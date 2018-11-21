@@ -1,0 +1,2 @@
+include ':app', ':utils'
+project(':utils').projectDir = new File('../utils')
