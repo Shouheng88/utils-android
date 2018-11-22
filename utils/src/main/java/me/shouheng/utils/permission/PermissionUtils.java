@@ -206,7 +206,7 @@ public class PermissionUtils {
      * @return permission name
      */
     @TargetApi(Build.VERSION_CODES.KITKAT_WATCH)
-    public static String map(int permission) {
+    private static String map(int permission) {
         switch (permission) {
             case Permission.STORAGE: return Manifest.permission.WRITE_EXTERNAL_STORAGE;
             case Permission.PHONE_STATE: return Manifest.permission.READ_PHONE_STATE;
@@ -228,7 +228,7 @@ public class PermissionUtils {
      * @param permission the permission from {@link Manifest.permission}
      * @return the translated permission
      */
-    public static String name(Context context, String permission) {
+    private static String name(Context context, String permission) {
         int resName;
         switch (permission) {
             case Manifest.permission.WRITE_EXTERNAL_STORAGE: resName = R.string.permission_storage_permission; break;
@@ -252,7 +252,7 @@ public class PermissionUtils {
      * @param permissions the permission names
      * @return the single string of permission names connected by ','
      */
-    public static String names(Context context, String[] permissions) {
+    static String names(Context context, String[] permissions) {
         int length = permissions.length;
         StringBuilder names = new StringBuilder();
         for (int i=0; i<length; i++) {
@@ -270,7 +270,7 @@ public class PermissionUtils {
      * @param context context to get package name
      * @return the package name
      */
-    public static String getPackageName(Context context) {
+    static String getPackageName(Context context) {
         return context.getApplicationContext().getPackageName();
     }
 
