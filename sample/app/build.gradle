@@ -26,4 +26,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     // utils
     implementation project(path : ':utils')
+    //     implementation 'me.shouheng.utils:utils-core:0.0.1'
 }
