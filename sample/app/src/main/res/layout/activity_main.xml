@@ -9,16 +9,24 @@
         android:layout_height="wrap_content">
 
         <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_permission"
-            android:text="Permission Utils"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:id="@+id/btn_activity_helper"
+            android:text="@string/menu_activity_helper"
+            style="@style/MenuButton" />
 
         <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_activity_helper"
-            android:text="Activity Helper"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:id="@+id/btn_permission"
+            android:text="@string/menu_permission_utils"
+            style="@style/MenuButton" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_crash"
+            android:text="@string/menu_crash_utils"
+            style="@style/MenuButton" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_hotfix"
+            android:text="@string/menu_hot_patch"
+            style="@style/MenuButton" />
 
     </LinearLayout>
 

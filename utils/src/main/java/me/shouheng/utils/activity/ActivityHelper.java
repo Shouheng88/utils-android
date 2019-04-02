@@ -1,4 +1,4 @@
-package me.shouheng.utils.helper;
+package me.shouheng.utils.activity;
 
 import android.app.Activity;
 import android.content.Context;
@@ -20,7 +20,11 @@ import java.util.ArrayList;
  * @author shouh
  * @version $Id: ActivityHelper, v 0.1 2018/11/17 17:29 shouh Exp$
  */
-public class ActivityHelper {
+public final class ActivityHelper {
+
+    private ActivityHelper() {
+        throw new UnsupportedOperationException("U can't initialize me!");
+    }
 
     /**
      * Start given activity.
@@ -60,7 +64,7 @@ public class ActivityHelper {
      * @param activity the destination activity
      * @return the builder
      */
-    public static Builder<? extends Activity> open(Class<? extends Activity> activity) {
+    public static <T extends Activity> Builder<T> open(Class<T> activity) {
         return new Builder<>(activity);
     }
 
@@ -87,14 +91,14 @@ public class ActivityHelper {
         /**
          * Builder with no params used to open the third part activity by intent.
          */
-        public Builder() {}
+        Builder() {}
 
         /**
          * Builder with given type activity used to open the activity defined in your manifest
          *
          * @param clz the activity to launch
          */
-        public Builder(Class<T> clz) {
+        Builder(Class<T> clz) {
             this.clz = clz;
         }
 
@@ -271,18 +275,18 @@ public class ActivityHelper {
         }
 
         public void launch(@NonNull Context context) {
-            Intent intent = getIntent(context);
-            context.startActivity(intent);
+            Intent i = getIntent(context);
+            context.startActivity(i);
         }
 
         public void launch(@NonNull Activity activity, int requestCode) {
-            Intent intent = getIntent(activity);
-            activity.startActivityForResult(intent, requestCode);
+            Intent i = getIntent(activity);
+            activity.startActivityForResult(i, requestCode);
         }
 
         public void launch(@NonNull Fragment fragment, int requestCode) {
-            Intent intent = getIntent(fragment.getActivity());
-            fragment.startActivityForResult(intent, requestCode);
+            Intent i = getIntent(fragment.getActivity());
+            fragment.startActivityForResult(i, requestCode);
         }
     }
 }

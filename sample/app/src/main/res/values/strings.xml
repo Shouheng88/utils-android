@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">AndroidUtils</string>
+
+    <string name="menu_activity_helper">测试 ActivityHelper</string>
+    <string name="menu_permission_utils">测试 PermissionUtils</string>
+    <string name="menu_crash_utils">强制 Crash 收集日志</string>
+    <string name="menu_hot_patch">热补丁</string>
+
+    <string name="activity_helper_web_intent">启动 http://www.baidu.com</string>
+    <string name="activity_helper_activity_result">启动 Activity 并获取结果</string>
+
+    <string name="permission_check_storage_permission">请求存储权限</string>
+    <string name="permission_check_camera_permission">请求相机权限</string>
+    <string name="permission_check_location_permission">请求位置权限</string>
+    <string name="permission_check_permissions">请求存储、位置、相机权限</string>
+    <string name="permission_get_storage_permission">已得到存储权限</string>
+    <string name="permission_get_camera_permission">已得到相机权限</string>
+    <string name="permission_get_location_permission">已得到位置权限</string>
+    <string name="permission_get_permissions">已得到存储、位置、相机权限</string>
+
 </resources>

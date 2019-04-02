@@ -1,38 +1,35 @@
 package me.shouheng.utils.permission;
 
-import android.Manifest;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 
-import me.shouheng.utils.R;
+import java.util.LinkedList;
+import java.util.List;
+
+import me.shouheng.utils.permission.Permission.PermissionCode;
+import me.shouheng.utils.permission.callback.OnGetPermissionCallback;
+import me.shouheng.utils.permission.callback.PermissionResultCallback;
 
 /**
- * The wrapped utils class to request for permission in runtime.
- * NOTE: The weakness is that the activity used to check permission must extends {@link PermissionActivity}
+ * The wrapped utils class to request for permission in runtime. The activity must
+ * implement {@link PermissionResultResolver} and call {@link PermissionResultHandler#handlePermissionsResult(
+ * Activity, int, String[], int[], PermissionResultCallback)} in its
+ * {@link Activity#onRequestPermissionsResult(int, String[], int[])} method.
  *
  * Created by wang shouheng on 2017/12/5.*/
-public class PermissionUtils {
+public final class PermissionUtils {
 
-    private final static int REQUEST_PERMISSIONS = 0xFF00;
-
-    /**
-     * The permission groups with int value.
-     */
-    public static class Permission {
-        public final static int STORAGE = 0xFF01;
-        public final static int PHONE_STATE = 0xFF02;
-        public final static int LOCATION = 0xFF03;
-        public final static int MICROPHONE = 0xFF04;
-        public final static int SMS = 0xFF05;
-        public final static int SENSORS = 0xFF06;
-        public final static int CONTACTS = 0xFF07;
-        public final static int CAMERA = 0xFF08;
-        public final static int CALENDAR = 0xFF09;
+    private PermissionUtils() {
+        throw new UnsupportedOperationException("U can't initialize me!");
     }
 
     /**
@@ -40,11 +37,11 @@ public class PermissionUtils {
      *
      * @param activity the base activity
      * @param callback the callback of checking result
-     * @param <T> the activity type, must implement {@link PermissionActivity}
+     * @param <T> the activity type, must implement {@link PermissionResultResolver}
      */
-    public static <T extends PermissionActivity> void checkStoragePermission(
+    public static <T extends Activity & PermissionResultResolver> void checkStoragePermission(
             @NonNull T activity, OnGetPermissionCallback callback) {
-        checkPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE, Permission.STORAGE, callback);
+        checkPermission(activity, Permission.STORAGE, callback);
     }
 
     /**
@@ -52,11 +49,11 @@ public class PermissionUtils {
      *
      * @param activity the base activity
      * @param callback the callback of checking result
-     * @param <T> the activity type, must implement {@link PermissionActivity}
+     * @param <T> the activity type, must implement {@link PermissionResultResolver}
      */
-    public static <T extends PermissionActivity> void checkPhonePermission(
+    public static <T extends Activity & PermissionResultResolver> void checkPhonePermission(
             @NonNull T activity, OnGetPermissionCallback callback) {
-        checkPermission(activity, Manifest.permission.READ_PHONE_STATE, Permission.PHONE_STATE, callback);
+        checkPermission(activity, Permission.PHONE_STATE, callback);
     }
 
     /**
@@ -64,11 +61,11 @@ public class PermissionUtils {
      *
      * @param activity the base activity
      * @param callback the callback of checking result
-     * @param <T> the activity type, must implement {@link PermissionActivity}
+     * @param <T> the activity type, must implement {@link PermissionResultResolver}
      */
-    public static <T extends PermissionActivity> void checkLocationPermission(
+    public static <T extends Activity & PermissionResultResolver> void checkLocationPermission(
             @NonNull T activity, OnGetPermissionCallback callback) {
-        checkPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION, Permission.LOCATION, callback);
+        checkPermission(activity, Permission.LOCATION, callback);
     }
 
     /**
@@ -76,11 +73,11 @@ public class PermissionUtils {
      *
      * @param activity the base activity
      * @param callback the callback of checking result
-     * @param <T> the activity type, must implement {@link PermissionActivity}
+     * @param <T> the activity type, must implement {@link PermissionResultResolver}
      */
-    public static <T extends PermissionActivity> void checkRecordPermission(
+    public static <T extends Activity & PermissionResultResolver> void checkRecordPermission(
             @NonNull T activity, OnGetPermissionCallback callback) {
-        checkPermission(activity, Manifest.permission.RECORD_AUDIO, Permission.MICROPHONE, callback);
+        checkPermission(activity, Permission.MICROPHONE, callback);
     }
 
     /**
@@ -88,11 +85,11 @@ public class PermissionUtils {
      *
      * @param activity the base activity
      * @param callback the callback of checking result
-     * @param <T> the activity type, must implement {@link PermissionActivity}
+     * @param <T> the activity type, must implement {@link PermissionResultResolver}
      */
-    public static <T extends PermissionActivity> void checkSmsPermission(
+    public static <T extends Activity & PermissionResultResolver> void checkSmsPermission(
             @NonNull T activity, OnGetPermissionCallback callback) {
-        checkPermission(activity, Manifest.permission.SEND_SMS, Permission.SMS, callback);
+        checkPermission(activity, Permission.SMS, callback);
     }
 
     /**
@@ -100,12 +97,12 @@ public class PermissionUtils {
      *
      * @param activity the base activity
      * @param callback the callback of checking result
-     * @param <T> the activity type, must implement {@link PermissionActivity}
+     * @param <T> the activity type, must implement {@link PermissionResultResolver}
      */
     @TargetApi(Build.VERSION_CODES.KITKAT_WATCH)
-    public static <T extends PermissionActivity> void checkSensorsPermission(
+    public static <T extends Activity & PermissionResultResolver> void checkSensorsPermission(
             @NonNull T activity, OnGetPermissionCallback callback) {
-        checkPermission(activity, Manifest.permission.BODY_SENSORS, Permission.SENSORS, callback);
+        checkPermission(activity, Permission.SENSORS, callback);
     }
 
     /**
@@ -113,11 +110,11 @@ public class PermissionUtils {
      *
      * @param activity the base activity
      * @param callback the callback of checking result
-     * @param <T> the activity type, must implement {@link PermissionActivity}
+     * @param <T> the activity type, must implement {@link PermissionResultResolver}
      */
-    public static <T extends PermissionActivity> void checkContactsPermission(
+    public static <T extends Activity & PermissionResultResolver> void checkContactsPermission(
             @NonNull T activity, OnGetPermissionCallback callback) {
-        checkPermission(activity, Manifest.permission.READ_CONTACTS, Permission.CONTACTS, callback);
+        checkPermission(activity, Permission.CONTACTS, callback);
     }
 
     /**
@@ -125,11 +122,11 @@ public class PermissionUtils {
      *
      * @param activity the base activity
      * @param callback the callback of checking result
-     * @param <T> the activity type, must implement {@link PermissionActivity}
+     * @param <T> the activity type, must implement {@link PermissionResultResolver}
      */
-    public static <T extends PermissionActivity> void checkCameraPermission(
+    public static <T extends Activity & PermissionResultResolver> void checkCameraPermission(
             @NonNull T activity, OnGetPermissionCallback callback) {
-        checkPermission(activity, Manifest.permission.CAMERA, Permission.CAMERA, callback);
+        checkPermission(activity, Permission.CAMERA, callback);
     }
 
     /**
@@ -137,11 +134,11 @@ public class PermissionUtils {
      *
      * @param activity the base activity
      * @param callback the callback of checking result
-     * @param <T> the activity type, must implement {@link PermissionActivity}
+     * @param <T> the activity type, must implement {@link PermissionResultResolver}
      */
-    public static <T extends PermissionActivity> void checkCalendarPermission(
+    public static <T extends Activity & PermissionResultResolver> void checkCalendarPermission(
             @NonNull T activity, OnGetPermissionCallback callback) {
-        checkPermission(activity, Manifest.permission.READ_CALENDAR, Permission.CALENDAR, callback);
+        checkPermission(activity, Permission.CALENDAR, callback);
     }
 
     /**
@@ -149,15 +146,16 @@ public class PermissionUtils {
      *
      * @param activity the activity
      * @param permission the permission to check
-     * @param requestCode the request code
      * @param callback the callback listener
-     * @param <T> the activity type, must implement {@link PermissionActivity}
+     * @param <T> the activity type, must implement {@link PermissionResultResolver}
      */
-    private static <T extends PermissionActivity> void checkPermission(
-            @NonNull T activity, @NonNull String permission, int requestCode, OnGetPermissionCallback callback) {
+    public static <T extends Activity & PermissionResultResolver> void checkPermission(
+            @NonNull T activity, @PermissionCode int permission, OnGetPermissionCallback callback) {
         activity.setOnGetPermissionCallback(callback);
-        if (ContextCompat.checkSelfPermission(activity, permission) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(activity, new String[]{permission}, requestCode);
+        if (ContextCompat.checkSelfPermission(activity, Permission.map(permission))
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(activity,
+                    new String[]{Permission.map(permission)}, permission);
         } else {
             if (callback != null) {
                 callback.onGetPermission();
@@ -173,95 +171,46 @@ public class PermissionUtils {
      * @param callback callback of permission result
      * @param <T> the activity type
      */
-    public static <T extends PermissionActivity> void checkPermissions(
-            @NonNull T activity, OnGetPermissionCallback callback, @NonNull Integer...permissions) {
+    public static <T extends Activity & PermissionResultResolver> void checkPermissions(
+            @NonNull T activity, @PermissionCode int[] permissions, OnGetPermissionCallback callback) {
         activity.setOnGetPermissionCallback(callback);
-        // Map permission code to permission name.
+        // map permission code
         int length = permissions.length;
         String[] standardPermissions = new String[length];
         for (int i=0; i<length; i++) {
-            standardPermissions[i] = map(permissions[i]);
+            standardPermissions[i] = Permission.map(permissions[i]);
         }
-        // Check every permission.
+        // check permissions
         int notGrantedCount = 0;
-        for (String string : standardPermissions) {
-            notGrantedCount += ((ContextCompat.checkSelfPermission(activity, string)
-                    != PackageManager.PERMISSION_GRANTED) ? 1 : 0);
+        List<String> notGranted = new LinkedList<>();
+        for (int i=0; i<length; i++) {
+            if (ContextCompat.checkSelfPermission(activity, standardPermissions[i])
+                    != PackageManager.PERMISSION_GRANTED) {
+                notGrantedCount++;
+                notGranted.add(standardPermissions[i]);
+            }
         }
         if (notGrantedCount == 0) {
-            // All permissions granted.
+            // all permission granted
             if (callback != null) {
                 callback.onGetPermission();
             }
         } else {
-            // At least one permission is not granted.
-            ActivityCompat.requestPermissions(activity, standardPermissions, REQUEST_PERMISSIONS);
+            ActivityCompat.requestPermissions(activity,
+                    notGranted.toArray(new String[0]), Permission.REQUEST_PERMISSIONS);
         }
     }
 
     /**
-     * Map from permission code of {@link Permission} to name in {@link Manifest.permission}
+     * Navigate to setting page of this app to grant permissions.
      *
-     * @param permission permission code
-     * @return permission name
+     * @param context the context
      */
-    @TargetApi(Build.VERSION_CODES.KITKAT_WATCH)
-    private static String map(int permission) {
-        switch (permission) {
-            case Permission.STORAGE: return Manifest.permission.WRITE_EXTERNAL_STORAGE;
-            case Permission.PHONE_STATE: return Manifest.permission.READ_PHONE_STATE;
-            case Permission.LOCATION: return Manifest.permission.ACCESS_FINE_LOCATION;
-            case Permission.MICROPHONE: return Manifest.permission.RECORD_AUDIO;
-            case Permission.SMS: return Manifest.permission.SEND_SMS;
-            case Permission.SENSORS: return Manifest.permission.BODY_SENSORS;
-            case Permission.CONTACTS: return Manifest.permission.READ_CONTACTS;
-            case Permission.CAMERA: return Manifest.permission.CAMERA;
-            case Permission.CALENDAR: return Manifest.permission.READ_CALENDAR;
-            default:throw new IllegalArgumentException("Unrecognized permission code " + permission);
-        }
-    }
-
-    /**
-     * Get translated permission name.
-     *
-     * @param context the context to get string in xml
-     * @param permission the permission from {@link Manifest.permission}
-     * @return the translated permission
-     */
-    private static String name(Context context, String permission) {
-        int resName;
-        switch (permission) {
-            case Manifest.permission.WRITE_EXTERNAL_STORAGE: resName = R.string.permission_storage_permission; break;
-            case Manifest.permission.READ_PHONE_STATE: resName = R.string.permission_phone_permission; break;
-            case Manifest.permission.ACCESS_FINE_LOCATION: resName = R.string.permission_location_permission; break;
-            case Manifest.permission.RECORD_AUDIO: resName = R.string.permission_microphone_permission; break;
-            case Manifest.permission.SEND_SMS: resName = R.string.permission_sms_permission; break;
-            case Manifest.permission.BODY_SENSORS: resName = R.string.permission_sensor_permission; break;
-            case Manifest.permission.READ_CONTACTS: resName = R.string.permission_contacts_permission; break;
-            case Manifest.permission.CAMERA: resName = R.string.permission_camera_permission; break;
-            case Manifest.permission.READ_CALENDAR: resName = R.string.permission_calendar_permission; break;
-            default: throw new IllegalArgumentException("Unrecognized permission " + permission);
-        }
-        return context.getResources().getString(resName);
-    }
-
-    /**
-     * Map multiple permission names to one single string used to display in toast and dialog.
-     *
-     * @param context the context used to get string in xml.
-     * @param permissions the permission names
-     * @return the single string of permission names connected by ','
-     */
-    static String names(Context context, String[] permissions) {
-        int length = permissions.length;
-        StringBuilder names = new StringBuilder();
-        for (int i=0; i<length; i++) {
-            names.append(name(context, permissions[i]));
-            if (i != length - 1) {
-                names.append(" ");
-            }
-        }
-        return names.toString();
+    public static void toSetPermission(Context context) {
+        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        Uri uri = Uri.fromParts("package", getPackageName(context), null);
+        intent.setData(uri);
+        context.startActivity(intent);
     }
 
     /**
@@ -270,11 +219,8 @@ public class PermissionUtils {
      * @param context context to get package name
      * @return the package name
      */
-    static String getPackageName(Context context) {
+    private static String getPackageName(Context context) {
         return context.getApplicationContext().getPackageName();
     }
 
-    public interface OnGetPermissionCallback {
-        void onGetPermission();
-    }
 }

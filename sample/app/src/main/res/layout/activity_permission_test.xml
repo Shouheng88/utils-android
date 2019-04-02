@@ -5,25 +5,25 @@
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btn_storage"
-        android:text="Storage permission test"
+        android:text="@string/permission_check_storage_permission"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btn_camera"
-        android:text="Camera permission test"
+        android:text="@string/permission_check_camera_permission"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btn_location"
-        android:text="Location permission test"
+        android:text="@string/permission_check_location_permission"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btn_group"
-        android:text="Group permissions test"
+        android:text="@string/permission_check_permissions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

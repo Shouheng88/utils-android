@@ -1,4 +1,4 @@
-package me.shouheng.samples.activityHelper;
+package me.shouheng.samples.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,18 +14,18 @@ import me.shouheng.samples.R;
 
 /**
  * @author shouh
- * @version $Id: TestActivityHelper2, v 0.1 2018/11/22 12:51 shouh Exp$
+ * @version $Id: TestActivityResult, v 0.1 2018/11/22 12:51 shouh Exp$
  */
-public class TestActivityHelper2 extends AppCompatActivity {
+public class TestActivityResult extends AppCompatActivity {
 
-    public final static String REQUEST_EXTRA_KEY_DATA = "__request_extra_key_data";
+    public static final String REQUEST_EXTRA_KEY_DATA = "__request_extra_key_data";
 
-    public final static String RESULT_EXTRA_KEY_DATA = "__result_extra_key_data";
+    public static final String RESULT_EXTRA_KEY_DATA = "__result_extra_key_data";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_helper_test2);
+        setContentView(R.layout.activity_helper_result);
 
         Request request = (Request) getIntent().getSerializableExtra(REQUEST_EXTRA_KEY_DATA);
         TextView tvRequest = findViewById(R.id.tv_request);
@@ -38,7 +38,6 @@ public class TestActivityHelper2 extends AppCompatActivity {
 
     public static class Request implements Serializable {
         final String name;
-
         final String value;
 
         Request(String name, String value) {
@@ -58,7 +57,6 @@ public class TestActivityHelper2 extends AppCompatActivity {
 
     public static class Result implements Serializable {
         final String name;
-
         final String value;
 
         Result(String name, String value) {
