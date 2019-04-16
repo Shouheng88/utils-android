@@ -24,10 +24,11 @@ public class PermissionResultHandler {
     /**
      * The method to call in {@link android.app.Activity#onRequestPermissionsResult(int, String[], int[])}.
      *
+     * @param activity the activity
      * @param requestCode request code
      * @param permissions permissions required
      * @param grantResults permission results
-     * @param
+     * @param permissionResultCallback callback
      */
     public static void handlePermissionsResult(Activity activity,
                                                int requestCode,

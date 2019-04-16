@@ -59,9 +59,10 @@ public final class ActivityHelper {
     }
 
     /**
-     * Get an {@link Builder} instance used to build the intent to start an activity.
+     Get an {@link Builder} instance used to build the intent to start an activity.
      *
      * @param activity the destination activity
+     * @param <T> the activity type
      * @return the builder
      */
     public static <T extends Activity> Builder<T> open(Class<T> activity) {

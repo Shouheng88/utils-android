@@ -25,14 +25,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
 
-apply plugin: 'com.novoda.bintray-release'
-
-publish {
-    userOrg = 'shouheng'
-    groupId = 'me.shouheng.utils'
-    artifactId = 'utils-core'
-    repoName = 'Android-Utils'
-    publishVersion = '0.0.1'
-    desc = 'The utils for Android.'
-    website = 'https://github.com/Shouheng88/Android-Utils'
+apply {
+    from ('../sample/bintrayUpload.gradle')
 }
