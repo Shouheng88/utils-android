@@ -23,11 +23,6 @@
             android:text="@string/menu_crash_utils"
             style="@style/MenuButton" />
 
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_hotfix"
-            android:text="@string/menu_hot_patch"
-            style="@style/MenuButton" />
-
     </LinearLayout>
 
 </ScrollView>

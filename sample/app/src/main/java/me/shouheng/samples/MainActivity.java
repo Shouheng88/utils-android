@@ -2,21 +2,16 @@ package me.shouheng.samples;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-import com.tencent.bugly.crashreport.CrashReport;
-
 import java.io.File;
 
 import me.shouheng.samples.activity.TestActivityHelper;
-import me.shouheng.samples.hotfix.BugClass;
 import me.shouheng.samples.permission.TestPermissionActivity;
 import me.shouheng.utils.activity.ActivityHelper;
 import me.shouheng.utils.crash.CrashHelper;
-import me.shouheng.utils.permission.PermissionUtils;
 
 /**
  * @author shouh
@@ -49,13 +44,7 @@ public class MainActivity extends BaseActivity {
                 for (File file : CrashHelper.listCrashFiles()) {
                     Log.d(TAG, file.getAbsolutePath());
                 }
-                CrashReport.testJavaCrash();
-            }
-        });
-        findViewById(R.id.btn_hotfix).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new BugClass().bug();
+                throw new IllegalStateException("Throw crash exception ...");
             }
         });
     }
