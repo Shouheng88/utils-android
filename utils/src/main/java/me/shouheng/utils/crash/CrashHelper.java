@@ -29,6 +29,8 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import me.shouheng.utils.string.StringUtils;
+
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 /**
@@ -110,7 +112,7 @@ public final class CrashHelper {
      * @param crashDirPath crash log file cache directory
      */
     private static void initCacheDir(Application application, final String crashDirPath) {
-        if (isSpace(crashDirPath)) {
+        if (StringUtils.isSpace(crashDirPath)) {
             dir = null;
         } else {
             dir = crashDirPath.endsWith(FILE_SEP) ? crashDirPath : crashDirPath + FILE_SEP;
@@ -247,16 +249,6 @@ public final class CrashHelper {
 
     private static boolean createOrExistsDir(final File file) {
         return file != null && (file.exists() ? file.isDirectory() : file.mkdirs());
-    }
-
-    private static boolean isSpace(final String s) {
-        if (s == null) return true;
-        for (int i = 0, len = s.length(); i < len; ++i) {
-            if (!Character.isWhitespace(s.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
     }
 
     public interface OnCrashListener {

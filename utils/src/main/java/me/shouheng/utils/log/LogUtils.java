@@ -52,6 +52,7 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
 import me.shouheng.utils.UtilsApp;
+import me.shouheng.utils.string.StringUtils;
 
 /**
  * @author WngShhng 2019-05-07 12:01
@@ -233,7 +234,7 @@ public final class LogUtils {
             if (stackIndex >= stackTrace.length) {
                 StackTraceElement targetElement = stackTrace[3];
                 final String fileName = getFileName(targetElement);
-                if (CONFIG.mTagIsSpace && isSpace(tag)) {
+                if (CONFIG.mTagIsSpace && StringUtils.isSpace(tag)) {
                     int index = fileName.indexOf('.');// Use proguard may not find '.'.
                     tag = index == -1 ? fileName : fileName.substring(0, index);
                 }
@@ -241,7 +242,7 @@ public final class LogUtils {
             }
             StackTraceElement targetElement = stackTrace[stackIndex];
             final String fileName = getFileName(targetElement);
-            if (CONFIG.mTagIsSpace && isSpace(tag)) {
+            if (CONFIG.mTagIsSpace && StringUtils.isSpace(tag)) {
                 int index = fileName.indexOf('.');// Use proguard may not find '.'.
                 tag = index == -1 ? fileName : fileName.substring(0, index);
             }
@@ -585,16 +586,6 @@ public final class LogUtils {
         return file != null && (file.exists() ? file.isDirectory() : file.mkdirs());
     }
 
-    private static boolean isSpace(final String s) {
-        if (s == null) return true;
-        for (int i = 0, len = s.length(); i < len; ++i) {
-            if (!Character.isWhitespace(s.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     private static void input2File(final String input, final String filePath) {
         EXECUTOR.execute(new Runnable() {
             @Override
@@ -658,7 +649,7 @@ public final class LogUtils {
         }
 
         public Config setGlobalTag(final String tag) {
-            if (isSpace(tag)) {
+            if (StringUtils.isSpace(tag)) {
                 mGlobalTag = "";
                 mTagIsSpace = true;
             } else {
@@ -679,7 +670,7 @@ public final class LogUtils {
         }
 
         public Config setDir(final String dir) {
-            if (isSpace(dir)) {
+            if (StringUtils.isSpace(dir)) {
                 mDir = null;
             } else {
                 mDir = dir.endsWith(FILE_SEP) ? dir : dir + FILE_SEP;
@@ -693,7 +684,7 @@ public final class LogUtils {
         }
 
         public Config setFilePrefix(final String filePrefix) {
-            if (isSpace(filePrefix)) {
+            if (StringUtils.isSpace(filePrefix)) {
                 mFilePrefix = "util";
             } else {
                 mFilePrefix = filePrefix;
