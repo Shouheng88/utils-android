@@ -33,6 +33,12 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 /**
  * Utils to handle uncaught exceptions runtime.
+ * Call one of {@link #init(Application)} methods to initialize the crash helper.
+ * The directory from the {@link #init(Application)} method will be used.
+ * If the user don't specify the directory, the
+ * <p>/android/data/< package name >/cache/crash/...</p> will be used af first,
+ * If the app din't get the storage permission the
+ * <p>/data/data/< package name >/cache/crash/...</p> will be used to store the crash log.
  *
  * @author WngShhng 2019-04-02 15:03
  */
@@ -83,9 +89,9 @@ public final class CrashHelper {
     }
 
     /**
-     * List all crash logs.
+     * Get all the crash files under current log directory.
      *
-     * @return crash logs
+     * @return crash log files
      */
     public static List<File> listCrashFiles() {
         File directory = new File(dir == null ? defaultDir : dir);
@@ -95,10 +101,12 @@ public final class CrashHelper {
         return Arrays.asList(directory.listFiles());
     }
 
+    /*---------------------------------------inner methods-----------------------------------------*/
+
     /**
      * Init crash log cache directory.
      *
-     * @param application app
+     * @param application application
      * @param crashDirPath crash log file cache directory
      */
     private static void initCacheDir(Application application, final String crashDirPath) {
@@ -108,11 +116,11 @@ public final class CrashHelper {
             dir = crashDirPath.endsWith(FILE_SEP) ? crashDirPath : crashDirPath + FILE_SEP;
         }
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
-                && application.getExternalCacheDir() != null)
-            // store under /android/data/< package name >/cache/crash/...
+                && application.getExternalCacheDir() != null) {
+            // defaultDir: /android/data/< package name >/cache/crash/...
             defaultDir = application.getExternalCacheDir() + FILE_SEP + "crash" + FILE_SEP;
-        else {
-            // store under /data/data/< package name >/cache/crash/...
+        } else {
+            // defaultDir: /data/data/< package name >/cache/crash/...
             defaultDir = application.getCacheDir() + FILE_SEP + "crash" + FILE_SEP;
         }
     }
@@ -120,7 +128,7 @@ public final class CrashHelper {
     /**
      * Init app information.
      *
-     * @param application app
+     * @param application application
      */
     private static void initAppInfo(Application application) {
         try {

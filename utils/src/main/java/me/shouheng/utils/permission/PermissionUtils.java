@@ -20,12 +20,13 @@ import me.shouheng.utils.permission.callback.OnGetPermissionCallback;
 import me.shouheng.utils.permission.callback.PermissionResultCallback;
 
 /**
- * The wrapped utils class to request for permission in runtime. The activity must
- * implement {@link PermissionResultResolver} and call {@link PermissionResultHandler#handlePermissionsResult(
- * Activity, int, String[], int[], PermissionResultCallback)} in its
- * {@link Activity#onRequestPermissionsResult(int, String[], int[])} method.
+ * The wrapped utils class to request for permission in runtime. The activity must:
+ * 1). Implement {@link PermissionResultResolver} and
+ * 2). Call {@link PermissionResultHandler#handlePermissionsResult(
+ * Activity, int, String[], int[], PermissionResultCallback)}
+ * in its {@link Activity#onRequestPermissionsResult(int, String[], int[])} method.
  *
- * Created by wang shouheng on 2017/12/5.*/
+ * Created by WngShhng on 2017/12/5.*/
 public final class PermissionUtils {
 
     private PermissionUtils() {

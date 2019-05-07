@@ -1,5 +1,6 @@
 package me.shouheng.samples;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -10,8 +11,11 @@ import java.io.File;
 
 import me.shouheng.samples.activity.TestActivityHelper;
 import me.shouheng.samples.permission.TestPermissionActivity;
+import me.shouheng.samples.utils.FileUtils;
 import me.shouheng.utils.activity.ActivityHelper;
 import me.shouheng.utils.crash.CrashHelper;
+import me.shouheng.utils.permission.PermissionUtils;
+import me.shouheng.utils.permission.callback.OnGetPermissionCallback;
 
 /**
  * @author shouh
@@ -45,6 +49,14 @@ public class MainActivity extends BaseActivity {
                     Log.d(TAG, file.getAbsolutePath());
                 }
                 throw new IllegalStateException("Throw crash exception ...");
+            }
+        });
+
+        PermissionUtils.checkStoragePermission(this, new OnGetPermissionCallback() {
+            @SuppressLint("MissingPermission")
+            @Override
+            public void onGetPermission() {
+                CrashHelper.init(getApplication(), FileUtils.getExternalStoragePublicCrashDir());
             }
         });
     }
