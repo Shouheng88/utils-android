@@ -23,6 +23,11 @@
             android:text="@string/menu_crash_utils"
             style="@style/MenuButton" />
 
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_log"
+            android:text="@string/menu_log_utils"
+            style="@style/MenuButton" />
+
     </LinearLayout>
 
 </ScrollView>

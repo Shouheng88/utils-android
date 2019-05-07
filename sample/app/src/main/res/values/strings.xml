@@ -4,7 +4,7 @@
     <string name="menu_activity_helper">测试 ActivityHelper</string>
     <string name="menu_permission_utils">测试 PermissionUtils</string>
     <string name="menu_crash_utils">强制 Crash 收集日志</string>
-    <string name="menu_hot_patch">热补丁</string>
+    <string name="menu_log_utils">测试 Log 收集效果</string>
 
     <string name="activity_helper_web_intent">启动 http://www.baidu.com</string>
     <string name="activity_helper_activity_result">启动 Activity 并获取结果</string>

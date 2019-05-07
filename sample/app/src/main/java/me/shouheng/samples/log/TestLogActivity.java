@@ -25,7 +25,7 @@ public class TestLogActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 cnt++;
-                switch (cnt % 5) {
+                switch (cnt % 6) {
                     case 0:
                         LogUtils.v("Logging v");
                         break;
@@ -40,6 +40,9 @@ public class TestLogActivity extends BaseActivity {
                         break;
                     case 4:
                         LogUtils.e("Logging e");
+                        break;
+                    case 5:
+                        LogUtils.a("Logging a");
                         break;
                     default:
                         // do nothing

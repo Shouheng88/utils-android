@@ -36,4 +36,13 @@ public final class FileUtils {
         }
         return crashDir;
     }
+
+    public static File getExternalStoragePublicLogDir() {
+        File crashDir = null;
+        if (isStorageWritable()) {
+            crashDir = new File(getExternalStoragePublicDir() + FILE_SEP + Constants.PUBLIC_LOG_DIR);
+            if (!crashDir.exists()) crashDir.mkdirs();
+        }
+        return crashDir;
+    }
 }

@@ -12,7 +12,6 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:usesCleartextTraffic="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:name=".SampleApp">
@@ -30,6 +29,8 @@
         <activity android:name=".activity.TestActivityHelper"/>
 
         <activity android:name=".activity.TestActivityResult"/>
+
+        <activity android:name=".log.TestLogActivity"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"
