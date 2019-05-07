@@ -2,15 +2,20 @@ package me.shouheng.samples.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 import java.io.Serializable;
 
 import me.shouheng.samples.R;
+import me.shouheng.utils.activity.ActivityHelper;
 
 /**
  * @author shouh
@@ -29,11 +34,24 @@ public class TestActivityResult extends AppCompatActivity {
 
         Request request = (Request) getIntent().getSerializableExtra(REQUEST_EXTRA_KEY_DATA);
         TextView tvRequest = findViewById(R.id.tv_request);
-        tvRequest.setText(request.toString());
+        if (request != null) {
+            tvRequest.setText(request.toString());
+        }
 
         Intent intent = new Intent();
         intent.putExtra(RESULT_EXTRA_KEY_DATA, new Result("Result-name", "Result-value"));
         setResult(Activity.RESULT_OK, intent);
+
+        View btnFinish = findViewById(R.id.btn_finish);
+        if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
+            btnFinish.setTransitionName("SHARED_ELEMENT");
+        }
+        btnFinish.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActivityHelper.finishActivity(TestActivityResult.this);
+            }
+        });
     }
 
     public static class Request implements Serializable {
@@ -48,10 +66,9 @@ public class TestActivityResult extends AppCompatActivity {
         @NonNull
         @Override
         public String toString() {
-            return "Request{" +
+            return "Request: " +
                     "name='" + name + '\'' +
-                    ", value='" + value + '\'' +
-                    '}';
+                    ", value='" + value;
         }
     }
 
@@ -67,10 +84,9 @@ public class TestActivityResult extends AppCompatActivity {
         @NonNull
         @Override
         public String toString() {
-            return "Result{" +
+            return "Result: " +
                     "name='" + name + '\'' +
-                    ", value='" + value + '\'' +
-                    '}';
+                    ", value='" + value;
         }
     }
 }

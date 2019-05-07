@@ -51,7 +51,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
-import me.shouheng.utils.Utils;
+import me.shouheng.utils.UtilsApp;
 
 /**
  * @author WngShhng 2019-05-07 12:01
@@ -558,9 +558,9 @@ public final class LogUtils {
         String versionName = "";
         int versionCode = 0;
         try {
-            PackageInfo pi = Utils.getApp()
+            PackageInfo pi = UtilsApp.getApp()
                     .getPackageManager()
-                    .getPackageInfo(Utils.getApp().getPackageName(), 0);
+                    .getPackageInfo(UtilsApp.getApp().getPackageName(), 0);
             if (pi != null) {
                 versionName = pi.versionName;
                 versionCode = pi.versionCode;
@@ -640,10 +640,10 @@ public final class LogUtils {
         private Config() {
             if (mDefaultDir != null) return;
             if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
-                    && Utils.getApp().getExternalCacheDir() != null)
-                mDefaultDir = Utils.getApp().getExternalCacheDir() + FILE_SEP + "log" + FILE_SEP;
+                    && UtilsApp.getApp().getExternalCacheDir() != null)
+                mDefaultDir = UtilsApp.getApp().getExternalCacheDir() + FILE_SEP + "log" + FILE_SEP;
             else {
-                mDefaultDir = Utils.getApp().getCacheDir() + FILE_SEP + "log" + FILE_SEP;
+                mDefaultDir = UtilsApp.getApp().getCacheDir() + FILE_SEP + "log" + FILE_SEP;
             }
         }
 

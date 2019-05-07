@@ -7,17 +7,17 @@ import android.app.Application;
  *
  * @author WngShhng 2019-05-7 12:13
  */
-public final class Utils {
+public final class UtilsApp {
 
     private static Application app;
 
-    private Utils() {
+    private UtilsApp() {
         throw new UnsupportedOperationException("u can't initialize me!");
     }
 
     public static Application getApp() {
         if (app == null) {
-            throw new IllegalStateException("Sorry, you must call Utils#init() method at first!");
+            throw new IllegalStateException("Sorry, you must call UtilsApp#init() method at first!");
         }
         return app;
     }
@@ -28,6 +28,6 @@ public final class Utils {
      * @param app the app used to initialize the utils library.
      */
     public static void init(Application app) {
-        Utils.app = app;
+        UtilsApp.app = app;
     }
 }

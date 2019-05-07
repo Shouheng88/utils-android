@@ -3,14 +3,24 @@ package me.shouheng.utils.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.annotation.AnimRes;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.util.Pair;
+import android.view.View;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+
+import me.shouheng.utils.UtilsApp;
 
 /**
  * ActivityHelper is a helper class used to start your activity defined in your manifest or
@@ -23,7 +33,23 @@ import java.util.ArrayList;
 public final class ActivityHelper {
 
     private ActivityHelper() {
-        throw new UnsupportedOperationException("U can't initialize me!");
+        throw new UnsupportedOperationException("u can't initialize me!");
+    }
+
+    /**
+     * Judge is given activity exists.
+     *
+     * @param pkg the package name
+     * @param cls the class name
+     * @return true if exists
+     */
+    public static boolean isActivityExists(@NonNull final String pkg, @NonNull final String cls) {
+        Intent intent = new Intent();
+        intent.setClassName(pkg, cls);
+        PackageManager pm = UtilsApp.getApp().getPackageManager();
+        return pm.resolveActivity(intent, 0) != null
+                && intent.resolveActivity(pm) != null
+                && pm.queryIntentActivities(intent, 0).size() != 0;
     }
 
     /**
@@ -32,30 +58,71 @@ public final class ActivityHelper {
      * @param context the context to start activity
      * @param activity the destination activity
      */
-    public static void start(Context context, Class<? extends Activity> activity) {
+    public static void start(@NonNull Context context,
+                             @NonNull Class<? extends Activity> activity) {
         context.startActivity(new Intent(context, activity));
     }
 
     /**
-     * Start given activity and try to get the result.
+     * Start activity.
      *
      * @param activity starter activity
      * @param activityClass target activity
      * @param requestCode the request code
      */
-    public static void start(Activity activity, Class<? extends Activity> activityClass, int requestCode) {
+    public static void start(@NonNull Activity activity,
+                             @NonNull Class<? extends Activity> activityClass,
+                             int requestCode) {
         activity.startActivityForResult(new Intent(activity, activityClass), requestCode);
     }
 
     /**
-     * Start given activity and try to get the result.
+     * Start activity.
      *
      * @param fragment starter fragment
      * @param activityClass the target activity
      * @param requestCode the request code
      */
-    public static void start(Fragment fragment, Class<? extends Activity> activityClass, int requestCode) {
+    public static void start(@NonNull Fragment fragment,
+                             @NonNull Class<? extends Activity> activityClass,
+                             int requestCode) {
         fragment.startActivityForResult(new Intent(fragment.getContext(), activityClass), requestCode);
+    }
+
+    /**
+     * Start home activity
+     *
+     * @param context the context
+     */
+    public static void startHomeActivity(Context context) {
+        Intent i = new Intent(Intent.ACTION_MAIN);
+        i.addCategory(Intent.CATEGORY_HOME);
+        context.startActivity(i);
+    }
+
+    /**
+     * Finish given activity
+     *
+     * @param activity the activity to finish
+     */
+    public static void finishActivity(@NonNull Activity activity) {
+        activity.finish();
+    }
+
+    /**
+     * Finish activity with given animation
+     *
+     * @param activity the activity to finish
+     * @param enterAnim the enter animation
+     * @param exitAnim the exit animation
+     */
+    public static void finishActivity(@NonNull Activity activity,
+                                      @AnimRes final int enterAnim,
+                                      @AnimRes final int exitAnim) {
+        activity.finish();
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+            activity.overridePendingTransition(enterAnim, exitAnim);
+        }
     }
 
     /**
@@ -84,6 +151,16 @@ public final class ActivityHelper {
      * @param <T> the activity type
      */
     public static class Builder<T extends Activity> {
+
+        @AnimRes
+        private int enterAnim;
+
+        @AnimRes
+        private int exitAnim;
+
+        private View[] sharedElements;
+
+        private Bundle options;
 
         private Class<T> clz;
 
@@ -268,6 +345,22 @@ public final class ActivityHelper {
             return this;
         }
 
+        public Builder<T> withAnim(@AnimRes final int enterAnim, @AnimRes final int exitAnim) {
+            this.enterAnim = enterAnim;
+            this.exitAnim = exitAnim;
+            return this;
+        }
+
+        public Builder<T> wishSharedElements(View[] sharedElements) {
+            this.sharedElements = sharedElements;
+            return this;
+        }
+
+        public Builder<T> withOptions(Bundle options) {
+            this.options = options;
+            return this;
+        }
+
         public Intent getIntent(Context context) {
             if (clz != null) {
                 intent.setClass(context, clz);
@@ -277,17 +370,65 @@ public final class ActivityHelper {
 
         public void launch(@NonNull Context context) {
             Intent i = getIntent(context);
-            context.startActivity(i);
+            if (context instanceof Activity) {
+                if (options == null && sharedElements != null) {
+                    options = getOptionsBundle((Activity) context, sharedElements);
+                }
+                if (options != null && VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN) {
+                    context.startActivity(i, options);
+                } else {
+                    context.startActivity(i);
+                }
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                    ((Activity) context).overridePendingTransition(enterAnim, exitAnim);
+                }
+            } else {
+                context.startActivity(i);
+            }
         }
 
         public void launch(@NonNull Activity activity, int requestCode) {
             Intent i = getIntent(activity);
-            activity.startActivityForResult(i, requestCode);
+            if (options == null && sharedElements != null) {
+                options = getOptionsBundle(activity, sharedElements);
+            }
+            if (options != null && VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN) {
+                activity.startActivityForResult(i, requestCode, options);
+            } else {
+                activity.startActivityForResult(i, requestCode);
+            }
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                activity.overridePendingTransition(enterAnim, exitAnim);
+            }
         }
 
-        public void launch(@NonNull Fragment fragment, int requestCode) {
-            Intent i = getIntent(fragment.getActivity());
-            fragment.startActivityForResult(i, requestCode);
+        public void launch(@NonNull Fragment f, int requestCode) {
+            Activity a = f.getActivity();
+            Intent i = getIntent(a);
+            if (options == null && sharedElements != null) {
+                options = getOptionsBundle(a, sharedElements);
+            }
+            if (options != null && VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN) {
+                f.startActivityForResult(i, requestCode, options);
+            } else {
+                f.startActivityForResult(i, requestCode);
+            }
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN && a != null) {
+                a.overridePendingTransition(enterAnim, exitAnim);
+            }
+        }
+
+        private Bundle getOptionsBundle(final Activity activity, final View[] sharedElements) {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) return null;
+            if (sharedElements == null) return null;
+            int len = sharedElements.length;
+            if (len <= 0) return null;
+            @SuppressWarnings("unchecked")
+            Pair<View, String>[] pairs = new Pair[len];
+            for (int i = 0; i < len; i++) {
+                pairs[i] = Pair.create(sharedElements[i], sharedElements[i].getTransitionName());
+            }
+            return ActivityOptionsCompat.makeSceneTransitionAnimation(activity, pairs).toBundle();
         }
     }
 }

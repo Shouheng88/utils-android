@@ -3,13 +3,17 @@ package me.shouheng.samples.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Toast;
 
 import me.shouheng.samples.R;
+import me.shouheng.samples.activity.TestActivityResult.Request;
 import me.shouheng.utils.activity.ActivityHelper;
 
 /**
@@ -25,7 +29,7 @@ public class TestActivityHelper extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_helper_test);
 
-        findViewById(R.id.btn_view).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_view).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 ActivityHelper.open()
@@ -34,13 +38,26 @@ public class TestActivityHelper extends AppCompatActivity {
                         .launch(TestActivityHelper.this);
             }
         });
-        findViewById(R.id.btn_request_code).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_request_code).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 ActivityHelper.open(TestActivityResult.class)
                         .put(TestActivityResult.REQUEST_EXTRA_KEY_DATA,
-                                new TestActivityResult.Request("Request-name", "Request-value"))
+                                new Request("Request-name", "Request-value"))
                         .launch(TestActivityHelper.this, REQUEST_RESULT);
+            }
+        });
+
+        final View btnShared = findViewById(R.id.btn_shared_activity);
+        if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
+            btnShared.setTransitionName("SHARED_ELEMENT");
+        }
+        btnShared.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActivityHelper.open(TestActivityResult.class)
+                        .wishSharedElements(new View[]{btnShared})
+                        .launch(TestActivityHelper.this);
             }
         });
     }

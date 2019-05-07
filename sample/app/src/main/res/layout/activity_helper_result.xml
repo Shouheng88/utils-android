@@ -8,4 +8,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_finish"
+        android:layout_marginTop="100dp"
+        android:text="@string/activity_helper_finish"
+        style="@style/MenuButton"/>
+
 </LinearLayout>
