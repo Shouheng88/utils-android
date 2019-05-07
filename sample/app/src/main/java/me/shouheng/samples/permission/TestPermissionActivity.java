@@ -90,7 +90,7 @@ public class TestPermissionActivity extends AppCompatActivity implements Permiss
                             @Override
                             public void onGetPermission() {
                                 Toast.makeText(TestPermissionActivity.this,
-                                        R.string.permission_get_storage_permission,
+                                        R.string.permission_get_permissions,
                                         Toast.LENGTH_SHORT).show();
                             }
                         });

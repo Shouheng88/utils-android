@@ -10,6 +10,7 @@ import me.shouheng.samples.activity.TestActivityHelper;
 import me.shouheng.samples.crash.TestCrashActivity;
 import me.shouheng.samples.log.TestLogActivity;
 import me.shouheng.samples.permission.TestPermissionActivity;
+import me.shouheng.samples.shell.TestShellActivity;
 import me.shouheng.samples.utils.FileUtils;
 import me.shouheng.utils.activity.ActivityHelper;
 import me.shouheng.utils.crash.CrashHelper;
@@ -22,8 +23,6 @@ import me.shouheng.utils.permission.callback.OnGetPermissionCallback;
  * @version $Id: MainActivity, v 0.1 2018/11/22 12:10 shouh Exp$
  */
 public class MainActivity extends BaseActivity {
-
-    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,6 +51,12 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 ActivityHelper.start(MainActivity.this, TestLogActivity.class);
+            }
+        });
+        findViewById(R.id.btn_shell).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActivityHelper.start(MainActivity.this, TestShellActivity.class);
             }
         });
 

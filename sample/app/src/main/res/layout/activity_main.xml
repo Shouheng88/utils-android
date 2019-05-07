@@ -28,6 +28,11 @@
             android:text="@string/menu_log_utils"
             style="@style/MenuButton" />
 
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_shell"
+            android:text="@string/menu_shell_utils"
+            style="@style/MenuButton" />
+
     </LinearLayout>
 
 </ScrollView>

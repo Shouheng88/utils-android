@@ -28,7 +28,8 @@
         <activity android:name=".activity.TestActivityHelper" />
         <activity android:name=".activity.TestActivityResult" />
         <activity android:name=".log.TestLogActivity" />
-        <activity android:name=".crash.TestCrashActivity"></activity>
+        <activity android:name=".crash.TestCrashActivity" />
+        <activity android:name=".shell.TestShellActivity"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -39,7 +40,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
-
     </application>
 
 </manifest>
