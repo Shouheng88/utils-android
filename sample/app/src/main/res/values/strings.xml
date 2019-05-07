@@ -1,15 +1,18 @@
 <resources>
     <string name="app_name">AndroidUtils</string>
 
-    <string name="menu_activity_helper">测试 ActivityHelper</string>
-    <string name="menu_permission_utils">测试 PermissionUtils</string>
-    <string name="menu_crash_utils">强制 Crash 收集日志</string>
-    <string name="menu_log_utils">测试 Log 收集效果</string>
+    <string name="menu_activity_helper">ActivityHelper</string>
+    <string name="menu_permission_utils">PermissionUtils</string>
+    <string name="menu_crash_utils">CrashHelper</string>
+    <string name="menu_log_utils">LogUtils</string>
 
     <string name="activity_helper_web_intent">启动 http://www.baidu.com</string>
     <string name="activity_helper_activity_result">启动 Activity 并获取结果</string>
     <string name="activity_helper_finish">销毁当前 Activity</string>
     <string name="activity_helper_shared_activity">启动与当前 Activity 共享元素的 Activity （API 21）</string>
+
+    <string name="crash_helper_list_logs">列出当前的崩溃日志</string>
+    <string name="crash_helper_force_crash">强制 Crash</string>
 
     <string name="permission_check_storage_permission">请求存储权限</string>
     <string name="permission_check_camera_permission">请求相机权限</string>

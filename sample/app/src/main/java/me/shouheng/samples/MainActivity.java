@@ -6,9 +6,8 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-import java.io.File;
-
 import me.shouheng.samples.activity.TestActivityHelper;
+import me.shouheng.samples.crash.TestCrashActivity;
 import me.shouheng.samples.log.TestLogActivity;
 import me.shouheng.samples.permission.TestPermissionActivity;
 import me.shouheng.samples.utils.FileUtils;
@@ -46,10 +45,7 @@ public class MainActivity extends BaseActivity {
         findViewById(R.id.btn_crash).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (File file : CrashHelper.listCrashFiles()) {
-                    LogUtils.d(TAG, file.getAbsolutePath());
-                }
-                throw new IllegalStateException("Throw one exception to test the crash collector.");
+                ActivityHelper.start(MainActivity.this, TestCrashActivity.class);
             }
         });
         findViewById(R.id.btn_log).setOnClickListener(new OnClickListener() {
