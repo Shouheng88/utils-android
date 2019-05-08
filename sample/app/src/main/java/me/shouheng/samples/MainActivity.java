@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 import me.shouheng.samples.activity.TestActivityHelper;
+import me.shouheng.samples.app.TestAppUtilsActivity;
 import me.shouheng.samples.common.BaseActivity;
 import me.shouheng.samples.crash.TestCrashActivity;
 import me.shouheng.samples.intent.TestIntentActivity;
@@ -75,5 +76,9 @@ public class MainActivity extends BaseActivity {
 
     public void testShellUtils(View view) {
         ActivityHelper.start(this, TestShellActivity.class);
+    }
+
+    public void testAppUtils(View v) {
+        ActivityHelper.start(this, TestAppUtilsActivity.class);
     }
 }
