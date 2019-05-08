@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import me.shouheng.samples.R;
 import me.shouheng.samples.activity.TestActivityResult.Request;
-import me.shouheng.utils.activity.ActivityHelper;
+import me.shouheng.utils.app.ActivityHelper;
 
 /**
  * @author shouh

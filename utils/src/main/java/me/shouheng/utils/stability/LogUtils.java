@@ -1,4 +1,4 @@
-package me.shouheng.utils.log;
+package me.shouheng.utils.stability;
 
 import android.content.ClipData;
 import android.content.ComponentName;
@@ -52,7 +52,7 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
 import me.shouheng.utils.UtilsApp;
-import me.shouheng.utils.string.StringUtils;
+import me.shouheng.utils.data.StringUtils;
 
 /**
  * @author WngShhng 2019-05-07 12:01

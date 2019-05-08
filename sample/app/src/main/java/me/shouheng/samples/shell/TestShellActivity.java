@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import me.shouheng.samples.BaseActivity;
 import me.shouheng.samples.R;
-import me.shouheng.utils.shell.ShellUtils;
+import me.shouheng.utils.device.ShellUtils;
 
 public class TestShellActivity extends BaseActivity {
 

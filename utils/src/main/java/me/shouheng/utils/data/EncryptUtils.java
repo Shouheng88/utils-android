@@ -1,4 +1,4 @@
-package me.shouheng.utils.encrypt;
+package me.shouheng.utils.data;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -17,7 +17,7 @@ public final class EncryptUtils {
             return md.digest();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
-            return null;
+            return new byte[0];
         }
     }
 

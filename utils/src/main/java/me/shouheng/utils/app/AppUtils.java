@@ -9,13 +9,13 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.util.Log;
 
 import me.shouheng.utils.UtilsApp;
-import me.shouheng.utils.encrypt.EncryptUtils;
-import me.shouheng.utils.intent.IntentUtils;
-import me.shouheng.utils.shell.ShellUtils;
-import me.shouheng.utils.string.StringUtils;
+import me.shouheng.utils.data.EncryptUtils;
+import me.shouheng.utils.device.ShellUtils;
+import me.shouheng.utils.data.StringUtils;
 
 /**
  * Utils for App level.
@@ -24,9 +24,65 @@ import me.shouheng.utils.string.StringUtils;
  */
 public final class AppUtils {
 
-    /*--------------------------------Install and uninstall----------------------------------*/
+    /*--------------------------------install and uninstall----------------------------------*/
 
-    /*-------------------------------------Get app info-------------------------------------*/
+    public static boolean isInstall(String pkgName) {
+        PackageManager pm = UtilsApp.getApp().getPackageManager();
+        try {
+            pm.getPackageInfo(pkgName, PackageManager.GET_ACTIVITIES);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /*-------------------------------------get app info-------------------------------------*/
+
+    /**
+     * API 17
+     *
+     * @return true if above API 17
+     */
+    public static boolean isJellyBeanMR1() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1;
+    }
+
+    /**
+     * API 18
+     *
+     * @return true if above API 18
+     */
+    public static boolean isJellyBeanMR2() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2;
+    }
+
+    /**
+     * API 19
+     *
+     * @return true if above API 18
+     */
+    public static boolean isKitKat(){
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
+    }
+
+    /**
+     * API 21
+     *
+     * @return true if above API 21
+     */
+    public static boolean isLollipop() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
+    }
+
+    /**
+     * API 23
+     *
+     * @return true if above API 23
+     */
+    public static boolean isMarshmallow() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M;
+    }
 
     /**
      * Get whether this app got the root permission
@@ -237,7 +293,7 @@ public final class AppUtils {
                 .replaceAll("(?<=[0-9A-F]{2})[0-9A-F]{2}", ":$0");
     }
 
-    /*-------------------------------------Launch and exit-------------------------------------*/
+    /*-------------------------------------launch and exit-------------------------------------*/
 
     /**
      * Launch app of given package name
@@ -284,10 +340,10 @@ public final class AppUtils {
      */
     public static void launchAppSettings(final String pkgName) {
         if (StringUtils.isSpace(pkgName)) return;
-        UtilsApp.getApp().startActivity(IntentUtils.getLaunchSettingIntent(pkgName));
+        UtilsApp.getApp().startActivity(IntentUtils.getLaunchSettingIntent(pkgName, true));
     }
 
-    /*-------------------------------------Inner methods----------------------------------------*/
+    /*-------------------------------------inner methods----------------------------------------*/
 
     private AppUtils() {
         throw new UnsupportedOperationException("u can't initialize me!");

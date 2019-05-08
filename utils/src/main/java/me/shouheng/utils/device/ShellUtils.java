@@ -1,4 +1,4 @@
-package me.shouheng.utils.shell;
+package me.shouheng.utils.device;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -138,6 +138,8 @@ public final class ShellUtils {
                     "errorMsg: " + errorMsg;
         }
     }
+
+    /*-------------------------------------inner methods----------------------------------------*/
 
     private ShellUtils() {
         throw new UnsupportedOperationException("u can't initialize me!");

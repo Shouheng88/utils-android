@@ -1,4 +1,4 @@
-package me.shouheng.utils.activity;
+package me.shouheng.utils.app;
 
 import android.app.Activity;
 import android.content.Context;

@@ -15,7 +15,7 @@ import android.widget.TextView;
 import java.io.Serializable;
 
 import me.shouheng.samples.R;
-import me.shouheng.utils.activity.ActivityHelper;
+import me.shouheng.utils.app.ActivityHelper;
 
 /**
  * @author shouh

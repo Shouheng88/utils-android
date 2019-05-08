@@ -10,7 +10,7 @@ import android.widget.EditText;
 
 import me.shouheng.samples.BaseActivity;
 import me.shouheng.samples.R;
-import me.shouheng.utils.log.LogUtils;
+import me.shouheng.utils.stability.LogUtils;
 
 public class TestLogActivity extends BaseActivity {
 

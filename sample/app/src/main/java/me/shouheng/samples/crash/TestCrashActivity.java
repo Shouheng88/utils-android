@@ -10,7 +10,7 @@ import java.io.File;
 import java.util.List;
 
 import me.shouheng.samples.R;
-import me.shouheng.utils.crash.CrashHelper;
+import me.shouheng.utils.stability.CrashHelper;
 
 public class TestCrashActivity extends AppCompatActivity {
 

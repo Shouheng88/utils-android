@@ -1,4 +1,4 @@
-package me.shouheng.utils.crash;
+package me.shouheng.utils.stability;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
@@ -29,7 +29,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import me.shouheng.utils.string.StringUtils;
+import me.shouheng.utils.data.StringUtils;
 
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
