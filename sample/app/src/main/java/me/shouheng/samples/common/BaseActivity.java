@@ -1,4 +1,4 @@
-package me.shouheng.samples;
+package me.shouheng.samples.common;
 
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;

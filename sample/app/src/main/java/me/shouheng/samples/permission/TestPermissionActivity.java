@@ -85,7 +85,6 @@ public class TestPermissionActivity extends AppCompatActivity implements Permiss
             @Override
             public void onClick(View v) {
                 PermissionUtils.checkPermissions(TestPermissionActivity.this,
-                        new int[]{Permission.CAMERA, Permission.LOCATION, Permission.STORAGE},
                         new OnGetPermissionCallback() {
                             @Override
                             public void onGetPermission() {
@@ -93,7 +92,7 @@ public class TestPermissionActivity extends AppCompatActivity implements Permiss
                                         R.string.permission_get_permissions,
                                         Toast.LENGTH_SHORT).show();
                             }
-                        });
+                        }, Permission.CAMERA, Permission.LOCATION, Permission.STORAGE);
             }
         });
     }

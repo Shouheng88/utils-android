@@ -14,7 +14,7 @@ public interface PermissionResultResolver {
 
     /**
      * Set the permission callback. The {@link OnGetPermissionCallback} was used in
-     * {@link PermissionUtils#checkPermission(Activity, int, OnGetPermissionCallback)}
+     * {@link PermissionUtils#checkPermissions(Activity, OnGetPermissionCallback, int...)}
      * for user to handle their business when finally got permission.
      *
      * @param onGetPermissionCallback the permission callback

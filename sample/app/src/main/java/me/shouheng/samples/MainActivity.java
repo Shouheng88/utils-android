@@ -7,11 +7,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 import me.shouheng.samples.activity.TestActivityHelper;
+import me.shouheng.samples.common.BaseActivity;
 import me.shouheng.samples.crash.TestCrashActivity;
+import me.shouheng.samples.intent.TestIntentActivity;
 import me.shouheng.samples.log.TestLogActivity;
 import me.shouheng.samples.permission.TestPermissionActivity;
 import me.shouheng.samples.shell.TestShellActivity;
-import me.shouheng.samples.utils.FileUtils;
+import me.shouheng.samples.common.FileUtils;
 import me.shouheng.utils.app.ActivityHelper;
 import me.shouheng.utils.stability.CrashHelper;
 import me.shouheng.utils.stability.LogUtils;
@@ -53,12 +55,6 @@ public class MainActivity extends BaseActivity {
                 ActivityHelper.start(MainActivity.this, TestLogActivity.class);
             }
         });
-        findViewById(R.id.btn_shell).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ActivityHelper.start(MainActivity.this, TestShellActivity.class);
-            }
-        });
 
         PermissionUtils.checkStoragePermission(this, new OnGetPermissionCallback() {
             @SuppressLint("MissingPermission")
@@ -71,5 +67,13 @@ public class MainActivity extends BaseActivity {
                         .setFileFilter(LogUtils.W);
             }
         });
+    }
+
+    public void testIntentUtils(View view) {
+        ActivityHelper.start(this, TestIntentActivity.class);
+    }
+
+    public void testShellUtils(View view) {
+        ActivityHelper.start(this, TestShellActivity.class);
     }
 }

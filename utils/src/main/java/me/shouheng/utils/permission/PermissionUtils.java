@@ -15,18 +15,22 @@ import android.support.v4.content.ContextCompat;
 import java.util.LinkedList;
 import java.util.List;
 
+import me.shouheng.utils.UtilsApp;
 import me.shouheng.utils.permission.Permission.PermissionCode;
 import me.shouheng.utils.permission.callback.OnGetPermissionCallback;
 import me.shouheng.utils.permission.callback.PermissionResultCallback;
 
 /**
- * The wrapped utils class to request for permission in runtime. The activity must:
- * 1). Implement {@link PermissionResultResolver} and
- * 2). Call {@link PermissionResultHandler#handlePermissionsResult(
- * Activity, int, String[], int[], PermissionResultCallback)}
- * in its {@link Activity#onRequestPermissionsResult(int, String[], int[])} method.
+ * 用来获取运行时权限的工具类
  *
- * Created by WngShhng on 2017/12/5.*/
+ * 调用该类的时候需要传入一个 {@link Activity}，并且要求：
+ * 1. 实现了 {@link PermissionResultResolver}，并且
+ * 2. 在它的 {@link Activity#onRequestPermissionsResult(int, String[], int[])} 中
+ * 调用了 {@link PermissionResultHandler#handlePermissionsResult(
+ * Activity, int, String[], int[], PermissionResultCallback)} 方法。
+ *
+ * Created by WngShhng on 2017/12/5.
+ */
 public final class PermissionUtils {
 
     private PermissionUtils() {
@@ -34,146 +38,124 @@ public final class PermissionUtils {
     }
 
     /**
-     * Check storage permission.
+     * 请求存储空间权限
      *
-     * @param activity the base activity
-     * @param callback the callback of checking result
-     * @param <T> the activity type, must implement {@link PermissionResultResolver}
+     * @param activity 对应的 Activity
+     * @param callback 获取到权限时的回调
+     * @param <T> 需要同时实现 {@link PermissionResultResolver}
      */
     public static <T extends Activity & PermissionResultResolver> void checkStoragePermission(
             @NonNull T activity, OnGetPermissionCallback callback) {
-        checkPermission(activity, Permission.STORAGE, callback);
+        checkPermissions(activity, callback, Permission.STORAGE);
     }
 
     /**
-     * Check phone permission.
+     * 请求手机状态权限
      *
-     * @param activity the base activity
-     * @param callback the callback of checking result
-     * @param <T> the activity type, must implement {@link PermissionResultResolver}
+     * @param activity 对应的 Activity
+     * @param callback 获取到权限时的回调
+     * @param <T> 需要同时实现 {@link PermissionResultResolver}
      */
     public static <T extends Activity & PermissionResultResolver> void checkPhonePermission(
             @NonNull T activity, OnGetPermissionCallback callback) {
-        checkPermission(activity, Permission.PHONE_STATE, callback);
+        checkPermissions(activity, callback, Permission.PHONE_STATE);
     }
 
     /**
-     * Check location permission.
+     * 请求位置权限
      *
-     * @param activity the base activity
-     * @param callback the callback of checking result
-     * @param <T> the activity type, must implement {@link PermissionResultResolver}
+     * @param activity 对应的 Activity
+     * @param callback 获取到权限时的回调
+     * @param <T> 需要同时实现 {@link PermissionResultResolver}
      */
     public static <T extends Activity & PermissionResultResolver> void checkLocationPermission(
             @NonNull T activity, OnGetPermissionCallback callback) {
-        checkPermission(activity, Permission.LOCATION, callback);
+        checkPermissions(activity, callback, Permission.LOCATION);
     }
 
     /**
-     * Check record permission.
+     * 请求录音权限
      *
-     * @param activity the base activity
-     * @param callback the callback of checking result
-     * @param <T> the activity type, must implement {@link PermissionResultResolver}
+     * @param activity 对应的 Activity
+     * @param callback 获取到权限时的回调
+     * @param <T> 需要同时实现 {@link PermissionResultResolver}
      */
     public static <T extends Activity & PermissionResultResolver> void checkRecordPermission(
             @NonNull T activity, OnGetPermissionCallback callback) {
-        checkPermission(activity, Permission.MICROPHONE, callback);
+        checkPermissions(activity, callback, Permission.MICROPHONE);
     }
 
     /**
-     * Check sms permission.
+     * 请求短信权限
      *
-     * @param activity the base activity
-     * @param callback the callback of checking result
-     * @param <T> the activity type, must implement {@link PermissionResultResolver}
+     * @param activity 对应的 Activity
+     * @param callback 获取到权限时的回调
+     * @param <T> 需要同时实现 {@link PermissionResultResolver}
      */
     public static <T extends Activity & PermissionResultResolver> void checkSmsPermission(
             @NonNull T activity, OnGetPermissionCallback callback) {
-        checkPermission(activity, Permission.SMS, callback);
+        checkPermissions(activity, callback, Permission.SMS);
     }
 
     /**
-     * Check sensors permission.
+     * 请求传感器权限
      *
-     * @param activity the base activity
-     * @param callback the callback of checking result
-     * @param <T> the activity type, must implement {@link PermissionResultResolver}
+     * @param activity 对应的 Activity
+     * @param callback 获取到权限时的回调
+     * @param <T> 需要同时实现 {@link PermissionResultResolver}
      */
     @TargetApi(Build.VERSION_CODES.KITKAT_WATCH)
     public static <T extends Activity & PermissionResultResolver> void checkSensorsPermission(
             @NonNull T activity, OnGetPermissionCallback callback) {
-        checkPermission(activity, Permission.SENSORS, callback);
+        checkPermissions(activity, callback, Permission.SENSORS);
     }
 
     /**
-     * Check contacts permission.
+     * 请求联系人权限
      *
-     * @param activity the base activity
-     * @param callback the callback of checking result
-     * @param <T> the activity type, must implement {@link PermissionResultResolver}
+     * @param activity 对应的 Activity
+     * @param callback 获取到权限时的回调
+     * @param <T> 需要同时实现 {@link PermissionResultResolver}
      */
     public static <T extends Activity & PermissionResultResolver> void checkContactsPermission(
             @NonNull T activity, OnGetPermissionCallback callback) {
-        checkPermission(activity, Permission.CONTACTS, callback);
+        checkPermissions(activity, callback, Permission.CONTACTS);
     }
 
     /**
-     * Check camera permission.
+     * 请求相机权限
      *
-     * @param activity the base activity
-     * @param callback the callback of checking result
-     * @param <T> the activity type, must implement {@link PermissionResultResolver}
+     * @param activity 对应的 Activity
+     * @param callback 获取到权限时的回调
+     * @param <T> 需要同时实现 {@link PermissionResultResolver}
      */
     public static <T extends Activity & PermissionResultResolver> void checkCameraPermission(
             @NonNull T activity, OnGetPermissionCallback callback) {
-        checkPermission(activity, Permission.CAMERA, callback);
+        checkPermissions(activity, callback, Permission.CAMERA);
     }
 
     /**
-     * Check calendar permission.
+     * 请求日历权限
      *
-     * @param activity the base activity
-     * @param callback the callback of checking result
-     * @param <T> the activity type, must implement {@link PermissionResultResolver}
+     * @param activity 对应的 Activity
+     * @param callback 获取到权限时的回调
+     * @param <T> 需要同时实现 {@link PermissionResultResolver}
      */
     public static <T extends Activity & PermissionResultResolver> void checkCalendarPermission(
             @NonNull T activity, OnGetPermissionCallback callback) {
-        checkPermission(activity, Permission.CALENDAR, callback);
+        checkPermissions(activity, callback, Permission.CALENDAR);
     }
 
     /**
-     * The permission check method used to check one permission one time.
+     * 同时请求多组权限
      *
-     * @param activity the activity
-     * @param permission the permission to check
-     * @param callback the callback listener
-     * @param <T> the activity type, must implement {@link PermissionResultResolver}
-     */
-    public static <T extends Activity & PermissionResultResolver> void checkPermission(
-            @NonNull T activity, @PermissionCode int permission, OnGetPermissionCallback callback) {
-        activity.setOnGetPermissionCallback(callback);
-        if (ContextCompat.checkSelfPermission(activity, Permission.map(permission))
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(activity,
-                    new String[]{Permission.map(permission)}, permission);
-        } else {
-            if (callback != null) {
-                callback.onGetPermission();
-            }
-        }
-    }
-
-    /**
-     * Check multiple permissions at the same time.
-     *
-     * @param activity activity
-     * @param permissions permissions to check, use fields from {@link Permission}
-     * @param callback callback of permission result
-     * @param <T> the activity type
+     * @param activity    对应的 Activity
+     * @param callback    获取到权限时的回调
+     * @param permissions 要获取的权限
+     * @param <T> 需要同时实现 {@link PermissionResultResolver}
      */
     public static <T extends Activity & PermissionResultResolver> void checkPermissions(
-            @NonNull T activity, @PermissionCode int[] permissions, OnGetPermissionCallback callback) {
+            @NonNull T activity, OnGetPermissionCallback callback, @PermissionCode int...permissions) {
         activity.setOnGetPermissionCallback(callback);
         // map permission code
         int length = permissions.length;
@@ -202,26 +184,11 @@ public final class PermissionUtils {
         }
     }
 
-    /**
-     * Navigate to setting page of this app to grant permissions.
-     *
-     * @param context the context
-     */
     public static void toSetPermission(Context context) {
         Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-        Uri uri = Uri.fromParts("package", getPackageName(context), null);
+        Uri uri = Uri.fromParts("package", UtilsApp.getApp().getPackageName(), null);
         intent.setData(uri);
         context.startActivity(intent);
-    }
-
-    /**
-     * Get the package name
-     *
-     * @param context context to get package name
-     * @return the package name
-     */
-    private static String getPackageName(Context context) {
-        return context.getApplicationContext().getPackageName();
     }
 
 }

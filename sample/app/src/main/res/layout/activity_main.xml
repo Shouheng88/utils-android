@@ -30,7 +30,14 @@
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_shell"
+            android:onClick="testShellUtils"
             android:text="@string/menu_shell_utils"
+            style="@style/MenuButton" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_intent"
+            android:onClick="testIntentUtils"
+            android:text="IntentUtils"
             style="@style/MenuButton" />
 
     </LinearLayout>

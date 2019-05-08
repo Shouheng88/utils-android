@@ -11,7 +11,7 @@ import me.shouheng.utils.permission.Permission;
 import me.shouheng.utils.permission.PermissionUtils;
 
 /**
- * The default implement for {@link PermissionResultCallback}.
+ * {@link PermissionResultCallback} 的默认实现
  *
  * @author WngShhng 2019-04-02 12:40
  */

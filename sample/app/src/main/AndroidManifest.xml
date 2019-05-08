@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="me.shouheng.samples">
 
-    <!-- Common -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -16,6 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".intent.TestIntentActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,7 +29,7 @@
         <activity android:name=".activity.TestActivityResult" />
         <activity android:name=".log.TestLogActivity" />
         <activity android:name=".crash.TestCrashActivity" />
-        <activity android:name=".shell.TestShellActivity"/>
+        <activity android:name=".shell.TestShellActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

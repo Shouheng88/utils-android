@@ -7,7 +7,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import me.shouheng.samples.BaseActivity;
+import me.shouheng.samples.common.BaseActivity;
 import me.shouheng.samples.R;
 import me.shouheng.utils.device.ShellUtils;
 

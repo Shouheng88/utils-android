@@ -1,8 +1,10 @@
-package me.shouheng.samples.utils;
+package me.shouheng.samples.common;
 
 import android.os.Environment;
 
 import java.io.File;
+
+import me.shouheng.samples.common.Constants;
 
 public final class FileUtils {
 
