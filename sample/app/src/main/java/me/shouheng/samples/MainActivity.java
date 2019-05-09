@@ -15,8 +15,10 @@ import me.shouheng.samples.log.TestLogActivity;
 import me.shouheng.samples.permission.TestPermissionActivity;
 import me.shouheng.samples.shell.TestShellActivity;
 import me.shouheng.samples.common.FileUtils;
+import me.shouheng.samples.store.TestSpUtilsActivity;
 import me.shouheng.utils.app.ActivityHelper;
 import me.shouheng.utils.stability.CrashHelper;
+import me.shouheng.utils.stability.CrashHelper.OnCrashListener;
 import me.shouheng.utils.stability.LogUtils;
 import me.shouheng.utils.permission.PermissionUtils;
 import me.shouheng.utils.permission.callback.OnGetPermissionCallback;
@@ -61,7 +63,12 @@ public class MainActivity extends BaseActivity {
             @SuppressLint("MissingPermission")
             @Override
             public void onGetPermission() {
-                CrashHelper.init(getApplication(), FileUtils.getExternalStoragePublicCrashDir());
+                CrashHelper.init(getApplication(), FileUtils.getExternalStoragePublicCrashDir(), new OnCrashListener() {
+                    @Override
+                    public void onCrash(String crashInfo, Throwable e) {
+                        LogUtils.e(crashInfo);
+                    }
+                });
                 LogUtils.getConfig()
                         .setLog2FileSwitch(true)
                         .setDir(FileUtils.getExternalStoragePublicLogDir())
@@ -80,5 +87,9 @@ public class MainActivity extends BaseActivity {
 
     public void testAppUtils(View v) {
         ActivityHelper.start(this, TestAppUtilsActivity.class);
+    }
+
+    public void testSPUtils(View v) {
+        ActivityHelper.start(this, TestSpUtilsActivity.class);
     }
 }
