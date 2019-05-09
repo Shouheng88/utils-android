@@ -32,10 +32,6 @@ import me.shouheng.utils.UtilsApp;
  */
 public final class ActivityHelper {
 
-    private ActivityHelper() {
-        throw new UnsupportedOperationException("u can't initialize me!");
-    }
-
     /**
      * Judge is given activity exists.
      *
@@ -430,5 +426,11 @@ public final class ActivityHelper {
             }
             return ActivityOptionsCompat.makeSceneTransitionAnimation(activity, pairs).toBundle();
         }
+    }
+
+    /*----------------------------------inner methods--------------------------------------*/
+
+    private ActivityHelper() {
+        throw new UnsupportedOperationException("u can't initialize me!");
     }
 }

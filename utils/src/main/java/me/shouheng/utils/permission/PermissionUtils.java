@@ -184,6 +184,24 @@ public final class PermissionUtils {
         }
     }
 
+    public static boolean hasPermissions(Activity activity, @PermissionCode int...permissions) {
+        // map permission code
+        int length = permissions.length;
+        String[] standardPermissions = new String[length];
+        for (int i=0; i<length; i++) {
+            standardPermissions[i] = Permission.map(permissions[i]);
+        }
+        // check permissions
+        int notGrantedCount = 0;
+        for (int i=0; i<length; i++) {
+            if (ContextCompat.checkSelfPermission(activity, standardPermissions[i])
+                    != PackageManager.PERMISSION_GRANTED) {
+                notGrantedCount++;
+            }
+        }
+        return notGrantedCount == 0;
+    }
+
     public static void toSetPermission(Context context) {
         Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
         Uri uri = Uri.fromParts("package", UtilsApp.getApp().getPackageName(), null);

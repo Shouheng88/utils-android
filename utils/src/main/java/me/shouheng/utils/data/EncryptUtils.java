@@ -21,6 +21,8 @@ public final class EncryptUtils {
         }
     }
 
+    /*----------------------------------inner methods--------------------------------------*/
+
     private EncryptUtils() {
         throw new UnsupportedOperationException("u can't initialize me!");
     }
