@@ -53,6 +53,11 @@
             android:text="DeviceUtils"
             style="@style/MenuButton" />
 
+        <android.support.v7.widget.AppCompatButton
+            android:onClick="testNetworkUtils"
+            android:text="NetworkUtils"
+            style="@style/MenuButton" />
+
     </LinearLayout>
 
 </ScrollView>

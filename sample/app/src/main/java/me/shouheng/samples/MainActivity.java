@@ -11,6 +11,7 @@ import me.shouheng.samples.app.TestAppUtilsActivity;
 import me.shouheng.samples.common.BaseActivity;
 import me.shouheng.samples.crash.TestCrashActivity;
 import me.shouheng.samples.device.TestDeviceUtilsActivity;
+import me.shouheng.samples.device.TestNetworkUtilsActivity;
 import me.shouheng.samples.intent.TestIntentActivity;
 import me.shouheng.samples.log.TestLogActivity;
 import me.shouheng.samples.permission.TestPermissionActivity;
@@ -96,5 +97,9 @@ public class MainActivity extends BaseActivity {
 
     public void testDeviceUtils(View v) {
         ActivityHelper.start(this, TestDeviceUtilsActivity.class);
+    }
+
+    public void testNetworkUtils(View v) {
+        ActivityHelper.start(this, TestNetworkUtilsActivity.class);
     }
 }
