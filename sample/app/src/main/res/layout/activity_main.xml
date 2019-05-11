@@ -48,6 +48,11 @@
             android:text="SPUtils"
             style="@style/MenuButton" />
 
+        <android.support.v7.widget.AppCompatButton
+            android:onClick="testDeviceUtils"
+            android:text="DeviceUtils"
+            style="@style/MenuButton" />
+
     </LinearLayout>
 
 </ScrollView>

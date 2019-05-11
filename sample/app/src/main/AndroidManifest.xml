@@ -15,6 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".device.TestDeviceUtilsActivity"></activity>
         <activity android:name=".app.TestAppUtilsActivity" />
         <activity android:name=".intent.TestIntentActivity" />
         <activity android:name=".MainActivity">
@@ -42,7 +43,7 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <activity android:name=".store.TestSpUtilsActivity"></activity>
+        <activity android:name=".store.TestSpUtilsActivity" />
     </application>
 
 </manifest>

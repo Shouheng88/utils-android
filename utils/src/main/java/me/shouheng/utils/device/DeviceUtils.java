@@ -197,7 +197,7 @@ public final class DeviceUtils {
         str += "SimSerialNumber = " + tm.getSimSerialNumber() + "\n";
         str += "SimState = " + tm.getSimState() + "\n";
         str += "SubscriberId(IMSI) = " + tm.getSubscriberId() + "\n";
-        str += "VoiceMailNumber = " + tm.getVoiceMailNumber() + "\n";
+        str += "VoiceMailNumber = " + tm.getVoiceMailNumber();
         return str;
     }
 
@@ -321,7 +321,7 @@ public final class DeviceUtils {
 
     public static void reboot(final String reason) {
         PowerManager pm = (PowerManager) UtilsApp.getApp().getSystemService(Context.POWER_SERVICE);
-        //noinspection ConstantConditions
+        // noinspection ConstantConditions
         pm.reboot(reason);
     }
 
