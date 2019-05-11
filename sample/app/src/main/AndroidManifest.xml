@@ -20,7 +20,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".device.TestNetworkUtilsActivity"></activity>
+        <activity android:name=".store.TestPathUtilsActivity"></activity>
+        <activity android:name=".device.TestNetworkUtilsActivity" />
         <activity android:name=".device.TestDeviceUtilsActivity" />
         <activity android:name=".app.TestAppUtilsActivity" />
         <activity android:name=".intent.TestIntentActivity" />
@@ -35,9 +36,9 @@
         <activity android:name=".permission.TestPermissionActivity" />
         <activity android:name=".activity.TestActivityHelper" />
         <activity android:name=".activity.TestActivityResult" />
-        <activity android:name=".log.TestLogActivity" />
-        <activity android:name=".crash.TestCrashActivity" />
-        <activity android:name=".shell.TestShellActivity" />
+        <activity android:name=".stability.TestLogActivity" />
+        <activity android:name=".stability.TestCrashActivity" />
+        <activity android:name=".device.TestShellActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

@@ -1,4 +1,4 @@
-package me.shouheng.samples.shell;
+package me.shouheng.samples.device;
 
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;

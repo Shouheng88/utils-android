@@ -9,14 +9,15 @@ import android.view.View.OnClickListener;
 import me.shouheng.samples.activity.TestActivityHelper;
 import me.shouheng.samples.app.TestAppUtilsActivity;
 import me.shouheng.samples.common.BaseActivity;
-import me.shouheng.samples.crash.TestCrashActivity;
+import me.shouheng.samples.stability.TestCrashActivity;
 import me.shouheng.samples.device.TestDeviceUtilsActivity;
 import me.shouheng.samples.device.TestNetworkUtilsActivity;
 import me.shouheng.samples.intent.TestIntentActivity;
-import me.shouheng.samples.log.TestLogActivity;
+import me.shouheng.samples.stability.TestLogActivity;
 import me.shouheng.samples.permission.TestPermissionActivity;
-import me.shouheng.samples.shell.TestShellActivity;
+import me.shouheng.samples.device.TestShellActivity;
 import me.shouheng.samples.common.FileUtils;
+import me.shouheng.samples.store.TestPathUtilsActivity;
 import me.shouheng.samples.store.TestSpUtilsActivity;
 import me.shouheng.utils.app.ActivityHelper;
 import me.shouheng.utils.stability.CrashHelper;
@@ -101,5 +102,9 @@ public class MainActivity extends BaseActivity {
 
     public void testNetworkUtils(View v) {
         ActivityHelper.start(this, TestNetworkUtilsActivity.class);
+    }
+
+    public void testPathUtils(View v) {
+        ActivityHelper.start(this, TestPathUtilsActivity.class);
     }
 }

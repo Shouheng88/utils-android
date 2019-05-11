@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="me.shouheng.samples.shell.TestShellActivity">
+    tools:context="me.shouheng.samples.device.TestShellActivity">
 
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/et"

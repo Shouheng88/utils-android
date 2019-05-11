@@ -1,4 +1,4 @@
-package me.shouheng.samples.crash;
+package me.shouheng.samples.stability;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

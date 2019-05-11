@@ -1,4 +1,4 @@
-package me.shouheng.samples.log;
+package me.shouheng.samples.stability;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
