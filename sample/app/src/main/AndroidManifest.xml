@@ -20,7 +20,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".store.TestPathUtilsActivity"></activity>
+        <activity android:name=".ui.TestImageUtilsActivity"></activity>
+        <activity android:name=".store.TestPathUtilsActivity" />
         <activity android:name=".device.TestNetworkUtilsActivity" />
         <activity android:name=".device.TestDeviceUtilsActivity" />
         <activity android:name=".app.TestAppUtilsActivity" />
