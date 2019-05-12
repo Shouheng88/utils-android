@@ -20,6 +20,7 @@ import me.shouheng.samples.common.FileUtils;
 import me.shouheng.samples.store.TestPathUtilsActivity;
 import me.shouheng.samples.store.TestSpUtilsActivity;
 import me.shouheng.samples.ui.TestImageUtilsActivity;
+import me.shouheng.samples.ui.TestViewUtilsActivity;
 import me.shouheng.utils.app.ActivityHelper;
 import me.shouheng.utils.stability.CrashHelper;
 import me.shouheng.utils.stability.CrashHelper.OnCrashListener;
@@ -111,5 +112,9 @@ public class MainActivity extends BaseActivity {
 
     public void testImageUtils(View v) {
         ActivityHelper.start(this, TestImageUtilsActivity.class);
+    }
+
+    public void testViewUtils(View view) {
+        ActivityHelper.start(this, TestViewUtilsActivity.class);
     }
 }

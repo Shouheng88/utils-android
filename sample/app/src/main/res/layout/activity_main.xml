@@ -68,6 +68,11 @@
             android:text="ImageUtils"
             style="@style/MenuButton" />
 
+        <android.support.v7.widget.AppCompatButton
+            android:onClick="testViewUtils"
+            android:text="ViewUtils"
+            style="@style/MenuButton" />
+
     </LinearLayout>
 
 </ScrollView>
