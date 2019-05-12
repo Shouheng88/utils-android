@@ -20,7 +20,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".data.TestEncryptUtilsActivity"></activity>
+        <activity android:name=".data.TestTimeUtilsActivity"></activity>
+        <activity android:name=".data.TestEncryptUtilsActivity" />
         <activity android:name=".ui.TestViewUtilsActivity" />
         <activity android:name=".ui.TestImageUtilsActivity" />
         <activity android:name=".store.TestPathUtilsActivity" />

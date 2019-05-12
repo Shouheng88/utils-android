@@ -78,6 +78,11 @@
             android:text="EncryptUtils"
             style="@style/MenuButton" />
 
+        <android.support.v7.widget.AppCompatButton
+            android:onClick="testTimeUtils"
+            android:text="TimeUtils"
+            style="@style/MenuButton" />
+
     </LinearLayout>
 
 </ScrollView>
