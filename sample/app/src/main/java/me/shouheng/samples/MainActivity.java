@@ -9,6 +9,7 @@ import android.view.View.OnClickListener;
 import me.shouheng.samples.activity.TestActivityHelper;
 import me.shouheng.samples.app.TestAppUtilsActivity;
 import me.shouheng.samples.common.BaseActivity;
+import me.shouheng.samples.data.TestEncryptUtilsActivity;
 import me.shouheng.samples.stability.TestCrashActivity;
 import me.shouheng.samples.device.TestDeviceUtilsActivity;
 import me.shouheng.samples.device.TestNetworkUtilsActivity;
@@ -116,5 +117,9 @@ public class MainActivity extends BaseActivity {
 
     public void testViewUtils(View view) {
         ActivityHelper.start(this, TestViewUtilsActivity.class);
+    }
+
+    public void testEncryptUtils(View view) {
+        ActivityHelper.start(this, TestEncryptUtilsActivity.class);
     }
 }

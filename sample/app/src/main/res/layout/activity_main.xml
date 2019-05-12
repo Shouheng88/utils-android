@@ -73,6 +73,11 @@
             android:text="ViewUtils"
             style="@style/MenuButton" />
 
+        <android.support.v7.widget.AppCompatButton
+            android:onClick="testEncryptUtils"
+            android:text="EncryptUtils"
+            style="@style/MenuButton" />
+
     </LinearLayout>
 
 </ScrollView>
