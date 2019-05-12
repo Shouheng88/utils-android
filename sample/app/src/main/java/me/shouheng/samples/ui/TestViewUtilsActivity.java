@@ -3,11 +3,9 @@ package me.shouheng.samples.ui;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import me.shouheng.samples.R;
-import me.shouheng.utils.ui.ToastUtils;
 import me.shouheng.utils.ui.ViewUtils;
 
 public class TestViewUtilsActivity extends AppCompatActivity {

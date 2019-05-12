@@ -83,6 +83,11 @@
             android:text="TimeUtils"
             style="@style/MenuButton" />
 
+        <android.support.v7.widget.AppCompatButton
+            android:onClick="testToastUtils"
+            android:text="ToastUtils"
+            style="@style/MenuButton" />
+
     </LinearLayout>
 
 </ScrollView>

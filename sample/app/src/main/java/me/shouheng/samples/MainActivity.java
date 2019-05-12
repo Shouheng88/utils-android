@@ -22,6 +22,7 @@ import me.shouheng.samples.common.FileUtils;
 import me.shouheng.samples.store.TestPathUtilsActivity;
 import me.shouheng.samples.store.TestSpUtilsActivity;
 import me.shouheng.samples.ui.TestImageUtilsActivity;
+import me.shouheng.samples.ui.TestToastUtilsActivity;
 import me.shouheng.samples.ui.TestViewUtilsActivity;
 import me.shouheng.utils.app.ActivityHelper;
 import me.shouheng.utils.stability.CrashHelper;
@@ -126,5 +127,9 @@ public class MainActivity extends BaseActivity {
 
     public void testTimeUtils(View view) {
         ActivityHelper.start(this, TestTimeUtilsActivity.class);
+    }
+
+    public void testToastUtils(View view) {
+        ActivityHelper.start(this, TestToastUtilsActivity.class);
     }
 }

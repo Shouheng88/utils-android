@@ -7,7 +7,6 @@ import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -21,9 +20,7 @@ import me.shouheng.utils.app.IntentUtils;
 import me.shouheng.utils.permission.Permission;
 import me.shouheng.utils.permission.PermissionUtils;
 import me.shouheng.utils.permission.callback.OnGetPermissionCallback;
-import me.shouheng.utils.store.FileUtils;
 import me.shouheng.utils.store.PathUtils;
-import me.shouheng.utils.ui.ToastUtils;
 
 public class TestIntentActivity extends BaseActivity {
 
