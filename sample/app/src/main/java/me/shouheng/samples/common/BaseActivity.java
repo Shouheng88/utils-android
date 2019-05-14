@@ -1,8 +1,11 @@
 package me.shouheng.samples.common;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import me.shouheng.utils.app.ActivityHelper;
 import me.shouheng.utils.permission.PermissionResultHandler;
 import me.shouheng.utils.permission.PermissionResultResolver;
 import me.shouheng.utils.permission.callback.OnGetPermissionCallback;
@@ -11,6 +14,12 @@ import me.shouheng.utils.permission.callback.PermissionResultCallbackImpl;
 public abstract class BaseActivity extends AppCompatActivity implements PermissionResultResolver {
 
     private OnGetPermissionCallback onGetPermissionCallback;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ActivityHelper.addToList(this);
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -22,5 +31,11 @@ public abstract class BaseActivity extends AppCompatActivity implements Permissi
     @Override
     public void setOnGetPermissionCallback(OnGetPermissionCallback onGetPermissionCallback) {
         this.onGetPermissionCallback = onGetPermissionCallback;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ActivityHelper.removeFromList(this);
     }
 }

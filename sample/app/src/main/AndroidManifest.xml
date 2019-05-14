@@ -55,6 +55,8 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
+        <meta-data android:name="META_DATA" android:value="test-value"/>
+
         <activity android:name=".store.TestSpUtilsActivity" />
     </application>
 

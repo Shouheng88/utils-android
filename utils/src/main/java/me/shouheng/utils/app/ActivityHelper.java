@@ -19,6 +19,8 @@ import android.view.View;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 import me.shouheng.utils.UtilsApp;
 
@@ -31,6 +33,8 @@ import me.shouheng.utils.UtilsApp;
  * @version $Id: ActivityHelper, v 0.1 2018/11/17 17:29 shouh Exp$
  */
 public final class ActivityHelper {
+
+    private static List<Activity> activities = new LinkedList<>();
 
     /**
      * Judge is given activity exists.
@@ -425,6 +429,48 @@ public final class ActivityHelper {
                 pairs[i] = Pair.create(sharedElements[i], sharedElements[i].getTransitionName());
             }
             return ActivityOptionsCompat.makeSceneTransitionAnimation(activity, pairs).toBundle();
+        }
+    }
+
+    /*---------------------------------- 活动管理 --------------------------------------*/
+
+    /**
+     * 将 Activity 添加到列表中，应该在 {@link Activity#onDestroy()} 方法中
+     * 调用 {@link #removeFromList(Activity)} 从列表中移除，防止内存泄漏
+     *
+     * @param activity 要添加的 Activity
+     */
+    public static void addToList(Activity activity) {
+        activities.add(activity);
+    }
+
+    /**
+     * 将 Activity 从列表中移除
+     *
+     * @param activity 要移除的 Activity
+     */
+    public static void removeFromList(Activity activity) {
+        int index = activities.indexOf(activity);
+        if (index != -1) {
+            activities.remove(activity);
+        }
+    }
+
+    /**
+     * 当前的 Activity，该 Activity 应当曾经调用过 {@link #addToList(Activity)}
+     *
+     * @return 当前 Activity
+     */
+    public static Activity currentActivity() {
+        return activities.get(0);
+    }
+
+    /**
+     * 销毁列表中所有的 Activity
+     */
+    public static void finishAll() {
+        for (Activity activity : activities) {
+            activity.finish();
         }
     }
 

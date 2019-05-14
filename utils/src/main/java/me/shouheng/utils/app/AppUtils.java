@@ -10,12 +10,15 @@ import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
+
+import java.io.File;
 
 import me.shouheng.utils.UtilsApp;
 import me.shouheng.utils.data.EncryptUtils;
-import me.shouheng.utils.device.ShellUtils;
 import me.shouheng.utils.data.StringUtils;
+import me.shouheng.utils.device.ShellUtils;
 
 /**
  * Utils for App level.
@@ -190,25 +193,18 @@ public final class AppUtils {
         }
     }
 
-    public static String getAppPath() {
-        return getAppPath(UtilsApp.getApp().getPackageName());
+    public static int getAppUid() {
+        return getAppUid(UtilsApp.getApp().getPackageName());
     }
 
-    /**
-     * Get the path of given app
-     *
-     * @param pkgName package name of given app
-     * @return the path of app
-     */
-    public static String getAppPath(final String pkgName) {
-        if (StringUtils.isSpace(pkgName)) return "";
+    public static int getAppUid(String packageName) {
         try {
             PackageManager pm = UtilsApp.getApp().getPackageManager();
-            PackageInfo pi = pm.getPackageInfo(pkgName, 0);
-            return pi == null ? null : pi.applicationInfo.sourceDir;
+            PackageInfo pi = pm.getPackageInfo(packageName, 0);
+            return pi != null && pi.applicationInfo != null ? pi.applicationInfo.uid : 0;
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
-            return "";
+            return 0;
         }
     }
 
@@ -241,6 +237,53 @@ public final class AppUtils {
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
             return -1;
+        }
+    }
+
+    public static int getAppTargetSdkVersion() {
+        return getAppTargetSdkVersion(UtilsApp.getApp().getPackageName());
+    }
+
+    public static int getAppTargetSdkVersion(String packageName) {
+        try {
+            PackageManager pm = UtilsApp.getApp().getPackageManager();
+            ApplicationInfo ai = pm.getApplicationInfo(packageName, 0);
+            return ai == null ? 0 : ai.targetSdkVersion;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public static int getAppMinSdkVersion() {
+        return getAppMinSdkVersion(UtilsApp.getApp().getPackageName());
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public static int getAppMinSdkVersion(String packageName) {
+        try {
+            PackageManager pm = UtilsApp.getApp().getPackageManager();
+            ApplicationInfo ai = pm.getApplicationInfo(packageName, 0);
+            return ai == null ? 0 : ai.minSdkVersion;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    public static String getMetaData(String key) {
+        return getMetaData(UtilsApp.getApp().getPackageName(), key);
+    }
+
+    public static String getMetaData(final String packageName, String key) {
+        try {
+            PackageManager pm = UtilsApp.getApp().getPackageManager();
+            ApplicationInfo ai = pm.getApplicationInfo(packageName, PackageManager.GET_META_DATA);
+            return ai != null && ai.metaData != null ? ai.metaData.getString(key) : null;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
@@ -291,6 +334,68 @@ public final class AppUtils {
         if (signature == null || signature.length <= 0) return "";
         return StringUtils.bytes2HexString(EncryptUtils.hashTemplate(signature[0].toByteArray(), algorithm))
                 .replaceAll("(?<=[0-9A-F]{2})[0-9A-F]{2}", ":$0");
+    }
+
+    public static long getAppFirstInstallTime() {
+        return getAppFirstInstallTime(UtilsApp.getApp().getPackageName());
+    }
+
+    public static long getAppFirstInstallTime(String packageName) {
+        if (StringUtils.isSpace(packageName)) return -1;
+        try {
+            PackageManager pm = UtilsApp.getApp().getPackageManager();
+            PackageInfo pi = pm.getPackageInfo(packageName, 0);
+            return pi == null ? -1 : pi.firstInstallTime;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public static long getAppLastUpdateTime() {
+        return getAppLastUpdateTime(UtilsApp.getApp().getPackageName());
+    }
+
+    public static long getAppLastUpdateTime(String packageName) {
+        if (StringUtils.isSpace(packageName)) return -1;
+        try {
+            PackageManager pm = UtilsApp.getApp().getPackageManager();
+            PackageInfo pi = pm.getPackageInfo(packageName, 0);
+            return pi == null ? -1 : pi.lastUpdateTime;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public static long getAppSize() {
+        return getAppSize(UtilsApp.getApp().getPackageName());
+    }
+
+    public static long getAppSize(String packageName) {
+        try {
+            PackageManager pm = UtilsApp.getApp().getPackageManager();
+            ApplicationInfo ai = pm.getApplicationInfo(packageName, 0);
+            return ai == null ? 0 : new File(ai.sourceDir).length();
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    public static String getAppSourceDir() {
+        return getAppSourceDir(UtilsApp.getApp().getPackageName());
+    }
+
+    public static String getAppSourceDir(String packageName) {
+        try {
+            PackageManager pm = UtilsApp.getApp().getPackageManager();
+            ApplicationInfo ai = pm.getApplicationInfo(packageName, 0);
+            return ai == null ? null : ai.sourceDir;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     /*-------------------------------------launch and exit-------------------------------------*/
