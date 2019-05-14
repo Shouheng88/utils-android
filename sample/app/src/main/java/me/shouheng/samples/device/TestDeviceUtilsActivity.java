@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 import me.shouheng.samples.R;
 import me.shouheng.samples.common.BaseActivity;
@@ -44,7 +45,13 @@ public class TestDeviceUtilsActivity extends BaseActivity {
                         "Mac Address : " + DeviceUtils.getMacAddress() + "\n" +
                         "Manufacturer : " + DeviceUtils.getManufacturer() + "\n" +
                         "Model : " + DeviceUtils.getModel() + "\n" +
-                        "ABIs : " + Arrays.toString(DeviceUtils.getABIs());
+                        "Phone Width : " + DeviceUtils.getPhoneWidth() + "\n" +
+                        "Phone Height : " + DeviceUtils.getPhoneHeight() + "\n" +
+                        "CPUs : " + DeviceUtils.getCpuNumber() + "\n" +
+                        "ABIs : " + Arrays.toString(DeviceUtils.getABIs()) + "\n" +
+                        "All Installed : " + Arrays.toString(DeviceUtils.getInstalledApp().toArray()) + "\n" +
+                        "All Installed (None system) : " + Arrays.toString(DeviceUtils.getUserInstalledApp().toArray()) + "\n" +
+                        "";
                 tv.setText(sb);
             }
         });

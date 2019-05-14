@@ -3,6 +3,10 @@ package me.shouheng.utils.device;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
@@ -12,12 +16,17 @@ import android.support.annotation.RequiresApi;
 import android.support.annotation.RequiresPermission;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.view.WindowManager;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
+import java.util.regex.Pattern;
 
 import me.shouheng.utils.UtilsApp;
 
@@ -275,10 +284,10 @@ public final class DeviceUtils {
     }
 
     /**
-     * Return the model of device.
+     * 手机型号
      * <p>e.g. MI2SC</p>
      *
-     * @return the model of device
+     * @return 手机型号
      */
     public static String getModel() {
         String model = Build.MODEL;
@@ -299,6 +308,59 @@ public final class DeviceUtils {
             }
             return new String[]{Build.CPU_ABI};
         }
+    }
+
+    public static int getCpuNumber() {
+        try {
+            File dir = new File("/sys/devices/system/cpu/");
+            File[] files = dir.listFiles(new FileFilter() {
+                @Override
+                public boolean accept(File pathname) {
+                    return Pattern.matches("cpu[0-9]", pathname.getName());
+                }
+            });
+            return files.length;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 1;
+        }
+    }
+
+    public static int getPhoneWidth() {
+        WindowManager wm = (WindowManager) UtilsApp.getApp().getSystemService(Context.WINDOW_SERVICE);
+        return wm.getDefaultDisplay().getWidth();
+    }
+
+    public static int getPhoneHeight() {
+        WindowManager wm = (WindowManager) UtilsApp.getApp().getSystemService(Context.WINDOW_SERVICE);
+        return wm.getDefaultDisplay().getHeight();
+    }
+
+    /**
+     * 获取所有安装的应用
+     *
+     * @return 应用列表
+     */
+    public static List<PackageInfo> getInstalledApp() {
+        PackageManager pm = UtilsApp.getApp().getPackageManager();
+        return pm.getInstalledPackages(0);
+    }
+
+    /**
+     * 获取所有安装的非系统应用
+     *
+     * @return 应用列表
+     */
+    public static List<PackageInfo> getUserInstalledApp() {
+        List<PackageInfo> infos = getInstalledApp();
+        List<PackageInfo> apps = new ArrayList<>();
+        for (PackageInfo info : infos) {
+            if ((info.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) <= 0) {
+                apps.add(info);
+            }
+        }
+        infos.clear();
+        return apps;
     }
 
     /*---------------------------------- 命令操作 --------------------------------------*/
