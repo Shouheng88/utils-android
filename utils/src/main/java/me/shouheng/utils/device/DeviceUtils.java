@@ -16,6 +16,7 @@ import android.support.annotation.RequiresApi;
 import android.support.annotation.RequiresPermission;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
 import java.io.File;
@@ -26,6 +27,7 @@ import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 import me.shouheng.utils.UtilsApp;
@@ -238,6 +240,14 @@ public final class DeviceUtils {
         return android.os.Build.VERSION.SDK_INT;
     }
 
+    public static String getLanguage() {
+        return Locale.getDefault().getLanguage();
+    }
+
+    public static Locale[] getAvailableLanguages() {
+        return Locale.getAvailableLocales();
+    }
+
     @SuppressLint("HardwareIds")
     public static String getAndroidID() {
         String id = Settings.Secure.getString(
@@ -297,6 +307,78 @@ public final class DeviceUtils {
             model = "";
         }
         return model;
+    }
+
+    /**
+     * 操作系统版本号
+     *
+     * @return 操作系统版本号
+     */
+    public static String getRelease() {
+        return Build.VERSION.RELEASE;
+    }
+
+    /**
+     * 获取编译厂商
+     *
+     * @return 编译厂商
+     */
+    public static String getBrand() {
+        return Build.BRAND;
+    }
+
+    /**
+     * 获取系统版本号
+     *
+     * @return 系统版本号
+     */
+    public static String getDisplay() {
+        return Build.DISPLAY;
+    }
+
+    /**
+     * 获取硬件信息
+     *
+     * @return 硬件信息
+     */
+    public static String getHardware() {
+        return Build.HARDWARE;
+    }
+
+    /**
+     * 获取产品信息
+     *
+     * @return 产品信息
+     */
+    public static String getProduct() {
+        return Build.PRODUCT;
+    }
+
+    /**
+     *  获取设备信息
+     *
+     * @return 设备信息
+     */
+    public static String getDevice() {
+        return Build.DEVICE;
+    }
+
+    /**
+     * 获取主板信息
+     *
+     * @return 主板信息
+     */
+    public static String getBoard() {
+        return Build.BOARD;
+    }
+
+    /**
+     * 获取基带版本(无线电固件版本 Api14以上)
+     *
+     * @return 基带版本
+     */
+    public static String getRadioVersion() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH ? Build.getRadioVersion() : "";
     }
 
     public static String[] getABIs() {

@@ -41,10 +41,19 @@ public class TestDeviceUtilsActivity extends BaseActivity {
                         "Adb Enabled : " + DeviceUtils.isAdbEnabled() + "\n" +
                         "SDK Version Name : " + DeviceUtils.getSDKVersionName() + "\n" +
                         "SDK Version Code : " + DeviceUtils.getSDKVersionCode() + "\n" +
+                        "Language : " + DeviceUtils.getLanguage() + "\n" +
+                        "AvailableLanguages : " + Arrays.toString(DeviceUtils.getAvailableLanguages()) + "\n" +
                         "Android ID : " + DeviceUtils.getAndroidID() + "\n" +
                         "Mac Address : " + DeviceUtils.getMacAddress() + "\n" +
                         "Manufacturer : " + DeviceUtils.getManufacturer() + "\n" +
                         "Model : " + DeviceUtils.getModel() + "\n" +
+                        "Release : " + DeviceUtils.getRelease() + "\n" +
+                        "Brand : " + DeviceUtils.getBrand() + "\n" +
+                        "Display : " + DeviceUtils.getDisplay() + "\n" +
+                        "getHardware : " + DeviceUtils.getHardware() + "\n" +
+                        "getProduct : " + DeviceUtils.getProduct() + "\n" +
+                        "getBoard : " + DeviceUtils.getBoard() + "\n" +
+                        "getRadioVersion : " + DeviceUtils.getRadioVersion() + "\n" +
                         "Phone Width : " + DeviceUtils.getPhoneWidth() + "\n" +
                         "Phone Height : " + DeviceUtils.getPhoneHeight() + "\n" +
                         "CPUs : " + DeviceUtils.getCpuNumber() + "\n" +

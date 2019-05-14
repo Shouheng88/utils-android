@@ -36,6 +36,17 @@
             android:onClick="toggleAlpha"
             style="@style/MenuButton"/>
 
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/iv"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="300dp"
+            android:layout_height="300dp" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:text="截屏"
+            android:onClick="captureScreen"
+            style="@style/MenuButton"/>
+
     </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>

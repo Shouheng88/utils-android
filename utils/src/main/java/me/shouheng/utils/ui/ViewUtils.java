@@ -2,10 +2,13 @@ package me.shouheng.utils.ui;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.os.Build;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
@@ -57,6 +60,45 @@ public final class ViewUtils {
         } else {
             v.setAlpha(alpha);
         }
+    }
+
+    /*---------------------------------- 屏幕信息 --------------------------------------*/
+
+    public static int getScreenWidth() {
+        WindowManager wm = (WindowManager) UtilsApp.getApp().getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics metrics = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(metrics);
+        return metrics.widthPixels;
+    }
+
+    public static int getScreenHeight() {
+        WindowManager wm = (WindowManager) UtilsApp.getApp().getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics metrics = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(metrics);
+        return metrics.heightPixels;
+    }
+
+    /**
+     * 获取当前屏幕截图，不包含状态栏
+     *
+     * @param activity 当前的 Activity
+     * @return 截图
+     */
+    public static Bitmap captureScreenWithoutStatusBar(Activity activity) {
+        View view = activity.getWindow().getDecorView();
+        view.setDrawingCacheEnabled(true);
+        view.buildDrawingCache();
+        Bitmap bmp = view.getDrawingCache();
+        Rect frame = new Rect();
+        activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
+        int statusBarHeight = frame.top;
+
+        int width = getScreenWidth();
+        int height = getScreenHeight();
+        Bitmap bp;
+        bp = Bitmap.createBitmap(bmp, 0, statusBarHeight, width, height - statusBarHeight);
+        view.destroyDrawingCache();
+        return bp;
     }
 
     /*---------------------------------- 软键盘 --------------------------------------*/
