@@ -11,6 +11,7 @@ import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.AnimRes;
+import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
@@ -18,21 +19,33 @@ import android.support.v4.util.Pair;
 import android.view.View;
 
 import java.io.Serializable;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import me.shouheng.utils.R;
 import me.shouheng.utils.UtilsApp;
 
 /**
- * ActivityHelper is a helper class used to start your activity defined in your manifest or
+ * ActivityUtils is a helper class used to start your activity defined in your manifest or
  * start other activities by intent. You can easily prepare the values by the builder and connect
  * all the methods like a chain, which is rather elegant than using the raw intent.
  *
  * @author shouh
- * @version $Id: ActivityHelper, v 0.1 2018/11/17 17:29 shouh Exp$
+ * @version $Id: ActivityUtils, v 0.1 2018/11/17 17:29 shouh Exp$
  */
-public final class ActivityHelper {
+public final class ActivityUtils {
+
+    public static final int ANIMATE_NONE                        = 0x00;
+    public static final int ANIMATE_FORWARD                     = 0x01;
+    public static final int ANIMATE_BACK                        = 0x02;
+    public static final int ANIMATE_EASE_IN_OUT                 = 0x03;
+    public static final int ANIMATE_SLIDE_TOP_FROM_BOTTOM       = 0x04;
+    public static final int ANIMATE_SLIDE_BOTTOM_FROM_TOP       = 0x05;
+    public static final int ANIMATE_SCALE_IN                    = 0x06;
+    public static final int ANIMATE_SCALE_OUT                   = 0x07;
 
     private static List<Activity> activities = new LinkedList<>();
 
@@ -52,6 +65,8 @@ public final class ActivityHelper {
                 && pm.queryIntentActivities(intent, 0).size() != 0;
     }
 
+    /*---------------------------------- Starter --------------------------------------*/
+
     /**
      * Start given activity.
      *
@@ -62,6 +77,16 @@ public final class ActivityHelper {
                              @NonNull Class<? extends Activity> activity) {
         context.startActivity(new Intent(context, activity));
     }
+
+    public static void start(@NonNull Context context,
+                             @NonNull Class<? extends Activity> activity,
+                             @AnimDirection int direction) {
+        context.startActivity(new Intent(context, activity));
+        if (context instanceof Activity) {
+            overridePendingTransition((Activity) context, direction);
+        }
+    }
+
 
     /**
      * Start activity.
@@ -74,6 +99,23 @@ public final class ActivityHelper {
                              @NonNull Class<? extends Activity> activityClass,
                              int requestCode) {
         activity.startActivityForResult(new Intent(activity, activityClass), requestCode);
+    }
+
+    public static void start(@NonNull Activity activity,
+                             @NonNull Class<? extends Activity> activityClass,
+                             int requestCode,
+                             @AnimDirection int direction) {
+        start(activity, activityClass, requestCode, direction, false);
+    }
+
+    public static void start(@NonNull Activity activity,
+                             @NonNull Class<? extends Activity> activityClass,
+                             int requestCode,
+                             @AnimDirection int direction,
+                             boolean finishLast) {
+        activity.startActivityForResult(new Intent(activity, activityClass), requestCode);
+        if (finishLast) activity.finish();
+        overridePendingTransition(activity, direction);
     }
 
     /**
@@ -89,8 +131,16 @@ public final class ActivityHelper {
         fragment.startActivityForResult(new Intent(fragment.getContext(), activityClass), requestCode);
     }
 
+    public static void start(@NonNull Fragment fragment,
+                             @NonNull Class<? extends Activity> activityClass,
+                             int requestCode,
+                             @AnimDirection int direction) {
+        fragment.startActivityForResult(new Intent(fragment.getContext(), activityClass), requestCode);
+        overridePendingTransition(fragment.getActivity(), direction);
+    }
+
     /**
-     * Start home activity
+     * Start home activity.
      *
      * @param context the context
      */
@@ -100,13 +150,42 @@ public final class ActivityHelper {
         context.startActivity(i);
     }
 
+    private static void overridePendingTransition(Activity activity, @AnimDirection int direction) {
+        if (direction == ANIMATE_FORWARD) {
+            activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        } else if (direction == ANIMATE_BACK) {
+            activity.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        } else if (direction == ANIMATE_EASE_IN_OUT) {
+            activity.overridePendingTransition(R.anim.ease_in, R.anim.ease_out);
+        } else if (direction == ANIMATE_SLIDE_TOP_FROM_BOTTOM) {
+            activity.overridePendingTransition(R.anim.slide_bottom_to_top, R.anim.slide_none_medium_time);
+        } else if (direction == ANIMATE_SLIDE_BOTTOM_FROM_TOP) {
+            activity.overridePendingTransition(R.anim.slide_none_medium_time, R.anim.slide_top_to_bottom);
+        } else if (direction == ANIMATE_SCALE_IN) {
+            activity.overridePendingTransition(R.anim.popup_scale_in, R.anim.slide_none);
+        } else if (direction == ANIMATE_SCALE_OUT) {
+            activity.overridePendingTransition(R.anim.slide_none, R.anim.popup_scale_out);
+        } else if (direction == ANIMATE_NONE) {
+            // do nothing
+        } else {
+            activity.overridePendingTransition(R.anim.magnify_fade_in, R.anim.fade_out);
+        }
+    }
+
+    /*---------------------------------- Finisher --------------------------------------*/
+
     /**
-     * Finish given activity
+     * Finish given activity with default animation.
      *
      * @param activity the activity to finish
      */
     public static void finishActivity(@NonNull Activity activity) {
         activity.finish();
+    }
+
+    public static void finishActivity(@NonNull Activity activity, @AnimDirection int direction) {
+        activity.finish();
+        overridePendingTransition(activity, direction);
     }
 
     /**
@@ -120,10 +199,10 @@ public final class ActivityHelper {
                                       @AnimRes final int enterAnim,
                                       @AnimRes final int exitAnim) {
         activity.finish();
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-            activity.overridePendingTransition(enterAnim, exitAnim);
-        }
+        activity.overridePendingTransition(enterAnim, exitAnim);
     }
+
+    /*---------------------------------- Launcher --------------------------------------*/
 
     /**
      Get an {@link Builder} instance used to build the intent to start an activity.
@@ -432,7 +511,7 @@ public final class ActivityHelper {
         }
     }
 
-    /*---------------------------------- 活动管理 --------------------------------------*/
+    /*---------------------------------- Manager --------------------------------------*/
 
     /**
      * 将 Activity 添加到列表中，应该在 {@link Activity#onDestroy()} 方法中
@@ -474,9 +553,23 @@ public final class ActivityHelper {
         }
     }
 
-    /*----------------------------------inner methods--------------------------------------*/
+    /**
+     * Predefined animation codes.
+     */
+    @IntDef({ANIMATE_NONE,
+            ANIMATE_FORWARD,
+            ANIMATE_BACK,
+            ANIMATE_EASE_IN_OUT,
+            ANIMATE_SLIDE_TOP_FROM_BOTTOM,
+            ANIMATE_SLIDE_BOTTOM_FROM_TOP,
+            ANIMATE_SCALE_IN, ANIMATE_SCALE_OUT})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface AnimDirection {
+    }
 
-    private ActivityHelper() {
+    /*---------------------------------- inner methods --------------------------------------*/
+
+    private ActivityUtils() {
         throw new UnsupportedOperationException("u can't initialize me!");
     }
 }

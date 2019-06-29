@@ -1,5 +1,6 @@
 package me.shouheng.utils.data;
 
+import android.content.Context;
 import android.support.annotation.ArrayRes;
 import android.support.annotation.PluralsRes;
 import android.support.annotation.StringRes;
@@ -256,6 +257,14 @@ public final class StringUtils {
 
     public static String[] getStringArray(@ArrayRes int id) {
         return UtilsApp.getApp().getResources().getStringArray(id);
+    }
+
+    public static String format(@StringRes int resId, Object... arg) {
+        try {
+            return String.format(UtilsApp.getApp().getString(resId), arg);
+        } catch (Exception e) {
+            return UtilsApp.getApp().getString(resId);
+        }
     }
 
     /*----------------------------------inner methods--------------------------------------*/

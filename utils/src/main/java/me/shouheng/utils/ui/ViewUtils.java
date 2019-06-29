@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -52,13 +53,44 @@ public final class ViewUtils {
         });
     }
 
-    public static void setAlpha(View v, float alpha) {
+    public static void setAlpha(@NonNull View v, float alpha) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
             final AlphaAnimation animation = new AlphaAnimation(1F, alpha);
             animation.setFillAfter(true);
             v.startAnimation(animation);
         } else {
             v.setAlpha(alpha);
+        }
+    }
+
+    public static void setVisible(@NonNull View view) {
+        if (view.getVisibility() != View.VISIBLE) {
+            view.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public static void setGone(@NonNull View view) {
+        if (view.getVisibility() != View.GONE) {
+            view.setVisibility(View.GONE);
+        }
+    }
+
+    public static void setInvisible(@NonNull View view) {
+        if (view.getVisibility() != View.INVISIBLE) {
+            view.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    /**
+     * Set the visibility of view. The visibility must be one of {@link View#VISIBLE},
+     * {@link View#INVISIBLE} or {@link View#GONE}.
+     *
+     * @param v the view
+     * @param visibility the visibility
+     */
+    public static void setVisibility(@NonNull View v, int visibility) {
+        if (v.getVisibility() != visibility) {
+            v.setVisibility(visibility);
         }
     }
 

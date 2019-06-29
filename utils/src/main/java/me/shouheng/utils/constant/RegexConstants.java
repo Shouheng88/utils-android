@@ -6,10 +6,15 @@ package me.shouheng.utils.constant;
  */
 public final class RegexConstants {
 
+    private RegexConstants() {
+        throw new UnsupportedOperationException("u can't initialize me");
+    }
+
     /**
      * Regex of simple mobile.
      */
     public static final String REGEX_MOBILE_SIMPLE = "^[1]\\d{10}$";
+
     /**
      * Regex of exact mobile.
      * <p>china mobile: 134(0-8), 135, 136, 137, 138, 139, 147, 150, 151, 152, 157, 158, 159, 178, 182, 183, 184, 187, 188, 198</p>
