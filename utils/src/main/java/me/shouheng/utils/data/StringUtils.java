@@ -1,9 +1,10 @@
 package me.shouheng.utils.data;
 
-import android.content.Context;
 import android.support.annotation.ArrayRes;
 import android.support.annotation.PluralsRes;
 import android.support.annotation.StringRes;
+
+import java.util.List;
 
 import me.shouheng.utils.UtilsApp;
 
@@ -223,6 +224,37 @@ public final class StringUtils {
             }
         }
         return result;
+    }
+
+    public static <T> String connect(List<T> list, String connector) {
+        return connect(list, connector, new StringFunction<T>() {
+            @Override
+            public String apply(T from) {
+                return from.toString();
+            }
+        });
+    }
+
+    /**
+     * 将传入的列表按照指定的格式拼接起来
+     *
+     * @param list      列表
+     * @param connector 连接的字符串
+     * @param function  对象到字符串映射格式
+     * @param <T>       对象类型
+     * @return          拼接结果
+     */
+    public static <T> String connect(List<T> list, String connector, StringFunction<T> function) {
+        if (list == null || list.isEmpty()) return "";
+        StringBuilder sb = new StringBuilder();
+        for (int i=0, len=list.size(); i<len; i++) {
+            if (i != len-1) {
+                sb.append(function.apply(list.get(i))).append(connector);
+            } else {
+                sb.append(function.apply(list.get(i)));
+            }
+        }
+        return sb.toString();
     }
 
     /*----------------------------------android resources--------------------------------------*/

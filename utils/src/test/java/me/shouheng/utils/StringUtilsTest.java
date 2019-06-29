@@ -3,6 +3,10 @@ package me.shouheng.utils;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
+import me.shouheng.utils.data.StringFunction;
 import me.shouheng.utils.data.StringUtils;
 
 /**
@@ -41,5 +45,34 @@ public class StringUtilsTest {
         long bacLong = StringUtils.base64String2Long(base64);
         System.out.println(bacLong);
         Assert.assertEquals(oriLong, bacLong);
+    }
+
+    @Test
+    public void testStringConnector() {
+        List<Person> personList = Arrays.asList(
+                new Person("A", 1),
+                new Person("B", 2),
+                new Person("C", 3),
+                new Person("D", 4));
+        String result = StringUtils.connect(personList, "@", new StringFunction<Person>() {
+            @Override
+            public String apply(Person person) {
+                return person.name + "#" + person.age;
+            }
+        });
+        System.out.println(result);
+        Assert.assertEquals("A#1@B#2@C#3@D#4", result);
+    }
+
+    public static class Person {
+
+        final String name;
+
+        final int age;
+
+        Person(String name, int age) {
+            this.name = name;
+            this.age = age;
+        }
     }
 }
