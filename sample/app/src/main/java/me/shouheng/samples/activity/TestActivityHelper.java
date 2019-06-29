@@ -14,7 +14,8 @@ import android.widget.Toast;
 
 import me.shouheng.samples.R;
 import me.shouheng.samples.activity.TestActivityResult.Request;
-import me.shouheng.utils.app.ActivityHelper;
+import me.shouheng.utils.app.ActivityUtils;
+import me.shouheng.utils.ui.ToastUtils;
 
 /**
  * @author shouh
@@ -24,6 +25,28 @@ public class TestActivityHelper extends AppCompatActivity {
 
     private static final int REQUEST_RESULT = 1;
 
+    private static final int[] DIRECTION_ANIMATION_ARRAY = new int[]{
+            ActivityUtils.ANIMATE_NONE,
+            ActivityUtils.ANIMATE_FORWARD,
+            ActivityUtils.ANIMATE_EASE_IN_OUT,
+            ActivityUtils.ANIMATE_SLIDE_TOP_FROM_BOTTOM,
+            ActivityUtils.ANIMATE_SLIDE_BOTTOM_FROM_TOP,
+            ActivityUtils.ANIMATE_SCALE_IN,
+            ActivityUtils.ANIMATE_SCALE_OUT
+    };
+
+    private static final String[] DIRECTION_ANIMATION_NAME_ARRAY = new String[]{
+            "ANIMATE_NONE",
+            "ANIMATE_FORWARD",
+            "ANIMATE_EASE_IN_OUT",
+            "ANIMATE_SLIDE_TOP_FROM_BOTTOM",
+            "ANIMATE_SLIDE_BOTTOM_FROM_TOP",
+            "ANIMATE_SCALE_IN",
+            "ANIMATE_SCALE_OUT"
+    };
+
+    private int currentAnimationIndex = 0;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +55,7 @@ public class TestActivityHelper extends AppCompatActivity {
         findViewById(R.id.btn_view).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityHelper.open()
+                ActivityUtils.open()
                         .setAction(Intent.ACTION_VIEW)
                         .setData(Uri.parse("http://www.baidu.com"))
                         .launch(TestActivityHelper.this);
@@ -41,7 +64,7 @@ public class TestActivityHelper extends AppCompatActivity {
         findViewById(R.id.btn_request_code).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityHelper.open(TestActivityResult.class)
+                ActivityUtils.open(TestActivityResult.class)
                         .put(TestActivityResult.REQUEST_EXTRA_KEY_DATA,
                                 new Request("Request-name", "Request-value"))
                         .launch(TestActivityHelper.this, REQUEST_RESULT);
@@ -55,9 +78,20 @@ public class TestActivityHelper extends AppCompatActivity {
         btnShared.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityHelper.open(TestActivityResult.class)
+                ActivityUtils.open(TestActivityResult.class)
                         .wishSharedElements(new View[]{btnShared})
                         .launch(TestActivityHelper.this);
+            }
+        });
+
+        findViewById(R.id.btn_animation).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int index = (currentAnimationIndex++)%DIRECTION_ANIMATION_ARRAY.length;
+                ToastUtils.showShort(DIRECTION_ANIMATION_NAME_ARRAY[index]);
+                ActivityUtils.start(TestActivityHelper.this,
+                        TestActivityResult.class, 0,
+                        DIRECTION_ANIMATION_ARRAY[index]);
             }
         });
     }

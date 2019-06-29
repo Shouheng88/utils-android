@@ -15,7 +15,7 @@ import android.widget.TextView;
 import java.io.Serializable;
 
 import me.shouheng.samples.R;
-import me.shouheng.utils.app.ActivityHelper;
+import me.shouheng.utils.app.ActivityUtils;
 
 /**
  * @author shouh
@@ -49,7 +49,7 @@ public class TestActivityResult extends AppCompatActivity {
         btnFinish.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityHelper.finishActivity(TestActivityResult.this);
+                ActivityUtils.finishActivity(TestActivityResult.this);
             }
         });
     }

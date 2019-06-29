@@ -19,4 +19,9 @@
         android:text="@string/activity_helper_shared_activity"
         style="@style/MenuButton"/>
 
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_animation"
+        android:text="@string/activity_helper_animation"
+        style="@style/MenuButton" />
+
 </LinearLayout>

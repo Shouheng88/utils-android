@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import me.shouheng.utils.app.ActivityHelper;
+import me.shouheng.utils.app.ActivityUtils;
 import me.shouheng.utils.permission.PermissionResultHandler;
 import me.shouheng.utils.permission.PermissionResultResolver;
 import me.shouheng.utils.permission.callback.OnGetPermissionCallback;
@@ -18,7 +18,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Permissi
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityHelper.addToList(this);
+        ActivityUtils.addToList(this);
     }
 
     @Override
@@ -36,6 +36,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Permissi
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ActivityHelper.removeFromList(this);
+        ActivityUtils.removeFromList(this);
     }
 }

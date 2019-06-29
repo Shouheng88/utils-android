@@ -24,7 +24,7 @@ import me.shouheng.samples.store.TestSpUtilsActivity;
 import me.shouheng.samples.ui.TestImageUtilsActivity;
 import me.shouheng.samples.ui.TestToastUtilsActivity;
 import me.shouheng.samples.ui.TestViewUtilsActivity;
-import me.shouheng.utils.app.ActivityHelper;
+import me.shouheng.utils.app.ActivityUtils;
 import me.shouheng.utils.stability.CrashHelper;
 import me.shouheng.utils.stability.CrashHelper.OnCrashListener;
 import me.shouheng.utils.stability.LogUtils;
@@ -45,25 +45,25 @@ public class MainActivity extends BaseActivity {
         findViewById(R.id.btn_permission).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityHelper.start(MainActivity.this, TestPermissionActivity.class);
+                ActivityUtils.start(MainActivity.this, TestPermissionActivity.class);
             }
         });
         findViewById(R.id.btn_activity_helper).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityHelper.start(MainActivity.this, TestActivityHelper.class);
+                ActivityUtils.start(MainActivity.this, TestActivityHelper.class);
             }
         });
         findViewById(R.id.btn_crash).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityHelper.start(MainActivity.this, TestCrashActivity.class);
+                ActivityUtils.start(MainActivity.this, TestCrashActivity.class);
             }
         });
         findViewById(R.id.btn_log).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityHelper.start(MainActivity.this, TestLogActivity.class);
+                ActivityUtils.start(MainActivity.this, TestLogActivity.class);
             }
         });
 
@@ -86,50 +86,50 @@ public class MainActivity extends BaseActivity {
     }
 
     public void testIntentUtils(View view) {
-        ActivityHelper.start(this, TestIntentActivity.class);
+        ActivityUtils.start(this, TestIntentActivity.class);
     }
 
     public void testShellUtils(View view) {
-        ActivityHelper.start(this, TestShellActivity.class);
+        ActivityUtils.start(this, TestShellActivity.class);
     }
 
     public void testAppUtils(View v) {
-        ActivityHelper.start(this, TestAppUtilsActivity.class);
+        ActivityUtils.start(this, TestAppUtilsActivity.class);
     }
 
     public void testSPUtils(View v) {
-        ActivityHelper.start(this, TestSpUtilsActivity.class);
+        ActivityUtils.start(this, TestSpUtilsActivity.class);
     }
 
     public void testDeviceUtils(View v) {
-        ActivityHelper.start(this, TestDeviceUtilsActivity.class);
+        ActivityUtils.start(this, TestDeviceUtilsActivity.class);
     }
 
     public void testNetworkUtils(View v) {
-        ActivityHelper.start(this, TestNetworkUtilsActivity.class);
+        ActivityUtils.start(this, TestNetworkUtilsActivity.class);
     }
 
     public void testPathUtils(View v) {
-        ActivityHelper.start(this, TestPathUtilsActivity.class);
+        ActivityUtils.start(this, TestPathUtilsActivity.class);
     }
 
     public void testImageUtils(View v) {
-        ActivityHelper.start(this, TestImageUtilsActivity.class);
+        ActivityUtils.start(this, TestImageUtilsActivity.class);
     }
 
     public void testViewUtils(View view) {
-        ActivityHelper.start(this, TestViewUtilsActivity.class);
+        ActivityUtils.start(this, TestViewUtilsActivity.class);
     }
 
     public void testEncryptUtils(View view) {
-        ActivityHelper.start(this, TestEncryptUtilsActivity.class);
+        ActivityUtils.start(this, TestEncryptUtilsActivity.class);
     }
 
     public void testTimeUtils(View view) {
-        ActivityHelper.start(this, TestTimeUtilsActivity.class);
+        ActivityUtils.start(this, TestTimeUtilsActivity.class);
     }
 
     public void testToastUtils(View view) {
-        ActivityHelper.start(this, TestToastUtilsActivity.class);
+        ActivityUtils.start(this, TestToastUtilsActivity.class);
     }
 }

@@ -11,6 +11,7 @@
     <string name="activity_helper_activity_result">启动 Activity 并获取结果</string>
     <string name="activity_helper_finish">销毁当前 Activity</string>
     <string name="activity_helper_shared_activity">启动与当前 Activity 共享元素的 Activity （API 21）</string>
+    <string name="activity_helper_animation">使用动画效果启动 Activity</string>
 
     <string name="crash_helper_list_logs">列出当前的崩溃日志</string>
     <string name="crash_helper_force_crash">强制 Crash</string>
