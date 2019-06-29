@@ -5,6 +5,16 @@ import android.app.Application;
 /**
  * The utils configuration, used to initialize the library.
  *
+ * o      o              .oPYo. 8      8
+ * 8      8              8      8      8
+ * 8      8 odYo. .oPYo. `Yooo. 8oPYo. 8oPYo. odYo. .oPYo.
+ * 8  db  8 8' `8 8    8     `8 8    8 8    8 8' `8 8    8
+ * `b.PY.d' 8   8 8    8      8 8    8 8    8 8   8 8    8
+ *  `8  8'  8   8 `YooP8 `YooP' 8    8 8    8 8   8 `YooP8
+ * ::..:..::..::..:....8 :.....:..:::....:::....::..:....8
+ * :::::::::::::::::ooP'.:::::::::::::::::::::::::::::ooP'.
+ * :::::::::::::::::...:::::::::::::::::::::::::::::::...::
+ *
  * @author WngShhng 2019-05-7 12:13
  */
 public final class UtilsApp {
