@@ -11,14 +11,20 @@ import android.content.pm.Signature;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.text.TextUtils;
 import android.util.Log;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 import me.shouheng.utils.UtilsApp;
 import me.shouheng.utils.data.EncryptUtils;
 import me.shouheng.utils.data.StringUtils;
 import me.shouheng.utils.device.ShellUtils;
+import me.shouheng.utils.stability.LogUtils;
 
 /**
  * Utils for App level.
@@ -26,6 +32,10 @@ import me.shouheng.utils.device.ShellUtils;
  * @author WngShhng 2019-05-07 19:20
  */
 public final class AppUtils {
+
+    private static List<WeakReference<Activity>> activityStack = new LinkedList<>();
+
+    private static LinkedList<Activity> foreActivityStack = new LinkedList<>();
 
     /*--------------------------------install and uninstall----------------------------------*/
 
@@ -446,6 +456,108 @@ public final class AppUtils {
     public static void launchAppSettings(final String pkgName) {
         if (StringUtils.isSpace(pkgName)) return;
         UtilsApp.getApp().startActivity(IntentUtils.getLaunchSettingIntent(pkgName, true));
+    }
+
+    /*-----------------------------------activity stack--------------------------------------*/
+
+    public static void exitApplication() {
+        finishActivity();
+    }
+
+    public static void detachActivity(Activity activity) {
+        ArrayList<WeakReference<Activity>> activityStacks = new ArrayList<>();
+        for (int i = activityStack.size() - 1; i >= 0; i--) {
+            try {
+                WeakReference<Activity> activityWeakReference = activityStack.get(i);
+                if (activityWeakReference != null && activityWeakReference.get() == activity) {
+                    activityStacks.add(activityWeakReference);
+                }
+            } catch (Exception e) {
+                LogUtils.e("detachActivity error: ", e);
+            }
+
+        }
+        try {
+            if (!activityStacks.isEmpty()) {
+                activityStack.removeAll(activityStacks);
+            }
+        } catch (Exception e) {
+            LogUtils.e("detachActivity error: ", e);
+        }
+        activityStacks.clear();
+    }
+
+    public static void finishActivity() {
+        for (int i = activityStack.size() - 1; i >= 0; i--) {
+            WeakReference<Activity> activity = activityStack.get(i);
+            if (activity != null && activity.get() != null) activity.get().finish();
+        }
+        activityStack.clear();
+    }
+
+    public static void finishOtherActivity(final String activityName) {
+        while (activityStack.size() > 1) {
+            WeakReference<Activity> remove = activityStack.remove(0);
+            Activity activity = remove.get();
+            if (activity == null) {
+                continue;
+            }
+            if (TextUtils.equals(activity.getLocalClassName(), activityName)) {
+                activityStack.add(remove);
+            } else {
+                activity.finish();
+            }
+        }
+    }
+
+    public static void finishOtherActivity() {
+        if (activityStack.size() > 1) {
+            for (int i = activityStack.size() - 2; i >= 0; --i) {
+                WeakReference<Activity> activity = activityStack.get(i);
+                if (activity != null && activity.get() != null) {
+                    activity.get().finish();
+                }
+            }
+        }
+    }
+
+    public static void finishLastActivity(int finishNum) {
+        if (activityStack == null) return;
+        int num = 1;
+        ArrayList<WeakReference<Activity>> activityStacks = new ArrayList<>();
+        int size = activityStack.size();
+        for (int i = size - 1; i >= 0; i--) {
+            WeakReference<Activity> activity = activityStack.get(i);
+            if (activity != null && activity.get() != null) {
+                activity.get().finish();
+                activityStacks.add(activity);
+                if (num++ == finishNum) break;
+            }
+        }
+
+        for (WeakReference<Activity> activity : activityStacks) {
+            activityStack.remove(activity);
+        }
+        activityStacks.clear();
+    }
+
+    public static void attachActivity(Activity activity) {
+        WeakReference<Activity> act = new WeakReference<>(activity);
+        if (activityStack.indexOf(act) == -1) activityStack.add(act);
+    }
+
+    public static void attachForeActivity(Activity activity) {
+        if (foreActivityStack.indexOf(activity) == -1) foreActivityStack.push(activity);
+    }
+
+    public static void detachForeActivity(Activity activity) {
+        foreActivityStack.remove(activity);
+    }
+
+    public static Activity getForeActivity() {
+        if (foreActivityStack.isEmpty())
+            return null;
+        return foreActivityStack.peek();
     }
 
     /*-------------------------------------inner methods----------------------------------------*/
