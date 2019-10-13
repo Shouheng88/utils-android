@@ -15,6 +15,7 @@ import android.widget.Toast;
 import me.shouheng.samples.R;
 import me.shouheng.samples.activity.TestActivityResult.Request;
 import me.shouheng.utils.app.ActivityUtils;
+import me.shouheng.utils.stability.LogUtils;
 import me.shouheng.utils.ui.ToastUtils;
 
 /**
@@ -94,6 +95,18 @@ public class TestActivityHelper extends AppCompatActivity {
                         DIRECTION_ANIMATION_ARRAY[index]);
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        LogUtils.d("START HELPER");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LogUtils.d("RESUME HELPER");
     }
 
     @Override

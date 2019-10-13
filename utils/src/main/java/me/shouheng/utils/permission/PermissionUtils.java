@@ -29,6 +29,51 @@ import me.shouheng.utils.permission.callback.PermissionResultCallback;
  * 调用了 {@link PermissionResultHandler#handlePermissionsResult(
  * Activity, int, String[], int[], PermissionResultCallback)} 方法。
  *
+ * Sample code below:
+ *
+ * <code>
+ *public class TestPermissionActivity extends AppCompatActivity implements PermissionResultResolver {
+ *
+ *     private OnGetPermissionCallback onGetPermissionCallback;
+ *
+ *     @Override
+ *     protected void onCreate(@Nullable Bundle savedInstanceState) {
+ *         super.onCreate(savedInstanceState);
+ *         setContentView(R.layout.activity_permission_test);
+ *
+ *         findViewById(R.id.btn_storage).setOnClickListener(new View.OnClickListener() {
+ *             @Override
+ *             public void onClick(View v) {
+ *                 // do check permission
+ *                 PermissionUtils.checkStoragePermission(TestPermissionActivity.this,
+ *                         new OnGetPermissionCallback() {
+ *                             @Override
+ *                             public void onGetPermission() {
+ *                                 // you logic when get permission
+ *                                 Toast.makeText(TestPermissionActivity.this,
+ *                                         R.string.permission_get_storage_permission,
+ *                                         Toast.LENGTH_SHORT).show();
+ *                             }
+ *                         });
+ *             }
+ *         });
+ *     }
+ *
+ *     @Override
+ *     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+ *         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+ *         // call permission result handler
+ *         PermissionResultHandler.handlePermissionsResult(this, requestCode, permissions,
+ *                 grantResults, new PermissionResultCallbackImpl(this, onGetPermissionCallback));
+ *     }
+ *
+ *     @Override
+ *     public void setOnGetPermissionCallback(OnGetPermissionCallback onGetPermissionCallback) {
+ *         this.onGetPermissionCallback = onGetPermissionCallback;
+ *     }
+ * }
+ * </code>
+ *
  * Created by WngShhng on 2017/12/5.
  */
 public final class PermissionUtils {
@@ -184,7 +229,24 @@ public final class PermissionUtils {
         }
     }
 
-    public static boolean hasPermissions(Activity activity, @PermissionCode int...permissions) {
+    /**
+     * 检查是否具有指定的全部权限
+     *
+     * @param permissions 权限列表
+     * @return            全部具备
+     */
+    public static boolean hasPermissions(@PermissionCode int...permissions) {
+        return hasPermissions(UtilsApp.getApp(), permissions);
+    }
+
+    /**
+     * 检查是否具有指定的全部权限
+     *
+     * @param context     ctx
+     * @param permissions 权限列表
+     * @return            全部具备
+     */
+    public static boolean hasPermissions(Context context, @PermissionCode int...permissions) {
         // map permission code
         int length = permissions.length;
         String[] standardPermissions = new String[length];
@@ -194,7 +256,7 @@ public final class PermissionUtils {
         // check permissions
         int notGrantedCount = 0;
         for (int i=0; i<length; i++) {
-            if (ContextCompat.checkSelfPermission(activity, standardPermissions[i])
+            if (ContextCompat.checkSelfPermission(context, standardPermissions[i])
                     != PackageManager.PERMISSION_GRANTED) {
                 notGrantedCount++;
             }
@@ -202,6 +264,11 @@ public final class PermissionUtils {
         return notGrantedCount == 0;
     }
 
+    /**
+     * 去设置权限
+     *
+     * @param context ctx
+     */
     public static void toSetPermission(Context context) {
         Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
         Uri uri = Uri.fromParts("package", UtilsApp.getApp().getPackageName(), null);

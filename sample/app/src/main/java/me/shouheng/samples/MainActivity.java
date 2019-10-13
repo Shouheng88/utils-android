@@ -85,6 +85,18 @@ public class MainActivity extends BaseActivity {
         });
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        LogUtils.d("STOP MAIN");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        LogUtils.d("PAUSE MAIN");
+    }
+
     public void testIntentUtils(View view) {
         ActivityUtils.start(this, TestIntentActivity.class);
     }
