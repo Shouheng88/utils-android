@@ -76,7 +76,7 @@ public class SampleApp extends Application {
 |21|[ToastUtils](./utils/src/main/java/me/shouheng/utils/ui/ToastUtils.java)|ui|土司封装|
 |22|[ViewUtils](./utils/src/main/java/me/shouheng/utils/ui/ViewUtils.java)|ui|获取控件信息以及软键盘操作等|
 
-## 2.3 运行时权限的使用说明
+### 2.3 运行时权限的使用说明
 
 像下面的代码显示的那样，你只需要让自己的 Acitivity 实现 PermissionResultResolver 接口，定义一个 OnGetPermissionCallback 实例，然后在 `onRequestPermissionsResult` 方法中调用 `PermissionResultHandler.handlePermissionsResult(...)` 就可以了。当你需要请求某个运行时权限的时候，使用 `PermisstionUtils` 的静态方法，并传入一个回调接口来执行当获取到权限的时候的逻辑即可。一般的，我们建议你在自己的顶层的 Activity 中进行上述操作，这样你就可以在所有继承了顶层 Activity 的子类中进行权限请求了。
 
