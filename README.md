@@ -125,7 +125,7 @@ public class TestPermissionActivity extends AppCompatActivity implements Permiss
 
 ## 3、更新日志
 
-- 版本 1.3.1：
+- 版本 1.2.1：
     - ActivityUtils 增加了动画支持
     - StringUtils 增加了字符串拼接的方法
 - 版本 1.1.0：
