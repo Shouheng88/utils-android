@@ -20,7 +20,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.TestToastUtilsActivity"></activity>
+        <activity android:name=".ui.TestToastUtilsActivity"/>
         <activity android:name=".data.TestTimeUtilsActivity" />
         <activity android:name=".data.TestEncryptUtilsActivity" />
         <activity android:name=".ui.TestViewUtilsActivity" />
@@ -40,7 +40,8 @@
         </activity>
         <activity android:name=".permission.TestPermissionActivity" />
         <activity android:name=".activity.TestActivityHelper" />
-        <activity android:name=".activity.TestActivityResult" />
+        <activity android:name=".activity.TestActivityResult"
+            android:theme="@style/AppTheme2"/>
         <activity android:name=".stability.TestLogActivity" />
         <activity android:name=".stability.TestCrashActivity" />
         <activity android:name=".device.TestShellActivity" />

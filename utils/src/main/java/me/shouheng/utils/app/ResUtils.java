@@ -1,8 +1,11 @@
 package me.shouheng.utils.app;
 
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
+import android.content.res.ColorStateList;
+import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build.VERSION_CODES;
@@ -17,6 +20,9 @@ import android.support.annotation.IntegerRes;
 import android.support.annotation.PluralsRes;
 import android.support.annotation.RawRes;
 import android.support.annotation.StringRes;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.content.res.AppCompatResources;
+import android.util.TypedValue;
 
 import java.io.InputStream;
 
@@ -26,6 +32,48 @@ import me.shouheng.utils.UtilsApp;
  * @author WngShhng 2019-05-08 20:20
  */
 public final class ResUtils {
+
+    public static float getAttrFloatValue(Context context, int attrRes){
+        TypedValue typedValue = new TypedValue();
+        context.getTheme().resolveAttribute(attrRes, typedValue, true);
+        return typedValue.getFloat();
+    }
+
+    public static int getAttrColor(Context context, int attrRes){
+        TypedValue typedValue = new TypedValue();
+        context.getTheme().resolveAttribute(attrRes, typedValue, true);
+        return typedValue.data;
+    }
+
+    public static ColorStateList getAttrColorStateList(Context context, int attrRes){
+        TypedValue typedValue = new TypedValue();
+        context.getTheme().resolveAttribute(attrRes, typedValue, true);
+        return ContextCompat.getColorStateList(context, typedValue.resourceId);
+    }
+
+    public static Drawable getAttrDrawable(Context context, int attrRes){
+        int[] attrs = new int[] { attrRes };
+        TypedArray ta = context.obtainStyledAttributes(attrs);
+        Drawable drawable = getAttrDrawable(context, ta, 0);
+        ta.recycle();
+        return drawable;
+    }
+
+    public static Drawable getAttrDrawable(Context context, TypedArray typedArray, int index){
+        TypedValue value = typedArray.peekValue(index);
+        if (value != null) {
+            if (value.type != TypedValue.TYPE_ATTRIBUTE && value.resourceId != 0) {
+                return AppCompatResources.getDrawable(context, value.resourceId);
+            }
+        }
+        return null;
+    }
+
+    public static int getAttrDimen(Context context, int attrRes){
+        TypedValue typedValue = new TypedValue();
+        context.getTheme().resolveAttribute(attrRes, typedValue, true);
+        return TypedValue.complexToDimensionPixelSize(typedValue.data, context.getResources().getDisplayMetrics());
+    }
 
     /*----------------------------------wrapper methods--------------------------------------*/
 

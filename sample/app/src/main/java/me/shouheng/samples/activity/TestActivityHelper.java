@@ -10,11 +10,14 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import me.shouheng.samples.R;
 import me.shouheng.samples.activity.TestActivityResult.Request;
 import me.shouheng.utils.app.ActivityUtils;
+import me.shouheng.utils.app.ResUtils;
+import me.shouheng.utils.constant.ActivityDirection;
 import me.shouheng.utils.stability.LogUtils;
 import me.shouheng.utils.ui.ToastUtils;
 
@@ -27,13 +30,13 @@ public class TestActivityHelper extends AppCompatActivity {
     private static final int REQUEST_RESULT = 1;
 
     private static final int[] DIRECTION_ANIMATION_ARRAY = new int[]{
-            ActivityUtils.ANIMATE_NONE,
-            ActivityUtils.ANIMATE_FORWARD,
-            ActivityUtils.ANIMATE_EASE_IN_OUT,
-            ActivityUtils.ANIMATE_SLIDE_TOP_FROM_BOTTOM,
-            ActivityUtils.ANIMATE_SLIDE_BOTTOM_FROM_TOP,
-            ActivityUtils.ANIMATE_SCALE_IN,
-            ActivityUtils.ANIMATE_SCALE_OUT
+            ActivityDirection.ANIMATE_NONE,
+            ActivityDirection.ANIMATE_FORWARD,
+            ActivityDirection.ANIMATE_EASE_IN_OUT,
+            ActivityDirection.ANIMATE_SLIDE_TOP_FROM_BOTTOM,
+            ActivityDirection.ANIMATE_SLIDE_BOTTOM_FROM_TOP,
+            ActivityDirection.ANIMATE_SCALE_IN,
+            ActivityDirection.ANIMATE_SCALE_OUT
     };
 
     private static final String[] DIRECTION_ANIMATION_NAME_ARRAY = new String[]{
@@ -68,6 +71,7 @@ public class TestActivityHelper extends AppCompatActivity {
                 ActivityUtils.open(TestActivityResult.class)
                         .put(TestActivityResult.REQUEST_EXTRA_KEY_DATA,
                                 new Request("Request-name", "Request-value"))
+                        .withDirection(ActivityDirection.ANIMATE_FORWARD)
                         .launch(TestActivityHelper.this, REQUEST_RESULT);
             }
         });
@@ -95,6 +99,8 @@ public class TestActivityHelper extends AppCompatActivity {
                         DIRECTION_ANIMATION_ARRAY[index]);
             }
         });
+
+        findViewById(R.id.iv_prop).setBackgroundColor(ResUtils.getAttrColor(this, R.attr.custom_prop));
     }
 
     @Override

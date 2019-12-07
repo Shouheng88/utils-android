@@ -16,6 +16,7 @@ import java.io.Serializable;
 
 import me.shouheng.samples.R;
 import me.shouheng.utils.app.ActivityUtils;
+import me.shouheng.utils.app.ResUtils;
 
 /**
  * @author shouh
@@ -52,6 +53,8 @@ public class TestActivityResult extends AppCompatActivity {
                 ActivityUtils.finishActivity(TestActivityResult.this);
             }
         });
+
+        findViewById(R.id.iv_prop).setBackgroundColor(ResUtils.getAttrColor(this, R.attr.custom_prop));
     }
 
     public static class Request implements Serializable {

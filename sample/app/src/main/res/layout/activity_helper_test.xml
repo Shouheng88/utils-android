@@ -24,4 +24,10 @@
         android:text="@string/activity_helper_animation"
         style="@style/MenuButton" />
 
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/iv_prop"
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"/>
+
 </LinearLayout>

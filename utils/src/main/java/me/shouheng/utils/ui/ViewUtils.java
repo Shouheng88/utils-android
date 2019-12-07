@@ -1,18 +1,28 @@
 package me.shouheng.utils.ui;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.LightingColorFilter;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.TouchDelegate;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import me.shouheng.utils.UtilsApp;
 
@@ -92,6 +102,104 @@ public final class ViewUtils {
         if (v.getVisibility() != visibility) {
             v.setVisibility(visibility);
         }
+    }
+
+    /**
+     * 获取 activity 的根 view
+     *
+     * @param activity activity
+     * @return         根 view
+     */
+    public static View getRootView(Activity activity) {
+        return ((ViewGroup) activity.findViewById(Window.ID_ANDROID_CONTENT)).getChildAt(0);
+    }
+
+    /**
+     * 扩展点击区域的范围
+     *
+     * @param view       需要扩展的元素，此元素必需要有父级元素
+     * @param expendSize 需要扩展的尺寸（以sp为单位的）
+     */
+    public static void expendTouchArea(final View view, final int expendSize) {
+        if (view != null) {
+            final View parentView = (View) view.getParent();
+            parentView.post(new Runnable() {
+                @Override
+                public void run() {
+                    Rect rect = new Rect();
+                    view.getHitRect(rect); // 如果太早执行本函数，会获取rect失败，因为此时UI界面尚未开始绘制，无法获得正确的坐标
+                    rect.left -= expendSize;
+                    rect.top -= expendSize;
+                    rect.right += expendSize;
+                    rect.bottom += expendSize;
+                    parentView.setTouchDelegate(new TouchDelegate(rect, view));
+                }
+            });
+        }
+    }
+
+    @SuppressWarnings("deprecation")
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    public static void setBackground(View view, Drawable drawable) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            view.setBackground(drawable);
+        } else {
+            view.setBackgroundDrawable(drawable);
+        }
+    }
+
+    /**
+     * 对 View 设置 paddingLeft
+     *
+     * @param view  需要被设置的 View
+     * @param value 设置的值
+     */
+    public static void setPaddingLeft(View view, int value) {
+        if (value != view.getPaddingLeft()) {
+            view.setPadding(value, view.getPaddingTop(), view.getPaddingRight(), view.getPaddingBottom());
+        }
+    }
+
+    /**
+     * 对 View 设置 paddingTop
+     *
+     * @param view  需要被设置的 View
+     * @param value 设置的值
+     */
+    public static void setPaddingTop(View view, int value) {
+        if (value != view.getPaddingTop()) {
+            view.setPadding(view.getPaddingLeft(), value, view.getPaddingRight(), view.getPaddingBottom());
+        }
+    }
+
+    /**
+     * 对 View 设置 paddingRight
+     *
+     * @param view  需要被设置的 View
+     * @param value 设置的值
+     */
+    public static void setPaddingRight(View view, int value) {
+        if (value != view.getPaddingRight()) {
+            view.setPadding(view.getPaddingLeft(), view.getPaddingTop(), value, view.getPaddingBottom());
+        }
+    }
+
+    /**
+     * 对 View 设置 paddingBottom
+     *
+     * @param view  需要被设置的 View
+     * @param value 设置的值
+     */
+    public static void setPaddingBottom(View view, int value) {
+        if (value != view.getPaddingBottom()) {
+            view.setPadding(view.getPaddingLeft(), view.getPaddingTop(), view.getPaddingRight(), value);
+        }
+    }
+
+    public static ColorFilter setImageViewTintColor(ImageView imageView, @ColorInt int tintColor) {
+        LightingColorFilter colorFilter = new LightingColorFilter(Color.argb(255, 0, 0, 0), tintColor);
+        imageView.setColorFilter(colorFilter);
+        return colorFilter;
     }
 
     /*---------------------------------- 屏幕信息 --------------------------------------*/

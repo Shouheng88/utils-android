@@ -11,7 +11,6 @@ import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.AnimRes;
-import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
@@ -19,14 +18,13 @@ import android.support.v4.util.Pair;
 import android.view.View;
 
 import java.io.Serializable;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 import me.shouheng.utils.R;
 import me.shouheng.utils.UtilsApp;
+import me.shouheng.utils.constant.ActivityDirection;
 
 /**
  * ActivityUtils is a helper class used to start your activity defined in your manifest or
@@ -37,15 +35,6 @@ import me.shouheng.utils.UtilsApp;
  * @version $Id: ActivityUtils, v 0.1 2018/11/17 17:29 shouh Exp$
  */
 public final class ActivityUtils {
-
-    public static final int ANIMATE_NONE                        = 0x00;
-    public static final int ANIMATE_FORWARD                     = 0x01;
-    public static final int ANIMATE_BACK                        = 0x02;
-    public static final int ANIMATE_EASE_IN_OUT                 = 0x03;
-    public static final int ANIMATE_SLIDE_TOP_FROM_BOTTOM       = 0x04;
-    public static final int ANIMATE_SLIDE_BOTTOM_FROM_TOP       = 0x05;
-    public static final int ANIMATE_SCALE_IN                    = 0x06;
-    public static final int ANIMATE_SCALE_OUT                   = 0x07;
 
     private static List<Activity> activities = new LinkedList<>();
 
@@ -80,7 +69,7 @@ public final class ActivityUtils {
 
     public static void start(@NonNull Context context,
                              @NonNull Class<? extends Activity> activity,
-                             @AnimDirection int direction) {
+                             @ActivityDirection int direction) {
         context.startActivity(new Intent(context, activity));
         if (context instanceof Activity) {
             overridePendingTransition((Activity) context, direction);
@@ -104,14 +93,14 @@ public final class ActivityUtils {
     public static void start(@NonNull Activity activity,
                              @NonNull Class<? extends Activity> activityClass,
                              int requestCode,
-                             @AnimDirection int direction) {
+                             @ActivityDirection int direction) {
         start(activity, activityClass, requestCode, direction, false);
     }
 
     public static void start(@NonNull Activity activity,
                              @NonNull Class<? extends Activity> activityClass,
                              int requestCode,
-                             @AnimDirection int direction,
+                             @ActivityDirection int direction,
                              boolean finishLast) {
         activity.startActivityForResult(new Intent(activity, activityClass), requestCode);
         if (finishLast) activity.finish();
@@ -134,7 +123,7 @@ public final class ActivityUtils {
     public static void start(@NonNull Fragment fragment,
                              @NonNull Class<? extends Activity> activityClass,
                              int requestCode,
-                             @AnimDirection int direction) {
+                             @ActivityDirection int direction) {
         fragment.startActivityForResult(new Intent(fragment.getContext(), activityClass), requestCode);
         overridePendingTransition(fragment.getActivity(), direction);
     }
@@ -150,22 +139,22 @@ public final class ActivityUtils {
         context.startActivity(i);
     }
 
-    public static void overridePendingTransition(Activity activity, @AnimDirection int direction) {
-        if (direction == ANIMATE_FORWARD) {
+    public static void overridePendingTransition(Activity activity, @ActivityDirection int direction) {
+        if (direction == ActivityDirection.ANIMATE_FORWARD) {
             activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-        } else if (direction == ANIMATE_BACK) {
+        } else if (direction == ActivityDirection.ANIMATE_BACK) {
             activity.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-        } else if (direction == ANIMATE_EASE_IN_OUT) {
+        } else if (direction == ActivityDirection.ANIMATE_EASE_IN_OUT) {
             activity.overridePendingTransition(R.anim.ease_in, R.anim.ease_out);
-        } else if (direction == ANIMATE_SLIDE_TOP_FROM_BOTTOM) {
+        } else if (direction == ActivityDirection.ANIMATE_SLIDE_TOP_FROM_BOTTOM) {
             activity.overridePendingTransition(R.anim.slide_bottom_to_top, R.anim.slide_none_medium_time);
-        } else if (direction == ANIMATE_SLIDE_BOTTOM_FROM_TOP) {
+        } else if (direction == ActivityDirection.ANIMATE_SLIDE_BOTTOM_FROM_TOP) {
             activity.overridePendingTransition(R.anim.slide_none_medium_time, R.anim.slide_top_to_bottom);
-        } else if (direction == ANIMATE_SCALE_IN) {
+        } else if (direction == ActivityDirection.ANIMATE_SCALE_IN) {
             activity.overridePendingTransition(R.anim.popup_scale_in, R.anim.slide_none);
-        } else if (direction == ANIMATE_SCALE_OUT) {
+        } else if (direction == ActivityDirection.ANIMATE_SCALE_OUT) {
             activity.overridePendingTransition(R.anim.slide_none, R.anim.popup_scale_out);
-        } else if (direction == ANIMATE_NONE) {
+        } else if (direction == ActivityDirection.ANIMATE_NONE) {
             // do nothing
         } else {
             activity.overridePendingTransition(R.anim.magnify_fade_in, R.anim.fade_out);
@@ -183,7 +172,7 @@ public final class ActivityUtils {
         activity.finish();
     }
 
-    public static void finishActivity(@NonNull Activity activity, @AnimDirection int direction) {
+    public static void finishActivity(@NonNull Activity activity, @ActivityDirection int direction) {
         activity.finish();
         overridePendingTransition(activity, direction);
     }
@@ -236,6 +225,9 @@ public final class ActivityUtils {
 
         @AnimRes
         private int exitAnim;
+
+        @ActivityDirection
+        private int direction;
 
         private View[] sharedElements;
 
@@ -430,6 +422,11 @@ public final class ActivityUtils {
             return this;
         }
 
+        public Builder<T> withDirection(@ActivityDirection final int direction) {
+            this.direction = direction;
+            return this;
+        }
+
         public Builder<T> wishSharedElements(View[] sharedElements) {
             this.sharedElements = sharedElements;
             return this;
@@ -458,8 +455,11 @@ public final class ActivityUtils {
                 } else {
                     context.startActivity(i);
                 }
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                if (enterAnim != 0 && exitAnim != 0) {
                     ((Activity) context).overridePendingTransition(enterAnim, exitAnim);
+                }
+                if (direction != 0) {
+                    overridePendingTransition((Activity) context, direction);
                 }
             } else {
                 context.startActivity(i);
@@ -476,8 +476,11 @@ public final class ActivityUtils {
             } else {
                 activity.startActivityForResult(i, requestCode);
             }
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+            if (enterAnim != 0 && exitAnim != 0) {
                 activity.overridePendingTransition(enterAnim, exitAnim);
+            }
+            if (direction != 0) {
+                overridePendingTransition(activity, direction);
             }
         }
 
@@ -492,8 +495,11 @@ public final class ActivityUtils {
             } else {
                 f.startActivityForResult(i, requestCode);
             }
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN && a != null) {
+            if (enterAnim != 0 && exitAnim != 0 && a != null) {
                 a.overridePendingTransition(enterAnim, exitAnim);
+            }
+            if (direction != 0) {
+                overridePendingTransition(a, direction);
             }
         }
 
@@ -551,20 +557,6 @@ public final class ActivityUtils {
         for (Activity activity : activities) {
             activity.finish();
         }
-    }
-
-    /**
-     * Predefined animation codes.
-     */
-    @IntDef({ANIMATE_NONE,
-            ANIMATE_FORWARD,
-            ANIMATE_BACK,
-            ANIMATE_EASE_IN_OUT,
-            ANIMATE_SLIDE_TOP_FROM_BOTTOM,
-            ANIMATE_SLIDE_BOTTOM_FROM_TOP,
-            ANIMATE_SCALE_IN, ANIMATE_SCALE_OUT})
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface AnimDirection {
     }
 
     /*---------------------------------- inner methods --------------------------------------*/
