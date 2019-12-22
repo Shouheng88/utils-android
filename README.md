@@ -2,6 +2,7 @@
 
 ![SLicense](https://img.shields.io/hexpm/l/plug.svg)
 ![Version](https://img.shields.io/maven-metadata/v/https/dl.bintray.com/easymark/Android/me/shouheng/utils/utils-core/maven-metadata.xml.svg)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/58b18f9bf47543cbbaf4ca67bcadfc7b)](https://www.codacy.com/manual/Shouheng88/Android-utils?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Shouheng88/Android-utils&amp;utm_campaign=Badge_Grade)
 
 ## 1、关于项目
 
