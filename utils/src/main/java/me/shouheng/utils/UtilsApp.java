@@ -5,6 +5,10 @@ import android.app.Application;
 import android.os.Bundle;
 
 import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import me.shouheng.utils.app.AppUtils;
 
 /**
@@ -49,6 +53,8 @@ public final class UtilsApp {
 
     private static boolean isForeGround = false;
 
+    private static List<OnForegroundChangeListener> onForegroundChangeListeners = new ArrayList<>();
+
     private UtilsApp() {
         throw new UnsupportedOperationException("u can't initialize me!");
     }
@@ -91,6 +97,7 @@ public final class UtilsApp {
             public void onActivityResumed(Activity activity) {
                 if (!isForeGround) {
                     isForeGround = true;
+                    notifyForegroundChange(true);
                 }
             }
 
@@ -105,6 +112,7 @@ public final class UtilsApp {
                 activityCount--;
                 if (activityCount == 0) {
                     isForeGround = false;
+                    notifyForegroundChange(false);
                     Log.i(TAG, "Activity foreground: " + System.currentTimeMillis());
                 }
             }
@@ -119,5 +127,48 @@ public final class UtilsApp {
                 AppUtils.detachActivity(activity);
             }
         });
+    }
+
+    /**
+     * Is current app foreground
+     *
+     * @return is foreground
+     */
+    public static boolean isAppForeGround() {
+        return isForeGround;
+    }
+
+    /**
+     * Register app foreground state change listener.
+     *
+     * @param l listener
+     */
+    public static void registerForegroundChangeListener(OnForegroundChangeListener l) {
+        if (!onForegroundChangeListeners.contains(l)) {
+            onForegroundChangeListeners.add(l);
+        }
+    }
+
+    /**
+     * Unregister app foreground state change listener.
+     *
+     * @param l listener
+     */
+    public static void unRegisterForegroundChangeListener(OnForegroundChangeListener l) {
+        onForegroundChangeListeners.remove(l);
+    }
+
+    private static void notifyForegroundChange(boolean isForeGround) {
+        for (OnForegroundChangeListener l : onForegroundChangeListeners) {
+            l.onForegroundChange(isForeGround);
+        }
+    }
+
+    /**
+     * On foreground state change callback.
+     */
+    public interface OnForegroundChangeListener {
+
+        void onForegroundChange(boolean isForeground);
     }
 }

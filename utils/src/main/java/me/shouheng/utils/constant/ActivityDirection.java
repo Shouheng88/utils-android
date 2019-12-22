@@ -1,11 +1,19 @@
 package me.shouheng.utils.constant;
 
+import android.app.Activity;
 import android.support.annotation.IntDef;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
+ * Activity animation direction enums.
+ *
+ * For usages see:
+ * 1. {@link me.shouheng.utils.app.ActivityUtils#finishActivity(Activity, int)}
+ * 2. {@link me.shouheng.utils.app.ActivityUtils#overridePendingTransition(Activity, int)}
+ * etc.
+ *
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
  * @version 2019-12-03 23:06
  */

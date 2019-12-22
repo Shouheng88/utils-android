@@ -27,7 +27,7 @@ import me.shouheng.samples.ui.TestViewUtilsActivity;
 import me.shouheng.utils.app.ActivityUtils;
 import me.shouheng.utils.stability.CrashHelper;
 import me.shouheng.utils.stability.CrashHelper.OnCrashListener;
-import me.shouheng.utils.stability.LogUtils;
+import me.shouheng.utils.stability.L;
 import me.shouheng.utils.permission.PermissionUtils;
 import me.shouheng.utils.permission.callback.OnGetPermissionCallback;
 
@@ -74,13 +74,13 @@ public class MainActivity extends BaseActivity {
                 CrashHelper.init(getApplication(), FileUtils.getExternalStoragePublicCrashDir(), new OnCrashListener() {
                     @Override
                     public void onCrash(String crashInfo, Throwable e) {
-                        LogUtils.e(crashInfo);
+                        L.e(crashInfo);
                     }
                 });
-                LogUtils.getConfig()
+                L.getConfig()
                         .setLog2FileSwitch(true)
                         .setDir(FileUtils.getExternalStoragePublicLogDir())
-                        .setFileFilter(LogUtils.W);
+                        .setFileFilter(L.W);
             }
         });
     }
@@ -88,13 +88,13 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        LogUtils.d("STOP MAIN");
+        L.d("STOP MAIN");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        LogUtils.d("PAUSE MAIN");
+        L.d("PAUSE MAIN");
     }
 
     public void testIntentUtils(View view) {

@@ -78,6 +78,8 @@ import me.shouheng.utils.permission.callback.PermissionResultCallback;
  */
 public final class PermissionUtils {
 
+    private static PermissionNameGetter permissionNameGetter;
+
     private PermissionUtils() {
         throw new UnsupportedOperationException("U can't initialize me!");
     }
@@ -276,4 +278,16 @@ public final class PermissionUtils {
         context.startActivity(intent);
     }
 
+    /**
+     * Set getter to get permission name
+     *
+     * @param permissionNameGetter permission name getter
+     */
+    public static void setPermissionNameGetter(PermissionNameGetter permissionNameGetter) {
+        PermissionUtils.permissionNameGetter = permissionNameGetter;
+    }
+
+    public static PermissionNameGetter getPermissionNameGetter() {
+        return permissionNameGetter;
+    }
 }

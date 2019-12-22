@@ -28,19 +28,19 @@ public final class SPUtils {
 
     /*-------------------------------------get instance----------------------------------------*/
 
-    public static SPUtils getInstance() {
-        return getInstance("", Context.MODE_PRIVATE);
+    public static SPUtils get() {
+        return get("", Context.MODE_PRIVATE);
     }
 
-    public static SPUtils getInstance(final int mode) {
-        return getInstance("", mode);
+    public static SPUtils get(final int mode) {
+        return get("", mode);
     }
 
-    public static SPUtils getInstance(String spName) {
-        return getInstance(spName, Context.MODE_PRIVATE);
+    public static SPUtils get(String spName) {
+        return get(spName, Context.MODE_PRIVATE);
     }
 
-    public static SPUtils getInstance(String spName, final int mode) {
+    public static SPUtils get(String spName, final int mode) {
         if (StringUtils.isSpace(spName)) spName = getDefaultSharedPreferencesName();
         SPUtils spUtils = SP_UTILS_MAP.get(spName);
         if (spUtils == null) {

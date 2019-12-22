@@ -103,6 +103,14 @@ public final class CrashHelper {
         return Arrays.asList(directory.listFiles());
     }
 
+    /**
+     * Call this method if you want to kill current process.
+     */
+    public static void killCurrentProcess() {
+        Process.killProcess(Process.myPid());
+        System.exit(1);
+    }
+
     /*---------------------------------------inner methods-----------------------------------------*/
 
     /**
@@ -156,8 +164,7 @@ public final class CrashHelper {
                     if (defaultUncaughtExceptionHandler != null) {
                         defaultUncaughtExceptionHandler.uncaughtException(t, e);
                     } else {
-                        Process.killProcess(Process.myPid());
-                        System.exit(1);
+                        killCurrentProcess();
                     }
                     return;
                 }

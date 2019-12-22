@@ -24,7 +24,7 @@ import me.shouheng.utils.UtilsApp;
 import me.shouheng.utils.data.EncryptUtils;
 import me.shouheng.utils.data.StringUtils;
 import me.shouheng.utils.device.ShellUtils;
-import me.shouheng.utils.stability.LogUtils;
+import me.shouheng.utils.stability.L;
 
 /**
  * Utils for App level.
@@ -473,7 +473,7 @@ public final class AppUtils {
                     activityStacks.add(activityWeakReference);
                 }
             } catch (Exception e) {
-                LogUtils.e("detachActivity error: ", e);
+                L.e("detachActivity error: ", e);
             }
 
         }
@@ -482,7 +482,7 @@ public final class AppUtils {
                 activityStack.removeAll(activityStacks);
             }
         } catch (Exception e) {
-            LogUtils.e("detachActivity error: ", e);
+            L.e("detachActivity error: ", e);
         }
         activityStacks.clear();
     }

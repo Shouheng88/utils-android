@@ -57,7 +57,7 @@ import me.shouheng.utils.data.StringUtils;
 /**
  * @author WngShhng 2019-05-07 12:01
  */
-public final class LogUtils {
+public final class L {
 
     public static final int V = Log.VERBOSE;
     public static final int D = Log.DEBUG;
@@ -103,7 +103,7 @@ public final class LogUtils {
 
     private static final SimpleArrayMap<Class, IFormatter> I_FORMATTER_MAP = new SimpleArrayMap<>();
 
-    private LogUtils() {
+    private L() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
@@ -479,7 +479,7 @@ public final class LogUtils {
                 (CONFIG.mDir == null ? CONFIG.mDefaultDir : CONFIG.mDir)
                         + CONFIG.mFilePrefix + "-" + date + ".txt";
         if (!createOrExistsFile(fullPath)) {
-            Log.e("LogUtils", "create " + fullPath + " failed!");
+            Log.e("L", "create " + fullPath + " failed!");
             return;
         }
         StringBuilder sb = new StringBuilder();
@@ -544,7 +544,7 @@ public final class LogUtils {
                         public void run() {
                             boolean delete = aFile.delete();
                             if (!delete) {
-                                Log.e("LogUtils", "delete " + aFile + " failed!");
+                                Log.e("L", "delete " + aFile + " failed!");
                             }
                         }
                     });
@@ -596,7 +596,7 @@ public final class LogUtils {
                     bw.write(input);
                 } catch (IOException e) {
                     e.printStackTrace();
-                    Log.e("LogUtils", "log to " + filePath + " failed!");
+                    Log.e("L", "log to " + filePath + " failed!");
                 } finally {
                     try {
                         if (bw != null) {

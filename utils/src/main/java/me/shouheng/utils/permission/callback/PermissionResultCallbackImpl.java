@@ -35,7 +35,7 @@ public class PermissionResultCallbackImpl implements PermissionResultCallback {
 
     @Override
     public void showPermissionsRationale(String... permissions) {
-        String names = Permission.names(context, permissions);
+        String names = Permission.names(permissions);
         String message = context.getResources().getQuantityString(
                 R.plurals.permission_set_in_settings_message, permissions.length, names);
         new AlertDialog.Builder(context)
@@ -53,7 +53,7 @@ public class PermissionResultCallbackImpl implements PermissionResultCallback {
 
     @Override
     public void onPermissionNotGranted(String... permissions) {
-        String names = Permission.names(context, permissions);
+        String names = Permission.names(permissions);
         String message = context.getResources().getQuantityString(
                 R.plurals.permission_denied_message, permissions.length, names);
         Toast.makeText(context, Html.fromHtml(message), Toast.LENGTH_SHORT).show();
