@@ -14,10 +14,10 @@ import android.view.animation.TranslateAnimation;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-import static me.shouheng.utils.ui.AnimationUtils.UIDirection.BOTTOM_TO_TOP;
-import static me.shouheng.utils.ui.AnimationUtils.UIDirection.LEFT_TO_RIGHT;
-import static me.shouheng.utils.ui.AnimationUtils.UIDirection.RIGHT_TO_LEFT;
-import static me.shouheng.utils.ui.AnimationUtils.UIDirection.TOP_TO_BOTTOM;
+import static me.shouheng.utils.ui.AnimUtils.UIDirection.BOTTOM_TO_TOP;
+import static me.shouheng.utils.ui.AnimUtils.UIDirection.LEFT_TO_RIGHT;
+import static me.shouheng.utils.ui.AnimUtils.UIDirection.RIGHT_TO_LEFT;
+import static me.shouheng.utils.ui.AnimUtils.UIDirection.TOP_TO_BOTTOM;
 
 /**
  * 动画相关
@@ -25,7 +25,7 @@ import static me.shouheng.utils.ui.AnimationUtils.UIDirection.TOP_TO_BOTTOM;
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
  * @version 2019-10-27 16:00
  */
-public final class AnimationUtils {
+public final class AnimUtils {
 
     /**
      * <p>对 View 做透明度变化的进场动画。</p>
@@ -131,9 +131,8 @@ public final class AnimationUtils {
      * @param direction       进场动画的方向
      * @return                动画对应的 Animator 对象, 注意无动画时返回 null
      */
-    public static
     @Nullable
-    TranslateAnimation slideIn(final View view, @UIDirection int duration, final Animation.AnimationListener listener, boolean isNeedAnimation, @UIDirection int direction) {
+    public static TranslateAnimation slideIn(final View view, @UIDirection int duration, final Animation.AnimationListener listener, boolean isNeedAnimation, @UIDirection int direction) {
         if (view == null) {
             return null;
         }
@@ -193,9 +192,8 @@ public final class AnimationUtils {
      * @param direction       进场动画的方向
      * @return                动画对应的 Animator 对象, 注意无动画时返回 null
      */
-    public static
     @Nullable
-    TranslateAnimation slideOut(final View view, @UIDirection int duration, final Animation.AnimationListener listener, boolean isNeedAnimation, @UIDirection int direction) {
+    public static TranslateAnimation slideOut(final View view, @UIDirection int duration, final Animation.AnimationListener listener, boolean isNeedAnimation, @UIDirection int direction) {
         if (view == null) {
             return null;
         }
@@ -271,7 +269,7 @@ public final class AnimationUtils {
         int BOTTOM_TO_TOP = 3;
     }
 
-    private AnimationUtils() {
+    private AnimUtils() {
         throw new UnsupportedOperationException();
     }
 }
