@@ -10,6 +10,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 import me.shouheng.utils.R;
+import me.shouheng.utils.UtilsApp;
 
 public class Permission {
 
@@ -55,13 +56,21 @@ public class Permission {
     }
 
     /**
-     * Get translated permission name.
+     * Get translated permission name. Use {@link PermissionUtils#setPermissionNameGetter(PermissionNameGetter)}
+     * to add custom permission name, otherwise the default permission name will be used.
      *
-     * @param context the context to get string in xml
      * @param permission the permission from {@link Manifest.permission}
      * @return the translated permission
      */
-    public static String name(Context context, String permission) {
+    public static String name(String permission) {
+        // Get permission name from getter first
+        if (PermissionUtils.getPermissionNameGetter() != null) {
+            String name = PermissionUtils.getPermissionNameGetter().getName(permission);
+            if (name != null) {
+                return name;
+            }
+        }
+        // If not get permission name from getter, use default permission name.
         int resName;
         switch (permission) {
             case Manifest.permission.WRITE_EXTERNAL_STORAGE:
@@ -93,20 +102,19 @@ public class Permission {
                 break;
             default: throw new IllegalArgumentException("Unrecognized permission " + permission);
         }
-        return context.getResources().getString(resName);
+        return UtilsApp.getApp().getString(resName);
     }
 
     /**
      * Map multiple permission names to one single string used to display in toast and dialog.
      *
-     * @param context the context used to get string in xml.
      * @param permissions the permission names
      * @return the single string of permission names connected by ','
      */
-    public static String names(Context context, String[] permissions) {
+    public static String names(String[] permissions) {
         StringBuilder names = new StringBuilder();
         for (int i=0, length=permissions.length; i<length; i++) {
-            names.append(Permission.name(context, permissions[i]));
+            names.append(Permission.name(permissions[i]));
             if (i != length - 1) {
                 names.append(",");
             }

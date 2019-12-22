@@ -10,7 +10,7 @@ import android.widget.EditText;
 
 import me.shouheng.samples.common.BaseActivity;
 import me.shouheng.samples.R;
-import me.shouheng.utils.stability.LogUtils;
+import me.shouheng.utils.stability.L;
 
 public class TestLogActivity extends BaseActivity {
 
@@ -27,22 +27,22 @@ public class TestLogActivity extends BaseActivity {
                 cnt++;
                 switch (cnt % 6) {
                     case 0:
-                        LogUtils.v("Logging v");
+                        L.v("Logging v");
                         break;
                     case 1:
-                        LogUtils.d("Logging d");
+                        L.d("Logging d");
                         break;
                     case 2:
-                        LogUtils.i("Logging i");
+                        L.i("Logging i");
                         break;
                     case 3:
-                        LogUtils.w("Logging w");
+                        L.w("Logging w");
                         break;
                     case 4:
-                        LogUtils.e("Logging e");
+                        L.e("Logging e");
                         break;
                     case 5:
-                        LogUtils.a("Logging a");
+                        L.a("Logging a");
                         break;
                     default:
                         // do nothing
@@ -62,7 +62,7 @@ public class TestLogActivity extends BaseActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                LogUtils.d(s);
+                L.d(s);
             }
         });
     }

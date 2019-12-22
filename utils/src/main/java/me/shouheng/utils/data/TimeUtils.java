@@ -45,6 +45,13 @@ public final class TimeUtils {
         return format.format(new Date(millis));
     }
 
+    /**
+     * Time format output by system flags. See sample app for details.
+     *
+     * @param millis millis of time
+     * @param flags  flags
+     * @return       date string output
+     */
     public static String toString(long millis, int flags) {
         return DateUtils.formatDateTime(UtilsApp.getApp(), millis, flags);
     }

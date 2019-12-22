@@ -18,26 +18,26 @@ public class TestSpUtilsActivity extends AppCompatActivity {
     }
 
     public void writeString2DefaultSP(View view) {
-        SPUtils.getInstance().put("default_string", "default_string_value");
+        SPUtils.get().put("default_string", "default_string_value");
     }
 
     public void writeBoolean2DefaultSP(View view) {
-        SPUtils.getInstance().put("default_boolean", true);
+        SPUtils.get().put("default_boolean", true);
     }
 
     public void writeInteger2DefaultSP(View view) {
-        SPUtils.getInstance().put("default_integer", 12);
+        SPUtils.get().put("default_integer", 12);
     }
 
     public void writeString2SP(View view) {
-        SPUtils.getInstance(NEW_SP_FILE_NAME).put("sp_string", "default_string_value");
+        SPUtils.get(NEW_SP_FILE_NAME).put("sp_string", "default_string_value");
     }
 
     public void writeBoolean2SP(View view) {
-        SPUtils.getInstance(NEW_SP_FILE_NAME).put("sp_boolean", true);
+        SPUtils.get(NEW_SP_FILE_NAME).put("sp_boolean", true);
     }
 
     public void writeInteger2SP(View view) {
-        SPUtils.getInstance(NEW_SP_FILE_NAME).put("sp_integer", 12);
+        SPUtils.get(NEW_SP_FILE_NAME).put("sp_integer", 12);
     }
 }

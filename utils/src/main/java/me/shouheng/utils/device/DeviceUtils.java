@@ -36,7 +36,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import me.shouheng.utils.UtilsApp;
-import me.shouheng.utils.stability.LogUtils;
+import me.shouheng.utils.stability.L;
 import me.shouheng.utils.store.IOUtils;
 
 import static android.Manifest.permission.ACCESS_WIFI_STATE;
@@ -71,7 +71,7 @@ public final class DeviceUtils {
                 fileInputStream = new FileInputStream(new File(Environment.getRootDirectory(), "build.prop"));
                 properties.load(fileInputStream);
             } catch (Exception e) {
-                LogUtils.e("read file error " + e);
+                L.e("read file error " + e);
             } finally {
                 IOUtils.safeCloseAll(fileInputStream);
             }
@@ -86,7 +86,7 @@ public final class DeviceUtils {
             // flyme
             sFlymeVersionName = getLowerCaseName(properties, getMethod, KEY_FLYME_VERSION_NAME);
         } catch (Exception e) {
-            LogUtils.e("read SystemProperties error " + e);
+            L.e("read SystemProperties error " + e);
         }
     }
 

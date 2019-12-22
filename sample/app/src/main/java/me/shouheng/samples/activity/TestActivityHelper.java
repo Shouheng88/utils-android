@@ -10,7 +10,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import me.shouheng.samples.R;
@@ -18,7 +17,7 @@ import me.shouheng.samples.activity.TestActivityResult.Request;
 import me.shouheng.utils.app.ActivityUtils;
 import me.shouheng.utils.app.ResUtils;
 import me.shouheng.utils.constant.ActivityDirection;
-import me.shouheng.utils.stability.LogUtils;
+import me.shouheng.utils.stability.L;
 import me.shouheng.utils.ui.ToastUtils;
 
 /**
@@ -106,13 +105,13 @@ public class TestActivityHelper extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        LogUtils.d("START HELPER");
+        L.d("START HELPER");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        LogUtils.d("RESUME HELPER");
+        L.d("RESUME HELPER");
     }
 
     @Override
