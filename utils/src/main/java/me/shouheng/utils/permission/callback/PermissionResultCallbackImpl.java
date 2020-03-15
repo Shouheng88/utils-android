@@ -4,11 +4,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.text.Html;
-import android.widget.Toast;
 
 import me.shouheng.utils.R;
-import me.shouheng.utils.permission.Permission;
+import me.shouheng.utils.permission.PermissionHelper;
 import me.shouheng.utils.permission.PermissionUtils;
+import me.shouheng.utils.ui.ToastUtils;
 
 /**
  * {@link PermissionResultCallback} 的默认实现
@@ -35,7 +35,7 @@ public class PermissionResultCallbackImpl implements PermissionResultCallback {
 
     @Override
     public void showPermissionsRationale(String... permissions) {
-        String names = Permission.names(permissions);
+        String names = PermissionHelper.names(permissions);
         String message = context.getResources().getQuantityString(
                 R.plurals.permission_set_in_settings_message, permissions.length, names);
         new AlertDialog.Builder(context)
@@ -53,9 +53,9 @@ public class PermissionResultCallbackImpl implements PermissionResultCallback {
 
     @Override
     public void onPermissionNotGranted(String... permissions) {
-        String names = Permission.names(permissions);
+        String names = PermissionHelper.names(permissions);
         String message = context.getResources().getQuantityString(
                 R.plurals.permission_denied_message, permissions.length, names);
-        Toast.makeText(context, Html.fromHtml(message), Toast.LENGTH_SHORT).show();
+        ToastUtils.showShort(Html.fromHtml(message));
     }
 }

@@ -16,24 +16,23 @@ import java.util.LinkedList;
 import java.util.List;
 
 import me.shouheng.utils.UtilsApp;
-import me.shouheng.utils.permission.Permission.PermissionCode;
 import me.shouheng.utils.permission.callback.OnGetPermissionCallback;
 import me.shouheng.utils.permission.callback.PermissionResultCallback;
 
 /**
- * 用来获取运行时权限的工具类
+ * The utils to get runtime permission.
  *
- * 调用该类的时候需要传入一个 {@link Activity}，并且要求：
- * 1. 实现了 {@link PermissionResultResolver}，并且
- * 2. 在它的 {@link Activity#onRequestPermissionsResult(int, String[], int[])} 中
- * 调用了 {@link PermissionResultHandler#handlePermissionsResult(
- * Activity, int, String[], int[], PermissionResultCallback)} 方法。
+ * To use this utils, you should:
+ * 1. Make your activity implement {@link PermissionResultResolver} and,
+ * 2. call {@link PermissionResultHandler#handlePermissionsResult(Activity, int, String[], int[],
+ * PermissionResultCallback)} in its {@link Activity#onRequestPermissionsResult(int, String[], int[])}.
  *
- * Sample code below:
- *
+ * Sample as below. Follow the step to handle your own logic,
  * <code>
- *public class TestPermissionActivity extends AppCompatActivity implements PermissionResultResolver {
+ * // Step 1: implement PermissionResultResolver
+ * public class TestPermissionActivity extends AppCompatActivity implements PermissionResultResolver {
  *
+ *     // Step 2: define a OnGetPermissionCallback instance
  *     private OnGetPermissionCallback onGetPermissionCallback;
  *
  *     @Override
@@ -44,12 +43,12 @@ import me.shouheng.utils.permission.callback.PermissionResultCallback;
  *         findViewById(R.id.btn_storage).setOnClickListener(new View.OnClickListener() {
  *             @Override
  *             public void onClick(View v) {
- *                 // do check permission
+ *                 // Step 6: do check permission
  *                 PermissionUtils.checkStoragePermission(TestPermissionActivity.this,
  *                         new OnGetPermissionCallback() {
  *                             @Override
  *                             public void onGetPermission() {
- *                                 // you logic when get permission
+ *                                 // Step 7: you logic when get permission
  *                                 Toast.makeText(TestPermissionActivity.this,
  *                                         R.string.permission_get_storage_permission,
  *                                         Toast.LENGTH_SHORT).show();
@@ -59,6 +58,7 @@ import me.shouheng.utils.permission.callback.PermissionResultCallback;
  *         });
  *     }
  *
+ *     // Step 5: Call PermissionResultHandler.handlePermissionsResult() in onRequestPermissionsResult method
  *     @Override
  *     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
  *         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -67,6 +67,7 @@ import me.shouheng.utils.permission.callback.PermissionResultCallback;
  *                 grantResults, new PermissionResultCallbackImpl(this, onGetPermissionCallback));
  *     }
  *
+ *     // Step 4: set value to OnGetPermissionCallback instance
  *     @Override
  *     public void setOnGetPermissionCallback(OnGetPermissionCallback onGetPermissionCallback) {
  *         this.onGetPermissionCallback = onGetPermissionCallback;
@@ -202,13 +203,13 @@ public final class PermissionUtils {
      * @param <T> 需要同时实现 {@link PermissionResultResolver}
      */
     public static <T extends Activity & PermissionResultResolver> void checkPermissions(
-            @NonNull T activity, OnGetPermissionCallback callback, @PermissionCode int...permissions) {
+            @NonNull T activity, OnGetPermissionCallback callback, @Permission int...permissions) {
         activity.setOnGetPermissionCallback(callback);
         // map permission code
         int length = permissions.length;
         String[] standardPermissions = new String[length];
         for (int i=0; i<length; i++) {
-            standardPermissions[i] = Permission.map(permissions[i]);
+            standardPermissions[i] = PermissionHelper.map(permissions[i]);
         }
         // check permissions
         int notGrantedCount = 0;
@@ -227,7 +228,7 @@ public final class PermissionUtils {
             }
         } else {
             ActivityCompat.requestPermissions(activity,
-                    notGranted.toArray(new String[0]), Permission.REQUEST_PERMISSIONS);
+                    notGranted.toArray(new String[0]), PermissionHelper.REQUEST_PERMISSIONS);
         }
     }
 
@@ -237,7 +238,7 @@ public final class PermissionUtils {
      * @param permissions 权限列表
      * @return            全部具备
      */
-    public static boolean hasPermissions(@PermissionCode int...permissions) {
+    public static boolean hasPermissions(@Permission int...permissions) {
         return hasPermissions(UtilsApp.getApp(), permissions);
     }
 
@@ -248,12 +249,12 @@ public final class PermissionUtils {
      * @param permissions 权限列表
      * @return            全部具备
      */
-    public static boolean hasPermissions(Context context, @PermissionCode int...permissions) {
+    public static boolean hasPermissions(Context context, @Permission int...permissions) {
         // map permission code
         int length = permissions.length;
         String[] standardPermissions = new String[length];
         for (int i=0; i<length; i++) {
-            standardPermissions[i] = Permission.map(permissions[i]);
+            standardPermissions[i] = PermissionHelper.map(permissions[i]);
         }
         // check permissions
         int notGrantedCount = 0;
