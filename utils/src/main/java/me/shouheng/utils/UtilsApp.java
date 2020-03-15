@@ -12,24 +12,24 @@ import java.util.List;
 import me.shouheng.utils.app.AppUtils;
 
 /**
- * ========================================================================================================================
+ * =================================================================================================
+ *
+ *                                 _           _     _   _    _ _   _ _
+ *                 /\             | |         (_)   | | | |  | | | (_) |
+ *                /  \   _ __   __| |_ __ ___  _  __| | | |  | | |_ _| |___
+ *               / /\ \ | '_ \ / _` | '__/ _ \| |/ _` | | |  | | __| | / __|
+ *              / ____ \| | | | (_| | | | (_) | | (_| | | |__| | |_| | \__ \
+ *             /_/    \_\_| |_|\__,_|_|  \___/|_|\__,_|  \____/ \__|_|_|___/
  *
  *
- *       .o.                         .o8                      o8o        .o8     ooooo     ooo     .    o8o  oooo
- *      .888.                       "888                      `"'       "888     `888'     `8'   .o8    `"'  `888
- *     .8"888.     ooo. .oo.    .oooo888  oooo d8b  .ooooo.  oooo   .oooo888      888       8  .o888oo oooo   888   .oooo.o
- *    .8' `888.    `888P"Y88b  d88' `888  `888""8P d88' `88b `888  d88' `888      888       8    888   `888   888  d88(  "8
- *   .88ooo8888.    888   888  888   888   888     888   888  888  888   888      888       8    888    888   888  `"Y88b.
- *  .8'     `888.   888   888  888   888   888     888   888  888  888   888      `88.    .8'    888 .  888   888  o.  )88b
- * o88o     o8888o o888o o888o `Y8bod88P" d888b    `Y8bod8P' o888o `Y8bod88P"       `YbodP'      "888" o888o o888o 8""888P'
+ *                                    == WngShhng ==
  *
- *                                                 == WngShhng ==
+ *                         AN COLLECTION OF USEFUL UTILS IN ANDROID
  *
- *                                    AN COLLECTION OF USEFUL UTILS IN ANDROID
+ * =================================================================================================
  *
- * ========================================================================================================================
- *
- * To initialize this library in your project, you should simply call {@link UtilsApp#init(Application)} in your application:
+ * To initialize this library in your project, you should simply call
+ * {@link UtilsApp#init(Application)} in your application:
  *
  * <code>
  * public class SampleApp extends Application {

@@ -9,13 +9,13 @@ import android.view.View;
 import android.widget.Toast;
 
 import me.shouheng.samples.R;
-import me.shouheng.utils.permission.callback.OnGetPermissionCallback;
 import me.shouheng.utils.permission.Permission;
-import me.shouheng.utils.permission.callback.PermissionResultCallback;
-import me.shouheng.utils.permission.callback.PermissionResultCallbackImpl;
 import me.shouheng.utils.permission.PermissionResultHandler;
 import me.shouheng.utils.permission.PermissionResultResolver;
 import me.shouheng.utils.permission.PermissionUtils;
+import me.shouheng.utils.permission.callback.OnGetPermissionCallback;
+import me.shouheng.utils.permission.callback.PermissionResultCallback;
+import me.shouheng.utils.permission.callback.PermissionResultCallbackImpl;
 
 /**
  * To use {@link PermissionUtils} to request permissions, you need:

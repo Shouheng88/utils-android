@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AndroidUtils</string>
+    <string name="app_name">安卓工具类</string>
 
     <string name="menu_activity_helper">ActivityHelper</string>
     <string name="menu_permission_utils">PermissionUtils</string>
