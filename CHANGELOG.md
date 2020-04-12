@@ -1,0 +1,13 @@
+- 版本 1.3.6
+    - SPUtils getInstance 方法重命名为 get，getInstance 太长
+    - LogUtils 类重命名为 L，LogUtils 太长
+    - 应用前后台切换的监听
+    - 动画工具类修改名称
+    - 权限工具类增加自定义权限名称的接口
+- 版本 1.3.5
+    - 解析 Theme 并读取属性值相关的工具类
+- 版本 1.2.1：
+    - ActivityUtils 增加了动画支持
+    - StringUtils 增加了字符串拼接的方法
+- 版本 1.1.0：
+    - 增加了基本的类库
