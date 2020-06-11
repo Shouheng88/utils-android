@@ -89,9 +89,9 @@ public class SampleApp extends Application {
 |10|[DeviceUtils](./utils/src/main/java/me/shouheng/utils/device/DeviceUtils.java)|设备信息|设备信息，比如 imei 手机型号 生产商等
 |11|[NetworkUtils](./utils/src/main/java/me/shouheng/utils/device/NetworkUtils.java)|设备信息|网络信息，网络类型等
 |12|[ShellUtils](./utils/src/main/java/me/shouheng/utils/device/ShellUtils.java)|设备信息|命令行执行
-|13|[PermissionUtils](./utils/src/main/java/me/shouheng/permission/app/PermissionUtils.java)|权限|Android 6.0 运行时权限权限请求
-|14|[CrashHelper](./utils/src/main/java/me/shouheng/utils/store/CrashHelper.java)|稳定性|崩溃日志
-|15|[LogUtils](./utils/src/main/java/me/shouheng/utils/store/LogUtils.java)|稳定性|日志输出，日志格式化，日志输出到文档等
+|13|[PermissionUtils](./utils/src/main/java/me/shouheng/utils/permission/PermissionUtils.java)|权限|Android 6.0 运行时权限权限请求
+|14|[CrashHelper](./utils/src/main/java/me/shouheng/utils/stability/CrashHelper.java)|稳定性|崩溃日志
+|15|[L](./utils/src/main/java/me/shouheng/utils/stability/L.java)|稳定性|日志输出，日志格式化，日志输出到文档等
 |16|[FileUtils](./utils/src/main/java/me/shouheng/utils/store/FileUtils.java)|数据存储|文件相关，获取文件信息，文件移动，删除和遍历等
 |17|[PathUtils](./utils/src/main/java/me/shouheng/utils/store/PathUtils.java)|数据存储|文件路径，获取手机中各个文件夹的路径等
 |18|[IOUtils](./utils/src/main/java/me/shouheng/utils/store/IOUtils.java)|数据存储|磁盘读写|
@@ -127,7 +127,7 @@ public class SampleApp extends Application {
 ## License
 
 ```
-Copyright (c) 2019-2020 CodeBrick.
+Copyright (c) 2019-2020 DaddyDev.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
