@@ -1,11 +1,13 @@
 package me.shouheng.utils.ui;
 
 import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.os.Build;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
@@ -132,7 +134,7 @@ public final class AnimUtils {
      * @return                动画对应的 Animator 对象, 注意无动画时返回 null
      */
     @Nullable
-    public static TranslateAnimation slideIn(final View view, @UIDirection int duration, final Animation.AnimationListener listener, boolean isNeedAnimation, @UIDirection int direction) {
+    public static TranslateAnimation slideIn(final View view, int duration, final Animation.AnimationListener listener, boolean isNeedAnimation, @UIDirection int direction) {
         if (view == null) {
             return null;
         }
@@ -193,7 +195,7 @@ public final class AnimUtils {
      * @return                动画对应的 Animator 对象, 注意无动画时返回 null
      */
     @Nullable
-    public static TranslateAnimation slideOut(final View view, @UIDirection int duration, final Animation.AnimationListener listener, boolean isNeedAnimation, @UIDirection int direction) {
+    public static TranslateAnimation slideOut(final View view, int duration, final Animation.AnimationListener listener, boolean isNeedAnimation, @UIDirection int direction) {
         if (view == null) {
             return null;
         }
@@ -257,7 +259,24 @@ public final class AnimUtils {
             view.setVisibility(View.GONE);
             return null;
         }
+    }
 
+    /**
+     * 指定的控件闪烁，用在提示等各种场景中
+     *
+     * @param view        做动画的 View
+     * @param duration    动画时长(毫秒)，参考 2888
+     * @param repeatCount 动画重复的次数，参考 6
+     * @param values      透明度改变的值，参考 0, 0.66f, 1.0f, 0
+     */
+    public static ObjectAnimator shining(View view, int duration, int repeatCount, float ...values) {
+        ObjectAnimator animator = ObjectAnimator.ofFloat(view, "alpha", values);
+        animator.setDuration(duration);
+        animator.setRepeatCount(repeatCount);
+        animator.setInterpolator(new AccelerateDecelerateInterpolator());
+        animator.setRepeatMode(ValueAnimator.REVERSE);
+        animator.start();
+        return animator;
     }
 
     @IntDef(value = {LEFT_TO_RIGHT, TOP_TO_BOTTOM, RIGHT_TO_LEFT, BOTTOM_TO_TOP})

@@ -24,6 +24,7 @@
         <activity android:name=".data.TestTimeUtilsActivity" />
         <activity android:name=".data.TestEncryptUtilsActivity" />
         <activity android:name=".ui.TestViewUtilsActivity" />
+        <activity android:name=".ui.TestAnimUtilsActivity" />
         <activity android:name=".ui.TestImageUtilsActivity" />
         <activity android:name=".store.TestPathUtilsActivity" />
         <activity android:name=".device.TestNetworkUtilsActivity" />

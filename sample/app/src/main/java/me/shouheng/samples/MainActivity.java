@@ -21,6 +21,7 @@ import me.shouheng.samples.device.TestShellActivity;
 import me.shouheng.samples.common.FileUtils;
 import me.shouheng.samples.store.TestPathUtilsActivity;
 import me.shouheng.samples.store.TestSpUtilsActivity;
+import me.shouheng.samples.ui.TestAnimUtilsActivity;
 import me.shouheng.samples.ui.TestImageUtilsActivity;
 import me.shouheng.samples.ui.TestToastUtilsActivity;
 import me.shouheng.samples.ui.TestViewUtilsActivity;
@@ -143,5 +144,9 @@ public class MainActivity extends BaseActivity {
 
     public void testToastUtils(View view) {
         ActivityUtils.start(this, TestToastUtilsActivity.class);
+    }
+
+    public void testAnimUtils(View view) {
+        ActivityUtils.start(this, TestAnimUtilsActivity.class);
     }
 }

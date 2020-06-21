@@ -12,6 +12,13 @@ import android.support.annotation.FloatRange;
  */
 public final class ColorUtils {
 
+    /**
+     * 为颜色添加透明度
+     *
+     * @param color 颜色
+     * @param alpha 透明度
+     * @return      结果
+     */
     public static int setColorAlpha(@ColorInt int color, @FloatRange(from = 0, to = 1) float alpha){
         return setColorAlpha(color, alpha, true);
     }
@@ -68,6 +75,21 @@ public final class ColorUtils {
      */
     public static String colorToString(@ColorInt int color) {
         return String.format("#%08X", color);
+    }
+
+    /**
+     * 获得颜色 ARGB 各个纬度的分量
+     *
+     * @param color 颜色
+     * @return      ARGB 各个分量组成的数组
+     */
+    public static int[] getColorARGB(@ColorInt int color) {
+        int[] argb = new int[4];
+        argb[0] = Color.alpha(color);
+        argb[1] = Color.red(color);
+        argb[2] = Color.green(color);
+        argb[3] = Color.blue(color);
+        return argb;
     }
 
     private ColorUtils() {

@@ -47,6 +47,12 @@
             android:onClick="captureScreen"
             style="@style/MenuButton"/>
 
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv"
+            android:padding="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
     </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>

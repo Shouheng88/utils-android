@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import me.shouheng.samples.R;
+import me.shouheng.utils.app.ResUtils;
+import me.shouheng.utils.ui.ColorUtils;
 import me.shouheng.utils.ui.ViewUtils;
 
 public class TestViewUtilsActivity extends AppCompatActivity {
@@ -27,6 +29,8 @@ public class TestViewUtilsActivity extends AppCompatActivity {
                 tvMeasure.setText("W:" + view.getWidth() + ", H:" + view.getHeight());
             }
         });
+        TextView tv = findViewById(R.id.tv);
+        tv.setText("颜色转换：#458CF7 -> " + ColorUtils.colorToString(ResUtils.getColor(R.color.colorPrimary)));
     }
 
     public void showSortInput(View view) {
