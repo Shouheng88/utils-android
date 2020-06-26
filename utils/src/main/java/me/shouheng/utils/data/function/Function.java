@@ -1,4 +1,4 @@
-package me.shouheng.utils.data;
+package me.shouheng.utils.data.function;
 
 /**
  * 用来根据传入的类型得到输出的类型
