@@ -2,11 +2,11 @@ package me.shouheng.samples.ui;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -53,9 +53,21 @@ public class TestImageUtilsActivity extends AppCompatActivity {
         addImage(ll, ImageUtils.compressByQuality(src, 10L * 1024), "Compress By Quality");// 10Kb
         addImage(ll, ImageUtils.compressBySampleSize(src, 2), "Compress By Sample Size");
         addImage(ll, ImageUtils.drawable2Bitmap(ImageUtils.tintDrawable(R.drawable.ic_widgets_black_24dp, Color.BLUE)), "Tint Drawable");
+        addImage(ll, ImageUtils.getDrawable(Color.BLUE, ViewUtils.dp2px(120f)), "Generated Drawable By Code");
+        addImage(ll, ImageUtils.getDrawable(Color.BLUE, ViewUtils.dp2px(120f), ViewUtils.dp2px(10f), Color.YELLOW), "Generated Drawable By Code With Stroke");
     }
 
     private void addImage(LinearLayout container, Bitmap bitmap, String title) {
+        ImageView iv = addImage(container, title);
+        iv.setImageBitmap(bitmap);
+    }
+
+    private void addImage(LinearLayout container, Drawable drawable, String title) {
+        ImageView iv = addImage(container, title);
+        iv.setImageDrawable(drawable);
+    }
+
+    private ImageView addImage(LinearLayout container, String title) {
         LinearLayout ll = new LinearLayout(this);
         ll.setOrientation(LinearLayout.VERTICAL);
         ll.setGravity(Gravity.CENTER_HORIZONTAL);
@@ -67,7 +79,6 @@ public class TestImageUtilsActivity extends AppCompatActivity {
         ImageView iv = new ImageView(this);
         int dp200 = ViewUtils.dp2px(200);
         iv.setLayoutParams(new LinearLayout.LayoutParams(dp200, dp200));
-        iv.setImageBitmap(bitmap);
         TextView tv = new TextView(this);
         tv.setText(title);
         LinearLayout.LayoutParams tvParams = new LinearLayout.LayoutParams(
@@ -77,5 +88,6 @@ public class TestImageUtilsActivity extends AppCompatActivity {
         ll.addView(iv);
         ll.addView(tv);
         container.addView(ll);
+        return iv;
     }
 }

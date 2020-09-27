@@ -22,6 +22,7 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.media.ExifInterface;
 import android.os.Build;
 import android.renderscript.Allocation;
@@ -152,6 +153,77 @@ public final class ImageUtils {
         final Drawable wrappedDrawable = DrawableCompat.wrap(drawable.mutate());
         DrawableCompat.setTintList(wrappedDrawable, ColorStateList.valueOf(color));
         return wrappedDrawable;
+    }
+
+    /**
+     * 获取带圆角的 drawable，各个圆角都为 radius，这里只是总结了比较常用的获取 Drawable 的方式
+     *
+     * @param color  solid color
+     * @param radius radius of every corner
+     * @return       the drawable
+     */
+    public static Drawable getDrawable(@ColorInt int color,
+                                       float radius) {
+        GradientDrawable drawable = new GradientDrawable();
+        drawable.setColor(color);
+        drawable.setCornerRadius(radius);
+        return drawable;
+    }
+
+    public static Drawable getDrawable(@ColorInt int color,
+                                       float radius,
+                                       int strokeWidth,
+                                       @ColorInt int strokeColor) {
+        GradientDrawable drawable = new GradientDrawable();
+        drawable.setColor(color);
+        drawable.setCornerRadius(radius);
+        drawable.setStroke(strokeWidth, strokeColor);
+        return drawable;
+    }
+
+    /**
+     * 获取带圆角的 drawable
+     *
+     * @param color             the solid color
+     * @param topLeftRadius     the top left radius
+     * @param topRightRadius    the top right radius
+     * @param bottomLeftRadius  the bottom left radius
+     * @param bottomRightRadius the bottom right radius
+     * @return                  the drawable
+     */
+    public static Drawable getDrawable(@ColorInt int color,
+                                       float topLeftRadius,
+                                       float topRightRadius,
+                                       float bottomLeftRadius,
+                                       float bottomRightRadius) {
+        GradientDrawable drawable = new GradientDrawable();
+        drawable.setColor(color);
+        drawable.setCornerRadii(new float[]{
+                topLeftRadius, topLeftRadius,
+                topRightRadius, topRightRadius,
+                bottomRightRadius, bottomRightRadius,
+                bottomLeftRadius, bottomLeftRadius
+        });
+        return drawable;
+    }
+
+    public static Drawable getDrawable(@ColorInt int color,
+                                       float topLeftRadius,
+                                       float topRightRadius,
+                                       float bottomLeftRadius,
+                                       float bottomRightRadius,
+                                       int strokeWidth,
+                                       @ColorInt int strokeColor) {
+        GradientDrawable drawable = new GradientDrawable();
+        drawable.setColor(color);
+        drawable.setStroke(strokeWidth, strokeColor);
+        drawable.setCornerRadii(new float[]{
+                topLeftRadius, topLeftRadius,
+                topRightRadius, topRightRadius,
+                bottomRightRadius, bottomRightRadius,
+                bottomLeftRadius, bottomLeftRadius
+        });
+        return drawable;
     }
 
     /*------------------------------------- 获取 ----------------------------------------*/
