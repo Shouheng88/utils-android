@@ -21,6 +21,24 @@ public final class RegexUtils {
         return isMatch(RegexConstants.REGEX_EMAIL, input);
     }
 
+    /**
+     * Only test the format of id card.
+     *
+     * @param input the input
+     * @return      is valid card by format
+     */
+    public static boolean isValidChineseIdCard(final CharSequence input) {
+        return isMatch(RegexConstants.REGEX_CHINESE_ID_CARD, input);
+    }
+
+    public static boolean isBankCard(final CharSequence input) {
+        return isMatch(RegexConstants.BANK_CARD_NO, input);
+    }
+
+    public static boolean isNumber(final CharSequence input) {
+        return isMatch(RegexConstants.NUMBER, input);
+    }
+
     public static boolean isMatch(final String regex, final CharSequence input) {
         return input != null && input.length() > 0 && Pattern.matches(regex, input);
     }
