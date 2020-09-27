@@ -1,26 +1,20 @@
 package me.shouheng.utils.data.collection;
 
 /**
- * 能给包含三个元素的容器
+ * A container contains three elements.
  *
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
  * @version 2020-06-26 16:37
  */
 public class Triple<A, B, C> {
 
-    /**
-     * 第一个元素
-     */
+    /** First element */
     private A first;
 
-    /**
-     * 第二个元素
-     */
+    /** Second element */
     private B second;
 
-    /**
-     * 第三个元素
-     */
+    /** Third element. */
     private C third;
 
     public Triple() {

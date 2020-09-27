@@ -1,25 +1,20 @@
 package me.shouheng.utils.data.collection;
 
 /**
- * 能给包含两个元素的容器
+ * A container contains two elements.
  *
  * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
  * @version 2020-06-26 16:35
  */
 public class Pair<A, B> {
 
-    /**
-     * 第一个元素
-     */
+    /** first element */
     private A first;
 
-    /**
-     * 第二个元素
-     */
+    /** second element */
     private B second;
 
-    public Pair() {
-    }
+    public Pair() { }
 
     public Pair(A first, B second) {
         this.first = first;
