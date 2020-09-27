@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import me.shouheng.utils.data.StringFunction;
+import me.shouheng.utils.data.function.StringFunction;
 import me.shouheng.utils.data.StringUtils;
 
 /**

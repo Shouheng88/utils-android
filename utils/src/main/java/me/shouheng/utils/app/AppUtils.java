@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.pm.Signature;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -155,8 +156,60 @@ public final class AppUtils {
         }
     }
 
+    /**
+     * Get the application class name of current App.
+     *
+     * @return the application name
+     */
+    public static String getApplicationName() {
+        return getApplicationName(UtilsApp.getApp().getPackageName());
+    }
+
+    public static String getApplicationName(final String pkgName) {
+        if (StringUtils.isSpace(pkgName)) return null;
+        try {
+            PackageManager pm = UtilsApp.getApp().getPackageManager();
+            ApplicationInfo ai = pm.getApplicationInfo(pkgName, 0);
+            return ai == null ? null : ai.className;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public static Drawable getAppIcon() {
         return getAppIcon(UtilsApp.getApp().getPackageName());
+    }
+
+    public static String getAppLauncher() {
+        return getAppLauncher(UtilsApp.getApp().getPackageName());
+    }
+
+    /**
+     * Get launcher activity name
+     *
+     * @param pkgName the package name
+     * @return        the launcher name
+     */
+    public static String getAppLauncher(final String pkgName) {
+        if (StringUtils.isSpace(pkgName)) return null;
+        try {
+            PackageManager pm = UtilsApp.getApp().getPackageManager();
+            PackageInfo pi = pm.getPackageInfo(pkgName, 0);
+            if (pi == null) return null;
+            Intent resolveIntent = new Intent(Intent.ACTION_MAIN, null);
+            resolveIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+            resolveIntent.setPackage(pi.packageName);
+            List<ResolveInfo> resolveInfoList = pm.queryIntentActivities(resolveIntent, 0);
+            ResolveInfo resolveInfo = resolveInfoList.iterator().next();
+            if (resolveInfo != null) {
+                return resolveInfo.activityInfo.name;
+            }
+            return null;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     /**

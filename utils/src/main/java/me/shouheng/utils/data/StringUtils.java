@@ -1,12 +1,16 @@
 package me.shouheng.utils.data;
 
+import android.os.Build;
 import android.support.annotation.ArrayRes;
 import android.support.annotation.PluralsRes;
 import android.support.annotation.StringRes;
+import android.text.Html;
+import android.text.Spanned;
 
-import java.util.List;
+import java.util.Collection;
 
 import me.shouheng.utils.UtilsApp;
+import me.shouheng.utils.data.function.StringFunction;
 
 /**
  * @author WngShhng (shouheng2015@gmail.com)
@@ -226,8 +230,16 @@ public final class StringUtils {
         return result;
     }
 
-    public static <T> String connect(List<T> list, String connector) {
-        return connect(list, connector, new StringFunction<T>() {
+    /**
+     * 使用指定的字符串将容器中的元素拼接起来
+     *
+     * @param c         容器
+     * @param connector 连接的字符串
+     * @param <T>       容器元素类型
+     * @return          拼接结果
+     */
+    public static <T> String connect(Collection<T> c, String connector) {
+        return connect(c, connector, new StringFunction<T>() {
             @Override
             public String apply(T from) {
                 return from.toString();
@@ -238,20 +250,22 @@ public final class StringUtils {
     /**
      * 将传入的列表按照指定的格式拼接起来
      *
-     * @param list      列表
+     * @param c         容器
      * @param connector 连接的字符串
      * @param function  对象到字符串映射格式
      * @param <T>       对象类型
      * @return          拼接结果
      */
-    public static <T> String connect(List<T> list, String connector, StringFunction<T> function) {
-        if (list == null || list.isEmpty()) return "";
+    public static <T> String connect(Collection<T> c, String connector, StringFunction<T> function) {
+        if (c == null || c.isEmpty()) return "";
         StringBuilder sb = new StringBuilder();
-        for (int i=0, len=list.size(); i<len; i++) {
-            if (i != len-1) {
-                sb.append(function.apply(list.get(i))).append(connector);
+        int count = 0;
+        int size = c.size();
+        for (T element : c) {
+            if (count++ != size - 1) {
+                sb.append(function.apply(element)).append(connector);
             } else {
-                sb.append(function.apply(list.get(i)));
+                sb.append(function.apply(element));
             }
         }
         return sb.toString();
@@ -296,6 +310,20 @@ public final class StringUtils {
             return String.format(UtilsApp.getApp().getString(resId), arg);
         } catch (Exception e) {
             return UtilsApp.getApp().getString(resId);
+        }
+    }
+
+    /**
+     * Get text from html
+     *
+     * @param html the html text
+     * @return     the spanned text
+     */
+    public static Spanned fromHtml(String html) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            return Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY);
+        } else {
+            return Html.fromHtml(html);
         }
     }
 
