@@ -1,8 +1,11 @@
 package me.shouheng.utils.data;
 
+import android.os.Build;
 import android.support.annotation.ArrayRes;
 import android.support.annotation.PluralsRes;
 import android.support.annotation.StringRes;
+import android.text.Html;
+import android.text.Spanned;
 
 import java.util.Collection;
 
@@ -307,6 +310,20 @@ public final class StringUtils {
             return String.format(UtilsApp.getApp().getString(resId), arg);
         } catch (Exception e) {
             return UtilsApp.getApp().getString(resId);
+        }
+    }
+
+    /**
+     * Get text from html
+     *
+     * @param html the html text
+     * @return     the spanned text
+     */
+    public static Spanned fromHtml(String html) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            return Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY);
+        } else {
+            return Html.fromHtml(html);
         }
     }
 
