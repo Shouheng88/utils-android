@@ -27,6 +27,8 @@ public class TestAppUtilsActivity extends BaseActivity {
                 "Is app debug : " + AppUtils.isAppDebug() + "\n" +
                 "Is app system : " + AppUtils.isAppSystem() + "\n" +
                 "Package name : " + AppUtils.getPackageName() + "\n" +
+                "Application Name : " + AppUtils.getApplicationName() + "\n" +
+                "Launcher name : " + AppUtils.getAppLauncher() + "\n" +
                 "App name : " + AppUtils.getAppName() + "\n" +
                 "App version name : " + AppUtils.getAppVersionName() + "\n" +
                 "App version code : " + AppUtils.getAppVersionCode() + "\n" +
@@ -49,6 +51,8 @@ public class TestAppUtilsActivity extends BaseActivity {
                 "Is app debug : " + AppUtils.isAppDebug(WEIBO_APP_PACKAGE) + "\n" +
                 "Is app system : " + AppUtils.isAppSystem(WEIBO_APP_PACKAGE) + "\n" +
                 "Package name : " + WEIBO_APP_PACKAGE + "\n" +
+                "Application Name : " + AppUtils.getApplicationName(WEIBO_APP_PACKAGE) + "\n" +
+                "Launcher name : " + AppUtils.getAppLauncher(WEIBO_APP_PACKAGE) + "\n" +
                 "App name : " + AppUtils.getAppName(WEIBO_APP_PACKAGE) + "\n" +
                 "App version name : " + AppUtils.getAppVersionName(WEIBO_APP_PACKAGE) + "\n" +
                 "App version code : " + AppUtils.getAppVersionCode(WEIBO_APP_PACKAGE) + "\n" +

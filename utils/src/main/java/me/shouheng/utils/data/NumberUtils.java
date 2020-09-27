@@ -8,6 +8,7 @@ import java.math.BigInteger;
 import java.lang.String;
 import java.lang.NumberFormatException;
 import java.lang.IllegalArgumentException;
+import java.util.Stack;
 
 /**
  * <p>Provides extra functionality for Java Number classes.</p>
@@ -53,6 +54,11 @@ public class NumberUtils {
     public static final Float FLOAT_ONE             = 1.0f;
     /** Reusable Float constant for minus one. */
     public static final Float FLOAT_MINUS_ONE       = -1.0f;
+
+    // 理论上支持62进制的转换, 当然可以自己添加一些其他符号来增加进制数
+    private static final String TARGET_STR = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static final char[] chs = TARGET_STR.toCharArray();
+    private static final BigInteger INTEGER0 = new BigInteger("0");
 
     /**
      * <p><code>NumberUtils</code> instances should NOT be constructed in standard programming.
@@ -1437,4 +1443,59 @@ public class NumberUtils {
         return !allowSigns && foundDigit;
     }
 
+    /*------------------------------------ number system ------------------------------------*/
+
+    /**
+     * 10 进制转任意进制
+     */
+    public static String numToRadix(String number, int toRadix) {
+        if (toRadix < 0 || toRadix > TARGET_STR.length()) {
+            toRadix = TARGET_STR.length();
+        }
+
+        BigInteger bigNumber = new BigInteger(number);
+        BigInteger bigRadix = new BigInteger(toRadix + "");
+
+        Stack<Character> stack = new Stack<>();
+        StringBuilder result = new StringBuilder(0);
+        while (!bigNumber.equals(INTEGER0)) {
+            stack.add(chs[bigNumber.remainder(bigRadix).intValue()]);
+            bigNumber = bigNumber.divide(bigRadix);
+        }
+        for (; !stack.isEmpty(); ) {
+            result.append(stack.pop());
+        }
+        return result.length() == 0 ? "0" : result.toString();
+    }
+
+    /**
+     * 任意进制转 10 进制
+     */
+    public static String radixToNum(String number, int fromRadix) {
+        if(fromRadix < 0 || fromRadix > TARGET_STR.length()){
+            fromRadix = TARGET_STR.length();
+        }
+        if (fromRadix == 10) return number;
+
+        char ca[] = number.toCharArray();
+        int len = ca.length;
+
+        BigInteger bigRadix = new BigInteger(fromRadix + "");
+        BigInteger result = new BigInteger("0");
+        BigInteger base = new BigInteger("1");
+
+        for (int i = len - 1; i >= 0; i--) {
+            BigInteger index = new BigInteger(TARGET_STR.indexOf(ca[i]) + "");
+            result = result.add(index.multiply(base)) ;
+            base = base.multiply(bigRadix);
+        }
+        return result.toString();
+    }
+
+    /**
+     * 任意进制之间的互相转换, 先将任意进制转为10进制, 然后在转换为任意进制
+     */
+    public static String transRadix(String num, int fromRadix, int toRadix) {
+        return numToRadix(radixToNum(num, fromRadix), toRadix);
+    }
 }
