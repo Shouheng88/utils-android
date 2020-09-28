@@ -19,17 +19,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    dataBinding {
-        enabled = true
-    }
-    sourceSets {
-        main {
-            jniLibs.srcDirs = ['libs']
-        }
-    }
     lintOptions {
-        checkReleaseBuilds false
         abortOnError false
+    }
+    subprojects {
+        tasks.withType(Javadoc).all { enabled = false }
     }
 }
 
