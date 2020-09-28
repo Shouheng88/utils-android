@@ -8,9 +8,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 
-import me.shouheng.samples.common.BaseActivity;
 import me.shouheng.samples.R;
-import me.shouheng.utils.ktx.LogKtxKt;
+import me.shouheng.samples.common.BaseActivity;
 import me.shouheng.utils.stability.L;
 
 import static me.shouheng.utils.ktx.LogKtxKt.loga;
