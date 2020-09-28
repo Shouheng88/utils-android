@@ -8,9 +8,16 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 
-import me.shouheng.samples.common.BaseActivity;
 import me.shouheng.samples.R;
+import me.shouheng.samples.common.BaseActivity;
 import me.shouheng.utils.stability.L;
+
+import static me.shouheng.utils.ktx.LogKtxKt.loga;
+import static me.shouheng.utils.ktx.LogKtxKt.logd;
+import static me.shouheng.utils.ktx.LogKtxKt.loge;
+import static me.shouheng.utils.ktx.LogKtxKt.logi;
+import static me.shouheng.utils.ktx.LogKtxKt.logv;
+import static me.shouheng.utils.ktx.LogKtxKt.logw;
 
 public class TestLogActivity extends BaseActivity {
 
@@ -27,22 +34,22 @@ public class TestLogActivity extends BaseActivity {
                 cnt++;
                 switch (cnt % 6) {
                     case 0:
-                        L.v("Logging v");
+                        logv("Logging v");
                         break;
                     case 1:
-                        L.d("Logging d");
+                        logd("Logging d");
                         break;
                     case 2:
-                        L.i("Logging i");
+                        logi("Logging i");
                         break;
                     case 3:
-                        L.w("Logging w");
+                        logw("Logging w");
                         break;
                     case 4:
-                        L.e("Logging e");
+                        loge("Logging e");
                         break;
                     case 5:
-                        L.a("Logging a");
+                        loga("Logging a");
                         break;
                     default:
                         // do nothing
