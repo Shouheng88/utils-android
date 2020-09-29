@@ -39,17 +39,19 @@
 首先，你需要引用 jCenter 到你的项目中：
 
 ```gradle
-repositories {
-    jcenter()
-}
+repositories { jcenter() }
 ```
 
 然后，在你的项目中添加该依赖：
 
 ```gradle
-dependencies {
-    implementation 'me.shouheng.utils:utils-core:latest-version'
-}
+implementation 'me.shouheng.utils:utils-core:latest-version'
+```
+
+如果需要使用 utils-ktx，可以在项目中添加如下依赖，
+
+```gradle
+implementation "me.shouheng.utils:utils-ktx:$latest-version"
 ```
 
 ### 2.2 项目初始化
@@ -98,6 +100,32 @@ public class SampleApp extends Application {
 |20|[ImageUtils](./utils/src/main/java/me/shouheng/utils/ui/ImageUtils.java)|ui|图片处理，缩放，旋转，变形，加水印等|
 |21|[ToastUtils](./utils/src/main/java/me/shouheng/utils/ui/ToastUtils.java)|ui|土司封装|
 |22|[ViewUtils](./utils/src/main/java/me/shouheng/utils/ui/ViewUtils.java)|ui|获取控件信息以及软键盘操作等|
+
+### 2.3 使用 Utils-ktx
+
+`utils-ktx` 是基于 Android-Utils 和 Kotlin 的特性定制的拓展库，可以参考 utlis-ktx 模块来查看其源代码。其主要设计被用来简化常见的调用方式，从而使代码更加简洁。比如，
+
+```kotlin
+fun Context.attrFloatOf(attrRes: Int): Float = ResUtils.getAttrFloatValue(this, attrRes)
+
+fun Context.attrColorOf(attrRes: Int): Int = ResUtils.getAttrColor(this, attrRes)
+
+// ...
+
+@ColorInt fun colorOf(@ColorRes id: Int): Int = ResUtils.getColor(id)
+
+fun stringOf(@StringRes id: Int): String = ResUtils.getString(id)
+
+// ...
+
+fun String.md5(salt: String): String = EncryptUtils.md5(this, salt)
+
+fun String.sha1(): String = EncryptUtils.sha1(this)
+
+fun String.sha224(): String = EncryptUtils.sha224(this)
+
+// ...
+```
 
 ## 3、关于
 
