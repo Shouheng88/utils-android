@@ -1,6 +1,9 @@
 package me.shouheng.utils.ktx
 
-import android.animation.*
+import android.animation.AnimatorListenerAdapter
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.support.annotation.ColorInt
 import android.view.View
 import android.view.animation.AlphaAnimation
@@ -8,7 +11,6 @@ import android.view.animation.Animation.AnimationListener
 import android.view.animation.ScaleAnimation
 import android.view.animation.TranslateAnimation
 import me.shouheng.utils.ui.AnimUtils
-import me.shouheng.utils.ui.AnimUtils.OnColorChangeListener
 import me.shouheng.utils.ui.AnimUtils.UIDirection
 
 fun View.fadeIn(duration: Int, listener: AnimationListener?, isNeedAnimation: Boolean): AlphaAnimation {
@@ -31,7 +33,7 @@ fun View.shining(duration: Int, repeatCount: Int, vararg values: Float): ObjectA
     return AnimUtils.shining(this, duration, repeatCount, *values)
 }
 
-fun changeColor(@ColorInt beforeColor: Int, @ColorInt afterColor: Int, duration: Long, listener: (color: Int) -> Unit): ValueAnimator? {
+fun changeColor(@ColorInt beforeColor: Int, @ColorInt afterColor: Int, duration: Long, listener: (color: Int) -> Unit): ValueAnimator {
     return AnimUtils.changeColor(beforeColor, afterColor, duration, listener)
 }
 

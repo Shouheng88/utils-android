@@ -67,6 +67,6 @@ fun Activity.finish(@AnimRes enterAnim: Int, @AnimRes exitAnim: Int) {
     this.overridePendingTransition(enterAnim, exitAnim)
 }
 
-fun <T : Activity?> open(activity: Class<T>?): ActivityUtils.Builder<T> = ActivityUtils.open(activity)
+fun <T : Activity?> open(activity: Class<T>): ActivityUtils.Builder<T> = ActivityUtils.open(activity)
 
 fun open(): ActivityUtils.Builder<*> = ActivityUtils.open()

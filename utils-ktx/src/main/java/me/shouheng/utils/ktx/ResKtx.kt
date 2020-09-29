@@ -25,30 +25,30 @@ fun Context.attrDrawableOf(typedArray: TypedArray, index: Int): Drawable? = ResU
 
 fun Context.attrDimenOf(attrRes: Int): Int = ResUtils.getAttrDimen(this, attrRes)
 
-fun intArrayOf(@ArrayRes id: Int): IntArray? = ResUtils.getIntArray(id)
+fun intArrayOf(@ArrayRes id: Int): IntArray = ResUtils.getIntArray(id)
 
-fun textArrayOf(@ArrayRes id: Int): Array<CharSequence?>? = ResUtils.getTextArray(id)
+fun textArrayOf(@ArrayRes id: Int): Array<CharSequence> = ResUtils.getTextArray(id)
 
-fun stringArrayOf(@ArrayRes id: Int): Array<String?>? = ResUtils.getStringArray(id)
+fun stringArrayOf(@ArrayRes id: Int): Array<String> = ResUtils.getStringArray(id)
 
 @ColorInt fun colorOf(@ColorRes id: Int): Int = ResUtils.getColor(id)
 
-fun stringOf(@StringRes id: Int): String? = ResUtils.getString(id)
+fun stringOf(@StringRes id: Int): String = ResUtils.getString(id)
 
-fun stringOf(@StringRes id: Int, vararg formatArgs: Any?): String? = ResUtils.getString(id, *formatArgs)
+fun stringOf(@StringRes id: Int, vararg formatArgs: Any): String = ResUtils.getString(id, *formatArgs)
 
-fun textOf(@StringRes id: Int): CharSequence? = ResUtils.getText(id)
+fun textOf(@StringRes id: Int): CharSequence = ResUtils.getText(id)
 
-fun quantityTextOf(@PluralsRes id: Int, quantity: Int): CharSequence? = ResUtils.getQuantityText(id, quantity)
+fun quantityTextOf(@PluralsRes id: Int, quantity: Int): CharSequence = ResUtils.getQuantityText(id, quantity)
 
-fun quantityStringOf(@PluralsRes id: Int, quantity: Int): String? = ResUtils.getQuantityString(id, quantity)
+fun quantityStringOf(@PluralsRes id: Int, quantity: Int): String = ResUtils.getQuantityString(id, quantity)
 
-fun quantityStringOf(@PluralsRes id: Int, quantity: Int, vararg formatArgs: Any?): String? = ResUtils.getQuantityString(id, quantity, *formatArgs)
+fun quantityStringOf(@PluralsRes id: Int, quantity: Int, vararg formatArgs: Any): String = ResUtils.getQuantityString(id, quantity, *formatArgs)
 
-fun drawableOf(@DrawableRes id: Int): Drawable? = ResUtils.getDrawable(id)
+fun drawableOf(@DrawableRes id: Int): Drawable = ResUtils.getDrawable(id)
 
 @TargetApi(VERSION_CODES.O)
-fun fontOf(@FontRes id: Int): Typeface? = ResUtils.getFont(id)
+fun fontOf(@FontRes id: Int): Typeface = ResUtils.getFont(id)
 
 fun dimenOf(@DimenRes id: Int): Float = ResUtils.getDimension(id)
 
@@ -56,8 +56,8 @@ fun booleanOf(@BoolRes id: Int): Boolean = ResUtils.getBoolean(id)
 
 fun intOf(@IntegerRes id: Int): Int = ResUtils.getInteger(id)
 
-fun openRawResourceOf(@RawRes id: Int): InputStream? = ResUtils.openRawResource(id)
+fun openRawResourceOf(@RawRes id: Int): InputStream = ResUtils.openRawResource(id)
 
-fun openRawResourceFdOf(@RawRes id: Int): AssetFileDescriptor? = ResUtils.openRawResourceFd(id)
+fun openRawResourceFdOf(@RawRes id: Int): AssetFileDescriptor = ResUtils.openRawResourceFd(id)
 
-fun assetsOf(): AssetManager? = ResUtils.getAssets()
+fun assetsOf(): AssetManager = ResUtils.getAssets()
