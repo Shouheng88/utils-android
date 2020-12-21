@@ -21,8 +21,10 @@ import me.shouheng.samples.ui.TestAnimUtilsActivity
 import me.shouheng.samples.ui.TestImageUtilsActivity
 import me.shouheng.samples.ui.TestToastUtilsActivity
 import me.shouheng.samples.ui.TestViewUtilsActivity
-import me.shouheng.utils.app.ActivityUtils
-import me.shouheng.utils.ktx.*
+import me.shouheng.utils.ktx.drawableOf
+import me.shouheng.utils.ktx.intOf
+import me.shouheng.utils.ktx.start
+import me.shouheng.utils.ktx.stringOf
 import me.shouheng.utils.permission.PermissionUtils
 import me.shouheng.utils.stability.CrashHelper
 import me.shouheng.utils.stability.L
@@ -52,12 +54,12 @@ class MainActivity : BaseActivity() {
 
     override fun onStop() {
         super.onStop()
-        logd("STOP MAIN")
+        L.d("STOP MAIN")
     }
 
     override fun onPause() {
         super.onPause()
-        logd("PAUSE MAIN")
+        L.d("PAUSE MAIN")
     }
 
     fun testIntentUtils(view: View?) { start(TestIntentActivity::class.java) }

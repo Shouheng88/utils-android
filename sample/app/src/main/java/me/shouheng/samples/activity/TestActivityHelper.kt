@@ -10,7 +10,11 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import me.shouheng.samples.R
 import me.shouheng.utils.constant.ActivityDirection
-import me.shouheng.utils.ktx.*
+import me.shouheng.utils.ktx.attrColorOf
+import me.shouheng.utils.ktx.open
+import me.shouheng.utils.ktx.start
+import me.shouheng.utils.ktx.toast
+import me.shouheng.utils.stability.L
 
 /**
  * @author shouh
@@ -52,12 +56,12 @@ class TestActivityHelper : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        logd("START HELPER")
+        L.d("START HELPER")
     }
 
     override fun onResume() {
         super.onResume()
-        logd("RESUME HELPER")
+        L.d("RESUME HELPER")
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

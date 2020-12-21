@@ -21,15 +21,14 @@ class TestEncryptUtilsActivity : AppCompatActivity() {
 
     fun doEncrypt(view: View?) {
         val s = et!!.text.toString()
-        val result = """
-            MD2 : ${s.md2()}
-            MD5 : ${s.md5()}
-            SHA1 : ${s.sha1()}
-            SHA224 : ${s.sha224()}
-            SHA256 : ${s.sha256()}
-            SHA384 : ${s.sha384()}
-            SHA512 : ${s.sha512()}
-            """.trimIndent()
+        val result = "\n\n".join(listOf(
+                "MD2 : ${s.md2()}",
+                "MD5 : ${s.md5()}",
+                "SHA1 : ${s.sha1()}",
+                "SHA224 : ${s.sha224()}",
+                "SHA256 : ${s.sha256()}",
+                "SHA384 : ${s.sha384()}",
+                "SHA512 : ${s.sha512()}"))
         tvResult!!.text = result
     }
 }

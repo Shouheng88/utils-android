@@ -2,6 +2,7 @@ package me.shouheng.utils.ktx
 
 import android.text.Spanned
 import me.shouheng.utils.data.*
+import me.shouheng.utils.data.function.StringFunction
 import java.util.*
 
 fun String.isSpace(): Boolean = StringUtils.isSpace(this)
@@ -45,6 +46,11 @@ fun String.base64(): ByteArray = EncodeUtils.base64Encode(this)
 fun String.base64Decode(): ByteArray = EncodeUtils.base64Decode(this)
 
 fun String.toDate(): Date = TimeUtils.toDate(this)
+
+/** Join string by current string as python, for example, ','.join([1,2,3]) is '1,2,3'. */
+fun <E> String.join(c: Collection<E>): String = StringUtils.connect(c, this)
+
+fun <E> String.join(c: Collection<E>, function: StringFunction<E>): String = StringUtils.connect(c, this, function)
 
 fun CharSequence.equalsIgnoreCase(s: CharSequence): Boolean = StringUtils.equals(this, s)
 
