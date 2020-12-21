@@ -45,6 +45,14 @@ fun String.base64(): ByteArray = EncodeUtils.base64Encode(this)
 
 fun String.base64Decode(): ByteArray = EncodeUtils.base64Decode(this)
 
+/** Get partial of given string from [start] to [end] to avoid index out of bound exception. */
+fun String.partial(start: Int, end: Int): String {
+    var s = start; var e = end
+    if (e > length) e = length
+    if (s < 0) s = 0
+    return substring(s, e)
+}
+
 /** Transform string to given type */
 fun String.toDate(): Date = TimeUtils.toDate(this)
 
