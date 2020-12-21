@@ -45,7 +45,16 @@ fun String.base64(): ByteArray = EncodeUtils.base64Encode(this)
 
 fun String.base64Decode(): ByteArray = EncodeUtils.base64Decode(this)
 
+/** Transform string to given type */
 fun String.toDate(): Date = TimeUtils.toDate(this)
+
+fun toInt(str: String, def: Int): Int = try { str.toInt() } catch (e: Exception) { def }
+
+fun toLong(str: String, def: Long): Long = try { str.toLong() } catch (e: Exception) { def }
+
+fun toFloat(str: String, def: Float): Float = try { str.toFloat() } catch (e: Exception) { def }
+
+fun toDouble(str: String, def: Double): Double = try { str.toDouble() } catch (e: Exception) { def }
 
 /** Join string by current string as python, for example, ','.join([1,2,3]) is '1,2,3'. */
 fun <E> String.join(c: Collection<E>): String = StringUtils.connect(c, this)
