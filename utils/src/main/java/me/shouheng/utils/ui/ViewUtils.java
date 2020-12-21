@@ -14,6 +14,7 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Menu;
 import android.view.TouchDelegate;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,8 @@ import android.view.animation.AlphaAnimation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+
+import java.lang.reflect.Method;
 
 import me.shouheng.utils.UtilsApp;
 
@@ -50,6 +53,24 @@ public final class ViewUtils {
     public static int px2sp(final float pxValue) {
         final float fontScale = UtilsApp.getApp().getResources().getDisplayMetrics().scaledDensity;
         return (int) (pxValue / fontScale + 0.5f);
+    }
+
+    /**
+     * Set icons visible for options menu
+     *
+     * @param menu    the menu
+     * @param visible is icons visible
+     */
+    public static void setIconsVisible(Menu menu, boolean visible) {
+        if (menu != null) {
+            try {
+                Method method = Menu.class.getDeclaredMethod("setOptionalIconsVisible", Boolean.TYPE);
+                method.setAccessible(true);
+                method.invoke(menu, visible);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public static void forceGetViewSize(final View view, final onGetSizeListener listener) {
