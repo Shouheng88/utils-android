@@ -1,3 +1,5 @@
+package me.shouheng.utils.ktx
+
 import android.view.View
 
 /** OnContinuousClickListener */
