@@ -1,0 +1,25 @@
+<resources>
+
+    <string name="permission_calendar_permission">Календарь</string>
+    <string name="permission_camera_permission">Камера</string>
+    <string name="permission_contacts_permission">Контакты</string>
+    <string name="permission_location_permission">Location</string>
+    <string name="permission_microphone_permission">Микрофон</string>
+    <string name="permission_phone_permission">Телефон</string>
+    <string name="permission_sensor_permission">Датчик</string>
+    <string name="permission_set_permission">Настройки разрешений</string>
+    <string name="permission_sms_permission">SMS</string>
+    <string name="permission_storage_permission">Место хранения</string>
+    <!--todo translate into Russan-->
+<!--    <plurals name="permission_denied_message">-->
+<!--        <item quantity="one">Permission denied. Please try again after grant the <![CDATA[<b>%s</b>]]> permission.</item>-->
+<!--        <item quantity="other">Permissions denied. Please try again after grant <![CDATA[<b>%s</b>]]> permissions.</item>-->
+<!--    </plurals>-->
+<!--    <plurals name="permission_set_in_settings_message">-->
+<!--        <item quantity="one">Permission required.\n\nGrant permission to this application and try again:\n\n Open app info page in settings, tap \'Permissions\', enable <![CDATA[<b>%s</b>]]> permission.</item>-->
+<!--        <item quantity="other">Permissions required.\n\nGrant permissions to this application and try again:\n\n Open app info page in settings, tap \'Permissions\', enable <![CDATA[<b>%s</b>]]> permissions.</item>-->
+<!--    </plurals>-->
+    <string name="permission_to_set">установить</string>
+    <string name="permission_cancel">Отменить</string>
+
+</resources>
