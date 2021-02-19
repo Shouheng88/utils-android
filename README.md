@@ -146,7 +146,7 @@ Visit the links below to get more information about author:
 ## License
 
 ```
-Copyright (c) 2019-2020 DaddyDev.
+Copyright (c) 2019-2020 Shouheng.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
