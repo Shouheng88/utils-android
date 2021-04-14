@@ -1,6 +1,6 @@
 ![Banner](https://github.com/CostCost/Resources/blob/master/github/xbanner.jpg?raw=true)
 
-<h1 align="center">Android-Utils: 常用的 Android 工具库合集</h1>
+<h1 align="center">Android-Utils: a collection of Android utils</h1>
 
 <p align="center">
   <a href="http://www.apache.org/licenses/LICENSE-2.0">
@@ -26,37 +26,37 @@
   </a>
 </P>
 
-## 1、关于项目
+## 1. Introcution
 
-该项目旨在收集 Android 开发中频繁使用的工具类，比如日志、Crash 收集、资源和属性获取、权限申请、TOAST 等，通过对相关的工具类进行封装，提供相关类的标准化应用，来降低开发者开发的难度。你可以参考 README 来了解项目中包含的工具类库。
+This project is mainly used to collect utils classes useful in Android development, for example, log, crash collection, resources, attr, runtime permission, toast etc so that to accelerate your Android evelopment.
 
-## 2、在项目中使用
+## 2. Use in your project
 
-### 2.1 添加工程依赖
+### 2.1 Add dependency
 
-该项目已经被提交到了 jCenter，所以你可以很方便地在你的项目中使用它。
+This project is published to jCenter, so you can easily use it in your project.
 
-首先，你需要引用 jCenter 到你的项目中：
+First, you need to add jcenter in your project:
 
 ```gradle
 repositories { jcenter() }
 ```
 
-然后，在你的项目中添加该依赖：
+then, add dependencies in your project:
 
 ```gradle
 implementation 'me.shouheng.utils:utils-core:latest-version'
 ```
 
-如果需要使用 utils-ktx，可以在项目中添加如下依赖，
+If you want to use the kotlin extension based on utils classes, use the dependency below:
 
 ```gradle
 implementation "me.shouheng.utils:utils-ktx:$latest-version"
 ```
 
-### 2.2 项目初始化
+### 2.2 Initialize
 
-然后你的自定义的 Application 中对工具类库进行初始化。这个步骤主要用来在类库内获取一个全局的 Context，从而使方法的调用更加简洁，不会占用你宝贵的启动时间。
+You need initialize utils in your application. This is mainly used to get a global context to make utils methods more convenient, and it will cost too much time of launching your App.
 
 ```java
 public class SampleApp extends Application {
@@ -64,87 +64,79 @@ public class SampleApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        // 对工具类库进行初始化
+        // initialize your library
         UtilsApp.init(this);
     }
 }
 ```
 
-初始化完毕之后，我们可以对类库中包含对模块进行个性化定制。具体可以参考示例代码和源码。
+### 2.2 Fetures and functions
 
-### 2.2 该类库中目前提供的功能
+The utils classes was divided into multiple groups:
 
-按照关注的主题，我们将项目中的类按照主题分成了几个大类。目前项目中的类的结构如下：
+|No|Class|Group|Desc|
+|:---:|:---:|:---:|:---:|
+|1|[ActivityUtils](./utils/src/main/java/me/shouheng/utils/app/ActivityUtils.java)|App|Activity start, close, aniation, builder|
+|2|[AppUtils](./utils/src/main/java/me/shouheng/utils/app/AppUtils.java)|App|App install, uninstall, get information
+|3|[IntentUtils](./utils/src/main/java/me/shouheng/utils/app/IntentUtils.java)|App|Intent to launch App, market etc
+|4|[ResUtils](./utils/src/main/java/me/shouheng/utils/app/ResUtils.java)|Resources|Image, Text, and other resources
+|5|[EncodeUtils](./utils/src/main/java/me/shouheng/utils/data/EncodeUtils.java)|Encode|base64 and url encode
+|6|[EncryptUtils](./utils/src/main/java/me/shouheng/utils/data/EncryptUtils.java)|Encrypt|md5 sha256 encrypt
+|7|[RegexUtils](./utils/src/main/java/me/shouheng/utils/data/RegexUtils.java)|Data|Regex
+|8|[StringUtils](./utils/src/main/java/me/shouheng/utils/data/StringUtils.java)|Data|String process
+|9|[TimeUtils](./utils/src/main/java/me/shouheng/utils/data/TimeUtils.java)|Data|Date and time process
+|10|[DeviceUtils](./utils/src/main/java/me/shouheng/utils/device/DeviceUtils.java)|Device|Device info, imei, model etc
+|11|[NetworkUtils](./utils/src/main/java/me/shouheng/utils/device/NetworkUtils.java)|Device|Network info, type etc
+|12|[ShellUtils](./utils/src/main/java/me/shouheng/utils/device/ShellUtils.java)|Device|Shell
+|13|[PermissionUtils](./utils/src/main/java/me/shouheng/utils/permission/PermissionUtils.java)|Permission|Android runtime permission
+|14|[CrashHelper](./utils/src/main/java/me/shouheng/utils/stability/CrashHelper.java)|Stability|crash
+|15|[L](./utils/src/main/java/me/shouheng/utils/stability/L.java)|Stability|log output, format etc
+|16|[FileUtils](./utils/src/main/java/me/shouheng/utils/store/FileUtils.java)|Storage|File, visit, move, delete etc
+|17|[PathUtils](./utils/src/main/java/me/shouheng/utils/store/PathUtils.java)|Storage|Get directory paths
+|18|[IOUtils](./utils/src/main/java/me/shouheng/utils/store/IOUtils.java)|Storage|IO|
+|19|[SPUtils](./utils/src/main/java/me/shouheng/utils/store/SPUtils.java)|Storage|Sharedpreference|
+|20|[ImageUtils](./utils/src/main/java/me/shouheng/utils/ui/ImageUtils.java)|ui|Image process, scale, roate etc|
+|21|[ToastUtils](./utils/src/main/java/me/shouheng/utils/ui/ToastUtils.java)|ui|Toast|
+|22|[ViewUtils](./utils/src/main/java/me/shouheng/utils/ui/ViewUtils.java)|ui|View info etc|
 
-|编号|类名|群组|说明|
-|:-:|:-:|:-:|:-:|
-|1|[ActivityUtils](./utils/src/main/java/me/shouheng/utils/app/ActivityUtils.java)|应用|Activity 启动、关闭、动画、启动参数构建|
-|2|[AppUtils](./utils/src/main/java/me/shouheng/utils/app/AppUtils.java)|应用|App 安装与卸载，获取应用信息等
-|3|[IntentUtils](./utils/src/main/java/me/shouheng/utils/app/IntentUtils.java)|应用|各种比较通用的意图，比如分享文字、打开应用商店等
-|4|[ResUtils](./utils/src/main/java/me/shouheng/utils/app/ResUtils.java)|资源|图片、字符串和其他资源获取
-|5|[EncodeUtils](./utils/src/main/java/me/shouheng/utils/data/EncodeUtils.java)|编码|base64 和 url 编码等
-|6|[EncryptUtils](./utils/src/main/java/me/shouheng/utils/data/EncryptUtils.java)|加密|md5 sha256 加密方式
-|7|[RegexUtils](./utils/src/main/java/me/shouheng/utils/data/RegexUtils.java)|数据处理|正则表达式
-|8|[StringUtils](./utils/src/main/java/me/shouheng/utils/data/StringUtils.java)|数据处理|字符串处理
-|9|[TimeUtils](./utils/src/main/java/me/shouheng/utils/data/TimeUtils.java)|数据处理|时间处理，时间和日期格式化等
-|10|[DeviceUtils](./utils/src/main/java/me/shouheng/utils/device/DeviceUtils.java)|设备信息|设备信息，比如 imei 手机型号 生产商等
-|11|[NetworkUtils](./utils/src/main/java/me/shouheng/utils/device/NetworkUtils.java)|设备信息|网络信息，网络类型等
-|12|[ShellUtils](./utils/src/main/java/me/shouheng/utils/device/ShellUtils.java)|设备信息|命令行执行
-|13|[PermissionUtils](./utils/src/main/java/me/shouheng/utils/permission/PermissionUtils.java)|权限|Android 6.0 运行时权限权限请求
-|14|[CrashHelper](./utils/src/main/java/me/shouheng/utils/stability/CrashHelper.java)|稳定性|崩溃日志
-|15|[L](./utils/src/main/java/me/shouheng/utils/stability/L.java)|稳定性|日志输出，日志格式化，日志输出到文档等
-|16|[FileUtils](./utils/src/main/java/me/shouheng/utils/store/FileUtils.java)|数据存储|文件相关，获取文件信息，文件移动，删除和遍历等
-|17|[PathUtils](./utils/src/main/java/me/shouheng/utils/store/PathUtils.java)|数据存储|文件路径，获取手机中各个文件夹的路径等
-|18|[IOUtils](./utils/src/main/java/me/shouheng/utils/store/IOUtils.java)|数据存储|磁盘读写|
-|19|[SPUtils](./utils/src/main/java/me/shouheng/utils/store/SPUtils.java)|数据存储|Sharedpreference 读写相关|
-|20|[ImageUtils](./utils/src/main/java/me/shouheng/utils/ui/ImageUtils.java)|ui|图片处理，缩放，旋转，变形，加水印等|
-|21|[ToastUtils](./utils/src/main/java/me/shouheng/utils/ui/ToastUtils.java)|ui|土司封装|
-|22|[ViewUtils](./utils/src/main/java/me/shouheng/utils/ui/ViewUtils.java)|ui|获取控件信息以及软键盘操作等|
+### 2.3 Use Utils-ktx
 
-### 2.3 使用 Utils-ktx
-
-`utils-ktx` 是基于 Android-Utils 和 Kotlin 的特性定制的拓展库，可以参考 utlis-ktx 模块来查看其源代码。其主要设计被用来简化常见的调用方式，从而使代码更加简洁。比如，
+`utils-ktx` is a kotlin extension based on Android-Utils, which is used to simplify usages of utils classes. For example, if you want to get a drawable, tint it and then display it in ImageView. One line is enough:
 
 ```kotlin
-fun Context.attrFloatOf(attrRes: Int): Float = ResUtils.getAttrFloatValue(this, attrRes)
-
-fun Context.attrColorOf(attrRes: Int): Int = ResUtils.getAttrColor(this, attrRes)
-
-// ...
-
-@ColorInt fun colorOf(@ColorRes id: Int): Int = ResUtils.getColor(id)
-
-fun stringOf(@StringRes id: Int): String = ResUtils.getString(id)
-
-// ...
-
-fun String.md5(salt: String): String = EncryptUtils.md5(this, salt)
-
-fun String.sha1(): String = EncryptUtils.sha1(this)
-
-fun String.sha224(): String = EncryptUtils.sha224(this)
-
-// ...
+iv.icon = drawableOf(R.drawable.ic_add_circle).tint(Color.WHITE)
 ```
 
-## 3、关于
+If you want to request runtime permission in Activity, what you need to do is only writing one line below,
 
-### 3.1 关于作者
+```kotlin
+checkStoragePermission {  /* got permission */ }
+```
 
-你可以通过访问下面的链接来获取作者的信息：
+As for avoding continous click, you only need one line, 
+
+```kotlin
+btnRateIntro.onDebouncedClick { /* do something */ }
+```
+
+All in all, by utils-ktx you can significantly lower the difficulty of development.
+
+## 3、About
+
+### 3.1 About Author
+
+Visit the links below to get more information about author:
 
 1. Twitter: https://twitter.com/shouheng_wang
 2. Github: https://github.com/Shouheng88
-3. 掘金：https://juejin.im/user/585555e11b69e6006c907a2a
-4. 简书: https://www.jianshu.com/u/e1ad842673e2
+3. Juejin：https://juejin.im/user/585555e11b69e6006c907a2a
+4. JianShu: https://www.jianshu.com/u/e1ad842673e2
 
-### 3.2 更新日志
+### 3.2 Change log
 
-[更新日志](CHANGELOG.md)
+[Log](CHANGELOG.md)
 
-## 4、捐赠项目
-
-我们致力于为广大开发者和个人开发者提供快速开发应用的解决方案。您可以通过下面的渠道来支持我们的项目，
+## Donate
 
 <div style="display:flex;" id="target">
 <img src="https://github.com/CostCost/Resources/blob/master/github/ali.jpg?raw=true" width="25%" />
@@ -154,7 +146,7 @@ fun String.sha224(): String = EncryptUtils.sha224(this)
 ## License
 
 ```
-Copyright (c) 2019-2020 DaddyDev.
+Copyright (c) 2019-2021 Shouheng.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -168,8 +160,4 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ```
-
-
-
-
 
