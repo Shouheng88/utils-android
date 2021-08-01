@@ -1,5 +1,3 @@
-![Banner](https://github.com/CostCost/Resources/blob/master/github/xbanner.jpg?raw=true)
-
 <h1 align="center">Android-Utils: a collection of Android utils</h1>
 
 <p align="center">
@@ -7,7 +5,7 @@
     <img src="https://img.shields.io/hexpm/l/plug.svg" alt="License" />
   </a>
   <a href="https://bintray.com/beta/#/easymark/Android/utils-core?tab=overview">
-    <img src="https://img.shields.io/maven-metadata/v/https/dl.bintray.com/easymark/Android/me/shouheng/utils/utils-core/maven-metadata.xml.svg" alt="Version" />
+    <img src="https://img.shields.io/maven-metadata/v/https/s01.oss.sonatype.org/service/local/repo_groups/public/content/com/github/Shouheng88/utils-core/maven-metadata.xml.svg" alt="Version" />
   </a>
   <a href="https://www.codacy.com/manual/Shouheng88/Android-utils?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Shouheng88/Android-utils&amp;utm_campaign=Badge_Grade">
     <img src="https://api.codacy.com/project/badge/Grade/58b18f9bf47543cbbaf4ca67bcadfc7b" alt="Code Grade"/>
@@ -17,12 +15,6 @@
   </a>
     <a href="https://developer.android.com/about/versions/android-4.0.html">
     <img src="https://img.shields.io/badge/API-14%2B-blue.svg?style=flat-square" alt="Min Sdk Version" />
-  </a>
-   <a href="https://github.com/Shouheng88">
-    <img src="https://img.shields.io/badge/Author-CodeBrick-orange.svg?style=flat-square" alt="Author" />
-  </a>
-  <a target="_blank" href="https://shang.qq.com/wpa/qunwpa?idkey=2711a5fa2e3ecfbaae34bd2cf2c98a5b25dd7d5cc56a3928abee84ae7a984253">
-    <img src="https://img.shields.io/badge/QQ%E7%BE%A4-1018235573-orange.svg?style=flat-square" alt="QQ Group" />
   </a>
 </P>
 
@@ -39,19 +31,19 @@ This project is published to jCenter, so you can easily use it in your project.
 First, you need to add jcenter in your project:
 
 ```gradle
-repositories { jcenter() }
+repositories { mavenCentral() }
 ```
 
 then, add dependencies in your project:
 
 ```gradle
-implementation 'me.shouheng.utils:utils-core:latest-version'
+implementation "com.github.Shouheng88:utils-core:$latest-version"
 ```
 
 If you want to use the kotlin extension based on utils classes, use the dependency below:
 
 ```gradle
-implementation "me.shouheng.utils:utils-ktx:$latest-version"
+implementation "com.github.Shouheng88:utils-ktx:$latest-version"
 ```
 
 ### 2.2 Initialize
@@ -123,30 +115,14 @@ All in all, by utils-ktx you can significantly lower the difficulty of developme
 
 ## 3、About
 
-### 3.1 About Author
-
-Visit the links below to get more information about author:
-
-1. Twitter: https://twitter.com/shouheng_wang
-2. Github: https://github.com/Shouheng88
-3. Juejin：https://juejin.im/user/585555e11b69e6006c907a2a
-4. JianShu: https://www.jianshu.com/u/e1ad842673e2
-
-### 3.2 Change log
+### 3.1 Change log
 
 [Log](CHANGELOG.md)
-
-## Donate
-
-<div style="display:flex;" id="target">
-<img src="https://github.com/CostCost/Resources/blob/master/github/ali.jpg?raw=true" width="25%" />
-<img src="https://github.com/CostCost/Resources/blob/master/github/mm.png?raw=true" style="margin-left:10px;" width="25%"/>
-</div>
 
 ## License
 
 ```
-Copyright (c) 2019-2021 Shouheng.
+Copyright (c) 2019-2021 wsh.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
