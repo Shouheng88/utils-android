@@ -34,9 +34,9 @@ import me.shouheng.utils.stability.L;
  */
 public final class AppUtils {
 
-    private static List<WeakReference<Activity>> activityStack = new LinkedList<>();
+    private static final List<WeakReference<Activity>> activityStack = new LinkedList<>();
 
-    private static LinkedList<Activity> foreActivityStack = new LinkedList<>();
+    private static final LinkedList<Activity> foreActivityStack = new LinkedList<>();
 
     /*--------------------------------install and uninstall----------------------------------*/
 
@@ -575,7 +575,6 @@ public final class AppUtils {
     }
 
     public static void finishLastActivity(int finishNum) {
-        if (activityStack == null) return;
         int num = 1;
         ArrayList<WeakReference<Activity>> activityStacks = new ArrayList<>();
         int size = activityStack.size();
@@ -596,11 +595,19 @@ public final class AppUtils {
 
     public static void attachActivity(Activity activity) {
         WeakReference<Activity> act = new WeakReference<>(activity);
-        if (activityStack.indexOf(act) == -1) activityStack.add(act);
+        boolean contains = false;
+        for (int i = activityStack.size()-1; i >= 0; i--) {
+            WeakReference<Activity> ref = activityStack.get(i);
+            if (ref != null && ref.get() == activity) {
+                contains = true;
+            }
+        }
+        if (!contains) activityStack.add(act);
     }
 
     public static void attachForeActivity(Activity activity) {
-        if (foreActivityStack.indexOf(activity) == -1) foreActivityStack.push(activity);
+        if (!foreActivityStack.contains(activity))
+            foreActivityStack.push(activity);
     }
 
     public static void detachForeActivity(Activity activity) {
@@ -608,9 +615,7 @@ public final class AppUtils {
     }
 
     public static Activity getForeActivity() {
-        if (foreActivityStack.isEmpty())
-            return null;
-        return foreActivityStack.peek();
+        return foreActivityStack.isEmpty() ? null : foreActivityStack.peek();
     }
 
     /*-------------------------------------inner methods----------------------------------------*/

@@ -209,8 +209,8 @@ public final class ActivityUtils {
      *
      * @return the builder used to build intent
      */
-    public static Builder open() {
-        return new Builder();
+    public static <T extends Activity> Builder<T> open() {
+        return new Builder<>();
     }
 
     /**
@@ -235,7 +235,7 @@ public final class ActivityUtils {
 
         private Class<T> clz;
 
-        private Intent intent = new Intent();
+        private final Intent intent = new Intent();
 
         /**
          * Builder with no params used to open the third part activity by intent.
