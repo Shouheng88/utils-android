@@ -10,28 +10,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv1"
             android:layout_gravity="center_horizontal"
             android:layout_margin="5dp"
             android:layout_width="40dp"
             android:layout_height="40dp" />
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv"
             android:padding="16dp"
             android:textSize="12sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv2"
             android:layout_gravity="center_horizontal"
             android:layout_margin="5dp"
             android:layout_width="40dp"
             android:layout_height="40dp" />
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv2"
             android:padding="16dp"
             android:textSize="12sp"

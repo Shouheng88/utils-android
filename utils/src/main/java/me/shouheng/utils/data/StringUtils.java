@@ -1,9 +1,9 @@
 package me.shouheng.utils.data;
 
 import android.os.Build;
-import android.support.annotation.ArrayRes;
-import android.support.annotation.PluralsRes;
-import android.support.annotation.StringRes;
+import androidx.annotation.ArrayRes;
+import androidx.annotation.PluralsRes;
+import androidx.annotation.StringRes;
 import android.text.Html;
 import android.text.Spanned;
 

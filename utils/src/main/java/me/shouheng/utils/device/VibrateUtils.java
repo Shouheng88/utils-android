@@ -2,7 +2,7 @@ package me.shouheng.utils.device;
 
 import android.content.Context;
 import android.os.Vibrator;
-import android.support.annotation.RequiresPermission;
+import androidx.annotation.RequiresPermission;
 
 import me.shouheng.utils.UtilsApp;
 

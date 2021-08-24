@@ -1,13 +1,12 @@
 package me.shouheng.samples.device;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import me.shouheng.samples.R;
 import me.shouheng.utils.device.NetworkUtils;
-import me.shouheng.utils.permission.PermissionUtils;
 
 public class TestNetworkUtilsActivity extends AppCompatActivity {
 

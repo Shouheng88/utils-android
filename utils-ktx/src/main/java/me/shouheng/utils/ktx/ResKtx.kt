@@ -9,7 +9,7 @@ import android.content.res.TypedArray
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.os.Build.VERSION_CODES
-import android.support.annotation.*
+import androidx.annotation.*
 import me.shouheng.utils.app.ResUtils
 import java.io.InputStream
 

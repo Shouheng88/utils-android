@@ -4,7 +4,7 @@ import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
-import android.support.annotation.ColorInt
+import androidx.annotation.ColorInt
 import android.view.View
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation.AnimationListener

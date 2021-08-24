@@ -2,8 +2,8 @@ package me.shouheng.utils.ktx
 
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
-import android.support.annotation.ColorInt
-import android.support.annotation.IntRange
+import androidx.annotation.ColorInt
+import androidx.annotation.IntRange
 import me.shouheng.utils.ui.ImageUtils
 import java.io.File
 
