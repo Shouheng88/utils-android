@@ -47,15 +47,14 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.0'
     implementation 'androidx.appcompat:appcompat:1.0.0'
     // utils
-    implementation project(path: ':utils')
-    implementation project(path: ':utils-ktx')
-//    implementation 'com.github.Shouheng88:utils-core:2.1.7'
-//    implementation 'com.github.Shouheng88:utils-ktx:2.1.7'
+//    implementation project(path: ':utils')
+//    implementation project(path: ':utils-ktx')
+    implementation 'com.github.Shouheng88:utils-core:2.4.0'
+    implementation 'com.github.Shouheng88:utils-ktx:2.4.0'
     // other utils class references
 //    implementation("com.google.guava:guava:30.1.1-android")
 //    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
 //    implementation group: 'org.apache.commons', name: 'commons-math3', version: '3.6.1'
 //    implementation group: 'org.apache.commons', name: 'commons-collections4', version: '4.4'
 //    implementation group: 'org.apache.commons', name: 'commons-text', version: '1.9'
-
 }
