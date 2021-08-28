@@ -4,27 +4,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_view"
         android:text="@string/activity_helper_web_intent"
         style="@style/MenuButton"/>
 
-    <android.support.v7.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_request_code"
         android:text="@string/activity_helper_activity_result"
         style="@style/MenuButton"/>
 
-    <android.support.v7.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_shared_activity"
         android:text="@string/activity_helper_shared_activity"
         style="@style/MenuButton"/>
 
-    <android.support.v7.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_animation"
         android:text="@string/activity_helper_animation"
         style="@style/MenuButton" />
 
-    <android.support.v7.widget.AppCompatImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_prop"
         android:layout_margin="8dp"
         android:layout_width="match_parent"

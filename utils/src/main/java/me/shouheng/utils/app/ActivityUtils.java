@@ -10,11 +10,11 @@ import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.support.annotation.AnimRes;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.util.Pair;
+import androidx.annotation.AnimRes;
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.fragment.app.Fragment;
+import androidx.core.util.Pair;
 import android.view.View;
 
 import java.io.Serializable;
@@ -209,8 +209,8 @@ public final class ActivityUtils {
      *
      * @return the builder used to build intent
      */
-    public static Builder open() {
-        return new Builder();
+    public static <T extends Activity> Builder<T> open() {
+        return new Builder<>();
     }
 
     /**
@@ -235,7 +235,7 @@ public final class ActivityUtils {
 
         private Class<T> clz;
 
-        private Intent intent = new Intent();
+        private final Intent intent = new Intent();
 
         /**
          * Builder with no params used to open the third part activity by intent.

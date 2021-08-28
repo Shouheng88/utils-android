@@ -3,8 +3,8 @@ package me.shouheng.utils.ktx
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.support.annotation.AnimRes
-import android.support.v4.app.Fragment
+import androidx.annotation.AnimRes
+import androidx.fragment.app.Fragment
 import me.shouheng.utils.app.ActivityUtils
 import me.shouheng.utils.constant.ActivityDirection
 
@@ -69,4 +69,4 @@ fun Activity.finish(@AnimRes enterAnim: Int, @AnimRes exitAnim: Int) {
 
 fun <T : Activity?> open(activity: Class<T>): ActivityUtils.Builder<T> = ActivityUtils.open(activity)
 
-fun open(): ActivityUtils.Builder<*> = ActivityUtils.open()
+fun open(): ActivityUtils.Builder<Activity> = ActivityUtils.open<Activity>()

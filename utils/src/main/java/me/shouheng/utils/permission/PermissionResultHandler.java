@@ -3,7 +3,7 @@ package me.shouheng.utils.permission;
 import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.util.LinkedList;
 import java.util.List;
