@@ -2,6 +2,7 @@ package me.shouheng.utils.stability;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
+import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -35,8 +36,8 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 /**
  * Utils to handle uncaught exceptions runtime.
- * Call one of {@link #init(Application)} methods to initialize the crash helper.
- * The directory from the {@link #init(Application)} method will be used.
+ * Call one of {@link #init(Context)} methods to initialize the crash helper.
+ * The directory from the {@link #init(Context)} method will be used.
  * If the user don't specify the directory, the
  * <p>/android/data/< package name >/cache/crash/...</p> will be used af first,
  * If the app din't get the storage permission the
@@ -63,29 +64,29 @@ public final class CrashHelper {
     private static OnCrashListener onCrashListener;
 
     @RequiresPermission(WRITE_EXTERNAL_STORAGE)
-    public static void init(Application application) {
-        init(application, "");
+    public static void init(Context context) {
+        init(context, "");
     }
 
     @RequiresPermission(WRITE_EXTERNAL_STORAGE)
-    public static void init(Application application, @NonNull final File crashDir) {
-        init(application, crashDir.getAbsolutePath());
+    public static void init(Context context, @NonNull final File crashDir) {
+        init(context, crashDir.getAbsolutePath());
     }
 
     @RequiresPermission(WRITE_EXTERNAL_STORAGE)
-    public static void init(Application application, final String crashDirPath) {
-        init(application, crashDirPath, null);
+    public static void init(Context context, final String crashDirPath) {
+        init(context, crashDirPath, null);
     }
 
     @RequiresPermission(WRITE_EXTERNAL_STORAGE)
-    public static void init(Application application, @NonNull final File crashDir, final OnCrashListener onCrashListener) {
-        init(application, crashDir.getAbsolutePath(), onCrashListener);
+    public static void init(Context context, @NonNull final File crashDir, final OnCrashListener onCrashListener) {
+        init(context, crashDir.getAbsolutePath(), onCrashListener);
     }
 
     @RequiresPermission(WRITE_EXTERNAL_STORAGE)
-    public static void init(Application application, final String crashDirPath, final OnCrashListener onCrashListener) {
-        initCacheDir(application, crashDirPath);
-        initAppInfo(application);
+    public static void init(Context context, final String crashDirPath, final OnCrashListener onCrashListener) {
+        initCacheDir(context, crashDirPath);
+        initAppInfo(context);
         initExceptionHandler();
         CrashHelper.onCrashListener = onCrashListener;
     }
@@ -116,33 +117,33 @@ public final class CrashHelper {
     /**
      * Init crash log cache directory.
      *
-     * @param application application
+     * @param context application
      * @param crashDirPath crash log file cache directory
      */
-    private static void initCacheDir(Application application, final String crashDirPath) {
+    private static void initCacheDir(Context context, final String crashDirPath) {
         if (StringUtils.isSpace(crashDirPath)) {
             dir = null;
         } else {
             dir = crashDirPath.endsWith(FILE_SEP) ? crashDirPath : crashDirPath + FILE_SEP;
         }
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
-                && application.getExternalCacheDir() != null) {
+                && context.getExternalCacheDir() != null) {
             // defaultDir: /android/data/< package name >/cache/crash/...
-            defaultDir = application.getExternalCacheDir() + FILE_SEP + "crash" + FILE_SEP;
+            defaultDir = context.getExternalCacheDir() + FILE_SEP + "crash" + FILE_SEP;
         } else {
             // defaultDir: /data/data/< package name >/cache/crash/...
-            defaultDir = application.getCacheDir() + FILE_SEP + "crash" + FILE_SEP;
+            defaultDir = context.getCacheDir() + FILE_SEP + "crash" + FILE_SEP;
         }
     }
 
     /**
      * Init app information.
      *
-     * @param application application
+     * @param context application
      */
-    private static void initAppInfo(Application application) {
+    private static void initAppInfo(Context context) {
         try {
-            PackageInfo pi = application.getPackageManager().getPackageInfo(application.getPackageName(), 0);
+            PackageInfo pi = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
             if (pi != null) {
                 versionName = pi.versionName;
                 versionCode = pi.versionCode;

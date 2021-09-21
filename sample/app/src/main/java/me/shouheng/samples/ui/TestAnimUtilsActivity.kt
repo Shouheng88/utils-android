@@ -60,4 +60,8 @@ class TestAnimUtilsActivity : AppCompatActivity() {
     fun popupOut(view: View?) {
         obj?.popupOut(1000, null)
     }
+
+    fun rotate(view: View) {
+        obj?.rotate(2_000)
+    }
 }

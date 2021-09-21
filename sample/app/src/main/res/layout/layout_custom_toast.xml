@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<me.shouheng.samples.ui.ToastBackgroundLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    app:shadow_layout_background_color="@android:color/white"
+    app:shadow_layout_blur="30dp"
+    app:shadow_layout_color="#1e000000"
+    app:shadow_layout_offsetY="2dp"
+    app:shadow_layout_radius="22dp">
+
+    <TextView
+        android:id="@+id/toastText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:paddingStart="20dp"
+        android:maxEms="16"
+        android:lineSpacingExtra="2dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="12dp"
+        android:textSize="14sp"
+        tools:text="blablablablablablablablablablablablablablablablablabla" />
+
+</me.shouheng.samples.ui.ToastBackgroundLayout>

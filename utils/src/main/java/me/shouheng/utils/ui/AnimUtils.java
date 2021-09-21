@@ -22,6 +22,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.OvershootInterpolator;
+import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
 
@@ -42,6 +43,36 @@ import static me.shouheng.utils.ui.AnimUtils.UIDirection.TOP_TO_BOTTOM;
 public final class AnimUtils {
 
     /**
+     * Rotate given view.
+     *
+     * @param view the view to rotate
+     * @param duration the duration
+     * @param repeatCount the repeat count, might be {@link Animation#INFINITE} to be infinite.
+     * @param fromDegrees might be 0
+     * @param toDegrees might be 360
+     * @return the animation object.
+     */
+    public static RotateAnimation rotate(
+            View view,
+            long duration,
+            int repeatCount,
+            float fromDegrees,
+            float toDegrees
+    ) {
+        if (view == null) {
+            return null;
+        }
+        RotateAnimation animRotate = new RotateAnimation(fromDegrees, toDegrees,
+                RotateAnimation.RELATIVE_TO_SELF, 0.5f,
+                RotateAnimation.RELATIVE_TO_SELF, 0.5f);
+        animRotate.setDuration(duration);
+        animRotate.setInterpolator(new LinearInterpolator());
+        animRotate.setRepeatCount(repeatCount);
+        view.startAnimation(animRotate);
+        return animRotate;
+    }
+
+    /**
      * <p>对 View 做透明度变化的进场动画。</p>
      * <p>相关方法 {@link #fadeOut(View, int, Animation.AnimationListener, boolean)}</p>
      *
@@ -50,10 +81,12 @@ public final class AnimUtils {
      * @param listener        动画回调
      * @param isNeedAnimation 是否需要动画
      */
-    public static AlphaAnimation fadeIn(View view,
-                                        int duration,
-                                        Animation.AnimationListener listener,
-                                        boolean isNeedAnimation) {
+    public static AlphaAnimation fadeIn(
+            View view,
+            int duration,
+            Animation.AnimationListener listener,
+            boolean isNeedAnimation
+    ) {
         if (view == null) {
             return null;
         }
@@ -84,10 +117,12 @@ public final class AnimUtils {
      * @param listener        动画回调
      * @param isNeedAnimation 是否需要动画
      */
-    public static AlphaAnimation fadeOut(final View view,
-                                         int duration,
-                                         final Animation.AnimationListener listener,
-                                         boolean isNeedAnimation) {
+    public static AlphaAnimation fadeOut(
+            final View view,
+            int duration,
+            final Animation.AnimationListener listener,
+            boolean isNeedAnimation
+    ) {
         if (view == null) {
             return null;
         }
@@ -152,11 +187,13 @@ public final class AnimUtils {
      * @return                动画对应的 Animator 对象, 注意无动画时返回 null
      */
     @Nullable
-    public static TranslateAnimation slideIn(final View view,
-                                             int duration,
-                                             final Animation.AnimationListener listener,
-                                             boolean isNeedAnimation,
-                                             @UIDirection int direction) {
+    public static TranslateAnimation slideIn(
+            final View view,
+            int duration,
+            final Animation.AnimationListener listener,
+            boolean isNeedAnimation,
+            @UIDirection int direction
+    ) {
         if (view == null) {
             return null;
         }
@@ -217,11 +254,13 @@ public final class AnimUtils {
      * @return                动画对应的 Animator 对象, 注意无动画时返回 null
      */
     @Nullable
-    public static TranslateAnimation slideOut(final View view,
-                                              int duration,
-                                              final Animation.AnimationListener listener,
-                                              boolean isNeedAnimation,
-                                              @UIDirection int direction) {
+    public static TranslateAnimation slideOut(
+            final View view,
+            int duration,
+            final Animation.AnimationListener listener,
+            boolean isNeedAnimation,
+            @UIDirection int direction
+    ) {
         if (view == null) {
             return null;
         }
@@ -328,10 +367,12 @@ public final class AnimUtils {
      * @param listener    the value change callback
      * @return            the animator
      */
-    public static ValueAnimator changeColor(@ColorInt int beforeColor,
-                                            @ColorInt int afterColor,
-                                            long duration,
-                                            final OnColorChangeListener listener) {
+    public static ValueAnimator changeColor(
+            @ColorInt int beforeColor,
+            @ColorInt int afterColor,
+            long duration,
+            final OnColorChangeListener listener
+    ) {
         ArgbEvaluator argbEvaluator = new ArgbEvaluator();
         ValueAnimator valueAnimator = ValueAnimator.ofObject(argbEvaluator, beforeColor, afterColor).setDuration(duration);
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -459,7 +500,11 @@ public final class AnimUtils {
      * @param animatorListenerAdapter the animator adapter
      * @return                        the animator
      */
-    public static ObjectAnimator popupOut(final View view, long duration, final AnimatorListenerAdapter animatorListenerAdapter) {
+    public static ObjectAnimator popupOut(
+            final View view,
+            long duration,
+            final AnimatorListenerAdapter animatorListenerAdapter
+    ) {
         ObjectAnimator popupOut = ObjectAnimator.ofPropertyValuesHolder(view,
                 PropertyValuesHolder.ofFloat("alpha", 1f, 0f),
                 PropertyValuesHolder.ofFloat("scaleX", 1f, 0f),

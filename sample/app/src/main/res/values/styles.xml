@@ -22,4 +22,12 @@
 
     <attr name="custom_prop" format="color"/>
 
+    <declare-styleable name="ShadowLayout">
+        <attr format="color" name="shadow_layout_color"/>
+        <attr format="color" name="shadow_layout_background_color"/>
+        <attr format="dimension" name="shadow_layout_offsetX"/>
+        <attr format="dimension" name="shadow_layout_offsetY"/>
+        <attr format="dimension" name="shadow_layout_blur"/>
+        <attr format="dimension" name="shadow_layout_radius"/>
+    </declare-styleable>
 </resources>
