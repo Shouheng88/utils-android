@@ -30,7 +30,7 @@ import me.shouheng.utils.stability.L;
 /**
  * Utils for App level.
  *
- * @author WngShhng 2019-05-07 19:20
+ * @author Shouheng Wang 2019-05-07 19:20
  */
 public final class AppUtils {
 

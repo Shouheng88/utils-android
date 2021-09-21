@@ -55,7 +55,7 @@ import me.shouheng.utils.UtilsApp;
 import me.shouheng.utils.data.StringUtils;
 
 /**
- * @author WngShhng 2019-05-07 12:01
+ * @author Shouheng Wang 2019-05-07 12:01
  */
 public final class L {
 

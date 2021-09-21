@@ -22,7 +22,7 @@ import me.shouheng.utils.app.AppUtils;
  *             /_/    \_\_| |_|\__,_|_|  \___/|_|\__,_|  \____/ \__|_|_|___/
  *
  *
- *                                    == WngShhng ==
+ *                                    == Shouheng Wang ==
  *
  *                         AN COLLECTION OF USEFUL UTILS IN ANDROID
  *
@@ -42,7 +42,7 @@ import me.shouheng.utils.app.AppUtils;
  * }
  * </code>
  *
- * @author WngShhng shouheng2015@gmail.com
+ * @author Shouheng Wang shouheng2020@gmail.com
  * @version 2019-05-07 12:13
  */
 public final class UtilsApp {

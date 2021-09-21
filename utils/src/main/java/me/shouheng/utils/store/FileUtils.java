@@ -38,7 +38,7 @@ import me.shouheng.utils.data.StringUtils;
 /**
  * 用来处理文件的拷贝、增加和删除等逻辑
  *
- * @author WngShhng 2019-05-08 21:30
+ * @author Shouheng Wang 2019-05-08 21:30
  */
 public final class FileUtils {
 

@@ -29,7 +29,7 @@ import me.shouheng.utils.UtilsApp;
  * You are also allowed to custom the view of toast by calling
  * {@link #setToastViewCallback(ToastViewCallback)} method.
  *
- * @author WngShhng (shouheng2015@gmail.com)
+ * @author Shouheng Wang (shouheng2020@gmail.com)
  * @version 2019/5/12 18:19
  */
 public final class ToastUtils {

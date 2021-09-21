@@ -43,7 +43,7 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
  * If the app din't get the storage permission the
  * <p>/data/data/< package name >/cache/crash/...</p> will be used to store the crash log.
  *
- * @author WngShhng 2019-04-02 15:03
+ * @author Shouheng Wang 2019-04-02 15:03
  */
 public final class CrashHelper {
 

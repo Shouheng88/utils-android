@@ -53,7 +53,7 @@ public class TestIntentActivity extends BaseActivity {
     }
 
     public void testSendEmail(View v) {
-        Intent i = IntentUtils.getSendEmailIntent("shouheng2015@gmail.com", "Subject", "Email body");
+        Intent i = IntentUtils.getSendEmailIntent("shouheng2020@gmail.com", "Subject", "Email body");
         if (!IntentUtils.isIntentAvailable(i)) {
             Toast.makeText(this, "Failed to send email : application not found!", Toast.LENGTH_SHORT).show();
         } else {

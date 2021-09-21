@@ -33,7 +33,7 @@ import static android.Manifest.permission.EXPAND_STATUS_BAR;
 /**
  * Bar utils
  *
- * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
+ * @author <a href="mailto:shouheng2020@gmail.com">Shouheng Wang</a>
  * @version 2019-12-08 12:57
  */
 public final class BarUtils {

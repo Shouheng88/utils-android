@@ -19,7 +19,7 @@ import me.shouheng.utils.data.StringUtils;
 /**
  * 封装基于 {@link android.content.SharedPreferences} 的持久化工具
  *
- * @author WngShhng 2019-05-08 21:30
+ * @author Shouheng Wang 2019-05-08 21:30
  */
 public final class SPUtils {
 

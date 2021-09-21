@@ -13,7 +13,7 @@ import java.util.Objects;
 /**
  * 颜色相关
  *
- * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
+ * @author <a href="mailto:shouheng2020@gmail.com">Shouheng Wang</a>
  * @version 2019-10-27 15:27
  */
 public final class ColorUtils {

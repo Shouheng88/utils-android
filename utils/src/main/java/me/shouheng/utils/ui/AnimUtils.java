@@ -37,7 +37,7 @@ import static me.shouheng.utils.ui.AnimUtils.UIDirection.TOP_TO_BOTTOM;
 /**
  * 动画相关
  *
- * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
+ * @author <a href="mailto:shouheng2020@gmail.com">Shouheng Wang</a>
  * @version 2019-10-27 16:00
  */
 public final class AnimUtils {

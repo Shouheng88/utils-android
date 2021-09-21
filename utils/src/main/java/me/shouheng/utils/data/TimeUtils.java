@@ -14,7 +14,7 @@ import me.shouheng.utils.UtilsApp;
 import me.shouheng.utils.constant.TimeConstants;
 
 /**
- * @author WngShhng (shouheng2015@gmail.com)
+ * @author Shouheng Wang (shouheng2020@gmail.com)
  * @version 2019/5/12 16:07
  */
 public final class TimeUtils {

@@ -8,7 +8,7 @@ import java.lang.annotation.RetentionPolicy;
 /**
  * Permission constants
  *
- * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
+ * @author <a href="mailto:shouheng2020@gmail.com">Shouheng Wang</a>
  * @version 2020-03-09 12:47
  */
 @IntDef({

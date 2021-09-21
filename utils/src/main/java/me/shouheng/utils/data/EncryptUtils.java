@@ -32,7 +32,7 @@ import static me.shouheng.utils.data.StringUtils.isSpace;
 /**
  * The encrypt utils.
  *
- * @author WngShhng (shouheng2015@gmail.com)
+ * @author Shouheng Wang (shouheng2020@gmail.com)
  * @version 2019/5/7 23:21
  */
 public final class EncryptUtils {

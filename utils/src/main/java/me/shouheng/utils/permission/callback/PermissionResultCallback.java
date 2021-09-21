@@ -3,7 +3,7 @@ package me.shouheng.utils.permission.callback;
 /**
  * The permission result callback
  *
- * @author WngShhng 2019-04-02 12:39
+ * @author Shouheng Wang 2019-04-02 12:39
  */
 public interface PermissionResultCallback {
 

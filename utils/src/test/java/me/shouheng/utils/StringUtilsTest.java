@@ -12,7 +12,7 @@ import me.shouheng.utils.data.StringUtils;
 /**
  * 测试 {@link StringUtils}
  *
- * @author WngShhng 2019-05-08 20:04
+ * @author Shouheng Wang 2019-05-08 20:04
  */
 public class StringUtilsTest {
 

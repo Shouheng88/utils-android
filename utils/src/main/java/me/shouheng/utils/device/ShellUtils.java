@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import java.util.List;
 
 /**
- * @author WngShhng (shouheng2015@gmail.com)
+ * @author Shouheng Wang (shouheng2020@gmail.com)
  * @version 2019/5/7 22:02
  */
 public final class ShellUtils {

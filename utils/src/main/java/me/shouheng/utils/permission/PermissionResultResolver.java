@@ -8,7 +8,7 @@ import me.shouheng.utils.permission.callback.OnGetPermissionCallback;
  * Permission result resolver interface.
  * The permission checker activity must implement this interface.
  *
- * @author WngShhng 2019-04-02 12:08
+ * @author Shouheng Wang 2019-04-02 12:08
  */
 public interface PermissionResultResolver {
 

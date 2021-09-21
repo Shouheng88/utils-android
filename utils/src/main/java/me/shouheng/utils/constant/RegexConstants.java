@@ -1,7 +1,7 @@
 package me.shouheng.utils.constant;
 
 /**
- * @author WngShhng (shouheng2015@gmail.com)
+ * @author Shouheng Wang (shouheng2020@gmail.com)
  * @version 2019/5/12 16:04
  */
 public final class RegexConstants {

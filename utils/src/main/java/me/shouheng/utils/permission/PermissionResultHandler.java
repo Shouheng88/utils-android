@@ -13,7 +13,7 @@ import me.shouheng.utils.permission.callback.PermissionResultCallback;
 /**
  * The permission default permission result handler
  *
- * @author WngShhng 2019-04-02 12:22
+ * @author Shouheng Wang 2019-04-02 12:22
  */
 public class PermissionResultHandler {
 
