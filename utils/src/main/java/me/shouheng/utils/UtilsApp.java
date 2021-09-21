@@ -55,6 +55,59 @@ public final class UtilsApp {
 
     private static List<OnForegroundChangeListener> onForegroundChangeListeners = new ArrayList<>();
 
+    private static final Application.ActivityLifecycleCallbacks activityLifecycleCallbacks = new Application.ActivityLifecycleCallbacks() {
+
+        private int activityCount = 0;
+
+        @Override
+        public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+            AppUtils.attachActivity(activity);
+        }
+
+        @Override
+        public void onActivityStarted(Activity activity) {
+            activityCount++;
+            AppUtils.attachForeActivity(activity);
+        }
+
+        @Override
+        public void onActivityResumed(Activity activity) {
+            if (!isForeGround) {
+                isForeGround = true;
+                notifyForegroundChange(true);
+            }
+        }
+
+        @Override
+        public void onActivityPaused(Activity activity) {
+            // no-op
+        }
+
+        @Override
+        public void onActivityStopped(Activity activity) {
+            AppUtils.detachForeActivity(activity);
+            activityCount--;
+            if (activityCount == 0) {
+                isForeGround = false;
+                notifyForegroundChange(false);
+                Log.i(TAG, "Activity foreground: " + System.currentTimeMillis());
+            }
+        }
+
+        @Override
+        public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
+            // no-op
+        }
+
+        @Override
+        public void onActivityDestroyed(Activity activity) {
+            AppUtils.detachActivity(activity);
+        }
+    };
+
+    /** Used to mark the register status, to avoid multiple register actions. */
+    private static volatile boolean registered = false;
+
     private UtilsApp() {
         throw new UnsupportedOperationException("u can't initialize me!");
     }
@@ -78,55 +131,10 @@ public final class UtilsApp {
      */
     public static void init(Application app) {
         UtilsApp.app = app;
-        app.registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
-
-            private int activityCount = 0;
-
-            @Override
-            public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-                AppUtils.attachActivity(activity);
-            }
-
-            @Override
-            public void onActivityStarted(Activity activity) {
-                activityCount++;
-                AppUtils.attachForeActivity(activity);
-            }
-
-            @Override
-            public void onActivityResumed(Activity activity) {
-                if (!isForeGround) {
-                    isForeGround = true;
-                    notifyForegroundChange(true);
-                }
-            }
-
-            @Override
-            public void onActivityPaused(Activity activity) {
-                // no-op
-            }
-
-            @Override
-            public void onActivityStopped(Activity activity) {
-                AppUtils.detachForeActivity(activity);
-                activityCount--;
-                if (activityCount == 0) {
-                    isForeGround = false;
-                    notifyForegroundChange(false);
-                    Log.i(TAG, "Activity foreground: " + System.currentTimeMillis());
-                }
-            }
-
-            @Override
-            public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
-                // no-op
-            }
-
-            @Override
-            public void onActivityDestroyed(Activity activity) {
-                AppUtils.detachActivity(activity);
-            }
-        });
+        if (!registered) {
+            app.registerActivityLifecycleCallbacks(activityLifecycleCallbacks);
+            registered = true;
+        }
     }
 
     /**
@@ -164,9 +172,7 @@ public final class UtilsApp {
         }
     }
 
-    /**
-     * On foreground state change callback.
-     */
+    /** On foreground state change callback. */
     public interface OnForegroundChangeListener {
 
         void onForegroundChange(boolean isForeground);
