@@ -75,7 +75,7 @@ import me.shouheng.utils.permission.callback.PermissionResultCallback;
  * }
  * </code>
  *
- * Created by WngShhng on 2017/12/5.
+ * Created by Shouheng Wang on 2017/12/5.
  */
 public final class PermissionUtils {
 

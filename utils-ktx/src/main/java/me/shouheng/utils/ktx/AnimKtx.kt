@@ -6,10 +6,8 @@ import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import androidx.annotation.ColorInt
 import android.view.View
-import android.view.animation.AlphaAnimation
+import android.view.animation.*
 import android.view.animation.Animation.AnimationListener
-import android.view.animation.ScaleAnimation
-import android.view.animation.TranslateAnimation
 import me.shouheng.utils.ui.AnimUtils
 import me.shouheng.utils.ui.AnimUtils.UIDirection
 
@@ -53,3 +51,6 @@ fun View.popupOut(duration: Long, animatorListenerAdapter: AnimatorListenerAdapt
     return AnimUtils.popupOut(this, duration, animatorListenerAdapter)
 }
 
+fun View.rotate(duration: Long, repeatCount: Int = Animation.INFINITE, fromDegrees: Float = .0f, toDegrees: Float = 360f): RotateAnimation {
+    return AnimUtils.rotate(this, duration, repeatCount, fromDegrees, toDegrees)
+}

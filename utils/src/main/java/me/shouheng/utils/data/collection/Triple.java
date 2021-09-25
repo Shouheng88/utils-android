@@ -7,7 +7,7 @@ import me.shouheng.utils.data.ObjectUtils;
 /**
  * A container contains three elements.
  *
- * @author <a href="mailto:shouheng2015@gmail.com">WngShhng</a>
+ * @author <a href="mailto:shouheng2020@gmail.com">Shouheng Wang</a>
  * @version 2020-06-26 16:37
  */
 public final class Triple<L, M, R> implements Comparable<Triple<L, M, R>>, Serializable {

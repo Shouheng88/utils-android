@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import androidx.annotation.ColorInt;
+import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import android.util.Log;
@@ -17,12 +18,18 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.Field;
 
 import me.shouheng.utils.UtilsApp;
 
 /**
- * @author WngShhng (shouheng2015@gmail.com)
+ * Toast utils. Except basic displaying message by a bubble styled system toast.
+ * You are also allowed to custom the view of toast by calling
+ * {@link #setToastViewCallback(ToastViewCallback)} method.
+ *
+ * @author Shouheng Wang (shouheng2020@gmail.com)
  * @version 2019/5/12 18:19
  */
 public final class ToastUtils {
@@ -38,36 +45,70 @@ public final class ToastUtils {
     private static int sMsgColor    = COLOR_DEFAULT;
     private static int sMsgTextSize = -1;
 
+    private static ToastViewCallback toastViewCallback;
+
     public static void showShort(final CharSequence text) {
-        show(text == null ? NULL : text, Toast.LENGTH_SHORT);
+        show(text == null ? NULL : text, Toast.LENGTH_SHORT, ToastStyle.NORMAL, null);
+    }
+
+    public static void showShort(final CharSequence text, @ToastStyle int style) {
+        show(text == null ? NULL : text, Toast.LENGTH_SHORT, style, null);
+    }
+
+    public static void showShort(final CharSequence text, ToastViewGetter getter) {
+        show(text == null ? NULL : text, Toast.LENGTH_SHORT, ToastStyle.NORMAL, getter);
     }
 
     public static void showShort(@StringRes final int resId) {
-        show(resId, Toast.LENGTH_SHORT);
+        show(resId, Toast.LENGTH_SHORT, ToastStyle.NORMAL, null);
+    }
+
+    public static void showShort(@StringRes final int resId, @ToastStyle int style) {
+        show(resId, Toast.LENGTH_SHORT, style, null);
+    }
+
+    public static void showShort(@StringRes final int resId, ToastViewGetter getter) {
+        show(resId, Toast.LENGTH_SHORT, ToastStyle.NORMAL, getter);
     }
 
     public static void showShort(@StringRes final int resId, final Object... args) {
-        show(resId, Toast.LENGTH_SHORT, args);
+        show(resId, Toast.LENGTH_SHORT, ToastStyle.NORMAL, null, args);
     }
 
     public static void showShort(final String format, final Object... args) {
-        show(format, Toast.LENGTH_SHORT, args);
+        show(format, Toast.LENGTH_SHORT, ToastStyle.NORMAL, null, args);
     }
 
     public static void showLong(final CharSequence text) {
-        show(text == null ? NULL : text, Toast.LENGTH_LONG);
+        show(text == null ? NULL : text, Toast.LENGTH_LONG, ToastStyle.NORMAL, null);
+    }
+
+    public static void showLong(final CharSequence text, @ToastStyle int style) {
+        show(text == null ? NULL : text, Toast.LENGTH_LONG, style, null);
+    }
+
+    public static void showLong(final CharSequence text, ToastViewGetter getter) {
+        show(text == null ? NULL : text, Toast.LENGTH_LONG, ToastStyle.NORMAL, getter);
     }
 
     public static void showLong(@StringRes final int resId) {
-        show(resId, Toast.LENGTH_LONG);
+        show(resId, Toast.LENGTH_LONG, ToastStyle.NORMAL, null);
+    }
+
+    public static void showLong(@StringRes final int resId, @ToastStyle int style) {
+        show(resId, Toast.LENGTH_LONG, style, null);
+    }
+
+    public static void showLong(@StringRes final int resId, ToastViewGetter getter) {
+        show(resId, Toast.LENGTH_LONG, ToastStyle.NORMAL, getter);
     }
 
     public static void showLong(@StringRes final int resId, final Object... args) {
-        show(resId, Toast.LENGTH_LONG, args);
+        show(resId, Toast.LENGTH_LONG, ToastStyle.NORMAL, null, args);
     }
 
     public static void showLong(final String format, final Object... args) {
-        show(format, Toast.LENGTH_LONG, args);
+        show(format, Toast.LENGTH_LONG, ToastStyle.NORMAL, null, args);
     }
 
     public static void setGravity(final int gravity, final int xOffset, final int yOffset) {
@@ -84,6 +125,14 @@ public final class ToastUtils {
         sMsgTextSize = textSize;
     }
 
+    public static void setToastViewCallback(ToastViewCallback toastViewCallback) {
+        ToastUtils.toastViewCallback = toastViewCallback;
+    }
+
+    public static ToastViewCallback getToastViewCallback() {
+        return toastViewCallback;
+    }
+
     public static void cancel() {
         if (sToast != null) {
             sToast.cancel();
@@ -92,15 +141,32 @@ public final class ToastUtils {
 
     /*---------------------------------- 内部方法 --------------------------------------*/
 
-    private static void show(@StringRes final int resId, final int duration) {
-        show(UtilsApp.getApp().getResources().getText(resId).toString(), duration);
+    private static void show(
+            @StringRes final int resId,
+            final int duration,
+            @ToastStyle final int style,
+            ToastViewGetter getter
+    ) {
+        show(UtilsApp.getApp().getResources().getText(resId).toString(), duration, style, getter);
     }
 
-    private static void show(@StringRes final int resId, final int duration, final Object... args) {
-        show(String.format(UtilsApp.getApp().getResources().getString(resId), args), duration);
+    private static void show(
+            @StringRes final int resId,
+            final int duration,
+            @ToastStyle final int style,
+            ToastViewGetter getter,
+            final Object... args
+    ) {
+        show(String.format(UtilsApp.getApp().getResources().getString(resId), args), duration, style, getter);
     }
 
-    private static void show(final String format, final int duration, final Object... args) {
+    private static void show(
+            final String format,
+            final int duration,
+            @ToastStyle final int style,
+            ToastViewGetter getter,
+            final Object... args
+    ) {
         String text;
         if (format == null) {
             text = NULL;
@@ -110,10 +176,15 @@ public final class ToastUtils {
                 text = NULL;
             }
         }
-        show(text, duration);
+        show(text, duration, style, getter);
     }
 
-    private static void show(final CharSequence text, final int duration) {
+    private static void show(
+            final CharSequence text,
+            final int duration,
+            @ToastStyle final int style,
+            final ToastViewGetter getter
+    ) {
         HANDLER.post(new Runnable() {
             @SuppressLint("ShowToast")
             @Override
@@ -129,6 +200,15 @@ public final class ToastUtils {
                 }
                 if (sGravity != -1 || sXOffset != -1 || sYOffset != -1) {
                     sToast.setGravity(sGravity, sXOffset, sYOffset);
+                }
+                // View from getter is prior then global toastViewCallback.
+                if (getter != null) {
+                    sToast.setView(getter.getView(text));
+                } else {
+                    View view;
+                    if (toastViewCallback != null && (view = toastViewCallback.getView(text, style)) != null) {
+                        sToast.setView(view);
+                    }
                 }
                 showToast();
             }
@@ -210,6 +290,26 @@ public final class ToastUtils {
                 base.removeView(view);
             }
         }
+    }
+
+    /** The custom toast view factory method. */
+    public interface ToastViewCallback {
+        /** Get normal styled toast view. */
+        View getView(CharSequence text, @ToastStyle int style);
+    }
+
+    /** The custom toast view getter. */
+    public interface ToastViewGetter {
+        View getView(CharSequence text);
+    }
+
+    @IntDef({ToastStyle.NORMAL, ToastStyle.INFO, ToastStyle.WARN, ToastStyle.ERROR})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface ToastStyle {
+        int NORMAL      = 0;
+        int INFO        = 1;
+        int WARN        = 2;
+        int ERROR       = 3;
     }
 
     private ToastUtils() {

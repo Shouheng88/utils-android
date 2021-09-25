@@ -13,7 +13,7 @@ import me.shouheng.utils.ui.ToastUtils;
 /**
  * {@link PermissionResultCallback} 的默认实现
  *
- * @author WngShhng 2019-04-02 12:40
+ * @author Shouheng Wang 2019-04-02 12:40
  */
 public class PermissionResultCallbackImpl implements PermissionResultCallback {
 

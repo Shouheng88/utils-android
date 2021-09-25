@@ -30,7 +30,7 @@ import static me.shouheng.utils.store.FileUtils.isFileExists;
 /**
  * 用来处理单个文件的读写
  *
- * @author WngShhng 2019-05-08 21:30
+ * @author Shouheng Wang 2019-05-08 21:30
  */
 public final class IOUtils {
 

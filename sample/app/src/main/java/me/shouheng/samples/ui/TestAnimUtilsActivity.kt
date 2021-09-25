@@ -12,7 +12,7 @@ import me.shouheng.utils.ui.ViewUtils
 /**
  * Anim utils test
  *
- * @author [WngShhng](mailto:shouheng2015@gmail.com)
+ * @author [Shouheng Wang](mailto:shouheng2020@gmail.com)
  * @version 2020-05-24 12:53
  */
 class TestAnimUtilsActivity : AppCompatActivity() {
@@ -59,5 +59,9 @@ class TestAnimUtilsActivity : AppCompatActivity() {
 
     fun popupOut(view: View?) {
         obj?.popupOut(1000, null)
+    }
+
+    fun rotate(view: View) {
+        obj?.rotate(2_000)
     }
 }

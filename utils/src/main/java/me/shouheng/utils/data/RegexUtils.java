@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 import me.shouheng.utils.constant.RegexConstants;
 
 /**
- * @author WngShhng 2019-05-08 21:30
+ * @author Shouheng Wang 2019-05-08 21:30
  */
 public final class RegexUtils {
 

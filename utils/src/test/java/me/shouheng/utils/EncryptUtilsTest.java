@@ -5,7 +5,7 @@ import org.junit.Test;
 import me.shouheng.utils.data.EncryptUtils;
 
 /**
- * @author WngShhng (shouheng2015@gmail.com)
+ * @author Shouheng Wang (shouheng2020@gmail.com)
  * @version 2019/5/12 13:27
  */
 public class EncryptUtilsTest {

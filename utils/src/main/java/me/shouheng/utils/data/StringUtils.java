@@ -13,7 +13,7 @@ import me.shouheng.utils.UtilsApp;
 import me.shouheng.utils.data.function.StringFunction;
 
 /**
- * @author WngShhng (shouheng2015@gmail.com)
+ * @author Shouheng Wang (shouheng2020@gmail.com)
  * @version 2019/5/7 22:38
  */
 public final class StringUtils {

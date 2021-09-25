@@ -29,7 +29,7 @@ import java.io.InputStream;
 import me.shouheng.utils.UtilsApp;
 
 /**
- * @author WngShhng 2019-05-08 20:20
+ * @author Shouheng Wang 2019-05-08 20:20
  */
 public final class ResUtils {
 

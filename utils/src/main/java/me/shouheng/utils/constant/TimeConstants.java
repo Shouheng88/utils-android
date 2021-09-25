@@ -6,7 +6,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
- * @author WngShhng (shouheng2015@gmail.com)
+ * @author Shouheng Wang (shouheng2020@gmail.com)
  * @version 2019/5/12 16:26
  */
 public class TimeConstants {

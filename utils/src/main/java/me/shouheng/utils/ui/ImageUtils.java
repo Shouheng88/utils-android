@@ -64,7 +64,7 @@ import static me.shouheng.utils.store.IOUtils.is2Bytes;
  * 2. {@link android.graphics.Bitmap}
  * 的工具类
  *
- * @author WngShhng 2019-05-08 21:30
+ * @author Shouheng Wang 2019-05-08 21:30
  */
 public final class ImageUtils {
 

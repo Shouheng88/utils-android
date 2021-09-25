@@ -17,7 +17,7 @@ import me.shouheng.utils.UtilsApp;
 import static android.Manifest.permission.CALL_PHONE;
 
 /**
- * @author WngShhng (shouheng2015@gmail.com)
+ * @author Shouheng Wang (shouheng2020@gmail.com)
  * @version 2019/5/7 23:09
  */
 public final class IntentUtils {

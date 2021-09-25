@@ -44,7 +44,7 @@ import static android.Manifest.permission.INTERNET;
 import static android.Manifest.permission.READ_PHONE_STATE;
 
 /**
- * @author  WngShhng
+ * @author  Shouheng Wang
  * @version 2019-05-09 21:20
  */
 public final class DeviceUtils {

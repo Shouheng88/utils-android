@@ -7,7 +7,7 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 
 /**
- * @author WngShhng (shouheng2015@gmail.com)
+ * @author Shouheng Wang (shouheng2020@gmail.com)
  * @version 2019/5/12 15:50
  */
 public final class EncodeUtils {

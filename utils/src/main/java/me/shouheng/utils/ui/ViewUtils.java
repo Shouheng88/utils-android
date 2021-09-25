@@ -30,7 +30,7 @@ import java.lang.reflect.Method;
 import me.shouheng.utils.UtilsApp;
 
 /**
- * @author WngShhng (shouheng2015@gmail.com)
+ * @author Shouheng Wang (shouheng2020@gmail.com)
  * @version 2019/5/9 22:38
  */
 public final class ViewUtils {

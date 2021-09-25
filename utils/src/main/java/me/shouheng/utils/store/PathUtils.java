@@ -8,7 +8,7 @@ import me.shouheng.utils.UtilsApp;
 /**
  * 用来对文件的路径进行处理，提供一些针对 Android 平台的路径获取等操作
  *
- * @author WngShhng 2019-05-08 21:30
+ * @author Shouheng Wang 2019-05-08 21:30
  */
 public final class PathUtils {
 

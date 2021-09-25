@@ -9,7 +9,7 @@ import me.shouheng.utils.store.IOUtils;
 /**
  * 测试 {@link IOUtils}
  *
- * @author WngShhng 2019-05-08 20:04
+ * @author Shouheng Wang 2019-05-08 20:04
  */
 public class IOUtilsTest {
 
