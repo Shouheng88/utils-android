@@ -6,10 +6,6 @@ import android.content.ContextWrapper;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
-import androidx.annotation.ColorInt;
-import androidx.annotation.IntDef;
-import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
@@ -17,6 +13,11 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.IntDef;
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -191,12 +192,25 @@ public final class ToastUtils {
             public void run() {
                 cancel();
                 sToast = Toast.makeText(UtilsApp.getApp(), text, duration);
-                final TextView tvMessage = sToast.getView().findViewById(android.R.id.message);
-                if (sMsgColor != COLOR_DEFAULT) {
-                    tvMessage.setTextColor(sMsgColor);
-                }
-                if (sMsgTextSize != -1) {
-                    tvMessage.setTextSize(sMsgTextSize);
+                View toastView = sToast.getView();
+                TextView tvMessage = null;
+                if (toastView != null) {
+                    tvMessage = toastView.findViewById(android.R.id.message);
+                }/* else {
+                    tvMessage = new AppCompatTextView(UtilsApp.getApp());
+                    tvMessage.setLayoutParams(new ViewGroup.LayoutParams(
+                            ViewGroup.LayoutParams.WRAP_CONTENT,
+                            ViewGroup.LayoutParams.WRAP_CONTENT));
+                    tvMessage.setText(text);
+                    sToast.setView(tvMessage);
+                }*/
+                if (tvMessage != null) {
+                    if (sMsgColor != COLOR_DEFAULT) {
+                        tvMessage.setTextColor(sMsgColor);
+                    }
+                    if (sMsgTextSize != -1) {
+                        tvMessage.setTextSize(sMsgTextSize);
+                    }
                 }
                 if (sGravity != -1 || sXOffset != -1 || sYOffset != -1) {
                     sToast.setGravity(sGravity, sXOffset, sYOffset);
