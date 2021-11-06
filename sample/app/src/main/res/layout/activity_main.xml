@@ -49,6 +49,11 @@
             style="@style/MenuButton" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:onClick="testStorageUtils"
+            android:text="Storage test"
+            style="@style/MenuButton" />
+
+        <androidx.appcompat.widget.AppCompatButton
             android:onClick="testDeviceUtils"
             android:text="DeviceUtils"
             style="@style/MenuButton" />

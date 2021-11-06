@@ -15,6 +15,7 @@ import me.shouheng.samples.intent.TestIntentActivity
 import me.shouheng.samples.permission.TestPermissionActivity
 import me.shouheng.samples.stability.TestCrashActivity
 import me.shouheng.samples.stability.TestLogActivity
+import me.shouheng.samples.store.StorageActivity
 import me.shouheng.samples.store.TestPathUtilsActivity
 import me.shouheng.samples.store.TestSpUtilsActivity
 import me.shouheng.samples.ui.TestAnimUtilsActivity
@@ -69,6 +70,8 @@ class MainActivity : BaseActivity() {
     fun testAppUtils(v: View?) { start(TestAppUtilsActivity::class.java) }
 
     fun testSPUtils(v: View?) { start(TestSpUtilsActivity::class.java) }
+
+    fun testStorageUtils(v: View?) { start(StorageActivity::class.java) }
 
     fun testDeviceUtils(v: View?) { start(TestDeviceUtilsActivity::class.java) }
 
