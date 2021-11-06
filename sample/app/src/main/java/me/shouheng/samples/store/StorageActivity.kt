@@ -44,6 +44,26 @@ class StorageActivity : AppCompatActivity() {
                 writeToPath()
             }
         }
+        findViewById<View>(R.id.btn_read).onDebouncedClick {
+            if (isExternalStoragePermissionGranted()) {
+                readPath()
+            }
+        }
+        findViewById<View>(R.id.btn_delete).onDebouncedClick {
+            if (isExternalStoragePermissionGranted()) {
+                delete()
+            }
+        }
+        findViewById<View>(R.id.btn_rename_dir).onDebouncedClick {
+            if (isExternalStoragePermissionGranted()) {
+                renameDir()
+            }
+        }
+        findViewById<View>(R.id.btn_rename_file).onDebouncedClick {
+            if (isExternalStoragePermissionGranted()) {
+                renameFile()
+            }
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
@@ -95,6 +115,83 @@ class StorageActivity : AppCompatActivity() {
             toast("Result: $ret")
         } catch (e: Exception) {
             e.printStackTrace()
+            toast("failed!")
+        }
+    }
+
+    private fun readPath() {
+        val uriString = SPUtils.get().getString("__external_storage_path")
+        try {
+            val uri = Uri.parse(uriString)
+            val root = DocumentFile.fromTreeUri(this, uri)
+            val name = "sample.txt"
+            val doc = createOrExistsFile(root, "test_a", "application/txt", name)
+            val ous = this.contentResolver.openOutputStream(doc!!.uri)
+            val ret = writeToOutputStream(ous, "sample a")
+            toast("Write succeed: $ret")
+            val file = getFile(root, "test_a", name)
+            val ins = contentResolver.openInputStream(file!!.uri)
+            val bytes = IOUtils.is2Bytes(ins)
+            toast("Read: ${String(bytes)}")
+        } catch (e: Exception) {
+            e.printStackTrace()
+            toast("failed!")
+        }
+    }
+
+    private fun delete() {
+        val uriString = SPUtils.get().getString("__external_storage_path")
+        try {
+            val uri = Uri.parse(uriString)
+            val root = DocumentFile.fromTreeUri(this, uri)
+            val name = "sample.txt"
+            val doc = getFile(root, "test_a", name)
+            if (doc == null) {
+                toast("File not found!")
+            } else {
+                val ret = doc.delete()
+                toast("Deleted: $ret")
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            toast("failed!")
+        }
+    }
+
+    private fun renameDir() {
+        val uriString = SPUtils.get().getString("__external_storage_path")
+        try {
+            val uri = Uri.parse(uriString)
+            val root = DocumentFile.fromTreeUri(this, uri)
+            val doc = getDirectory(root, "test_a")
+            if (doc == null) {
+                toast("Directory not found!")
+            } else {
+                val ret = doc.renameTo("test_a_renamed")
+                toast("Rename: $ret")
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            toast("failed!")
+        }
+    }
+
+    private fun renameFile() {
+        val uriString = SPUtils.get().getString("__external_storage_path")
+        try {
+            val uri = Uri.parse(uriString)
+            val root = DocumentFile.fromTreeUri(this, uri)
+            val name = "sample.txt"
+            val doc = getFile(root, "test_a", name)
+            if (doc == null) {
+                toast("File not found!")
+            } else {
+                val ret = doc.renameTo("sample_renamed.txt")
+                toast("Rename: $ret")
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            toast("failed!")
         }
     }
 
@@ -130,6 +227,26 @@ class StorageActivity : AppCompatActivity() {
             dir = dir?.listFiles()?.find {
                 part == it.name && it.isDirectory
             } ?: dir?.createDirectory(part)
+        }
+        return dir
+    }
+
+    /** Get document file under root with given name. */
+    private fun getFile(root: DocumentFile?, directoryPath: String, fileName: String): DocumentFile? {
+        val dir = getDirectory(root, directoryPath)
+        val file = dir?.findFile(fileName)
+        return if (file != null && file.isFile ) file else null
+    }
+
+    /** Get document file directory under root with given path. */
+    private fun getDirectory(root: DocumentFile?, directoryPath: String): DocumentFile? {
+        if (root == null) return null
+        val parts = directoryPath.split(File.separator).toTypedArray()
+        var dir = root
+        parts.filter { it.isNotEmpty() }.forEach { part ->
+            dir = dir?.listFiles()?.find {
+                part == it.name && it.isDirectory
+            } ?: return@forEach
         }
         return dir
     }
