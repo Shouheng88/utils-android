@@ -15,13 +15,16 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.documentfile.provider.DocumentFile
 import me.shouheng.samples.R
+import me.shouheng.utils.data.EncodeUtils
 import me.shouheng.utils.ktx.onDebouncedClick
 import me.shouheng.utils.ktx.toast
 import me.shouheng.utils.store.IOUtils
+import me.shouheng.utils.store.PathUtils
 import me.shouheng.utils.store.SPUtils
 import java.io.File
 import java.io.IOException
 import java.io.OutputStream
+import java.util.*
 
 /** To make a sample for storage usage on Android 11. */
 class StorageActivity : AppCompatActivity() {
@@ -62,6 +65,16 @@ class StorageActivity : AppCompatActivity() {
         findViewById<View>(R.id.btn_rename_file).onDebouncedClick {
             if (isExternalStoragePermissionGranted()) {
                 renameFile()
+            }
+        }
+        findViewById<View>(R.id.btn_write_old).onDebouncedClick {
+            if (isExternalStoragePermissionGranted()) {
+                writeByFile()
+            }
+        }
+        findViewById<View>(R.id.btn_list_all).onDebouncedClick {
+            if (isExternalStoragePermissionGranted()) {
+                listAll()
             }
         }
     }
@@ -193,6 +206,24 @@ class StorageActivity : AppCompatActivity() {
             e.printStackTrace()
             toast("failed!")
         }
+    }
+
+    private fun writeByFile() {
+        val uriString = SPUtils.get().getString("__external_storage_path")
+        val left = uriString.removePrefix("content://com.android.externalstorage.documents/tree/primary%3A")
+        val path = EncodeUtils.urlDecode(left)
+        val root = PathUtils.getExternalStoragePath()
+        val file = File("$root${File.separator}$path", "write_old.text")
+        IOUtils.writeFileFromString(file, "test test")
+    }
+
+    private fun listAll() {
+        val uriString = SPUtils.get().getString("__external_storage_path")
+        val left = uriString.removePrefix("content://com.android.externalstorage.documents/tree/primary%3A")
+        val path = EncodeUtils.urlDecode(left)
+        val root = PathUtils.getExternalStoragePath()
+        val files = File("$root${File.separator}$path").list()
+        toast(Arrays.toString(files))
     }
 
     private fun writeToOutputStream(ous: OutputStream?, text: String): Boolean {

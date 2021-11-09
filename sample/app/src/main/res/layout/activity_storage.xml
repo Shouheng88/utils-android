@@ -52,6 +52,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_write_old"
+            android:text="Write to storage by File"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_list_all"
+            android:text="List all files"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>
