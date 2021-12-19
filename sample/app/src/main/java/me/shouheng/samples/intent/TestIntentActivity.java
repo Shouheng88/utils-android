@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
 import androidx.appcompat.app.AlertDialog;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -16,6 +17,7 @@ import java.util.List;
 
 import me.shouheng.samples.R;
 import me.shouheng.samples.common.BaseActivity;
+import me.shouheng.utils.app.AppUtils;
 import me.shouheng.utils.app.IntentUtils;
 import me.shouheng.utils.permission.Permission;
 import me.shouheng.utils.permission.PermissionUtils;
@@ -30,6 +32,13 @@ public class TestIntentActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_intent);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        TextView textView = findViewById(R.id.tv_notification_status);
+        textView.setText("Notification status : " + (AppUtils.areNotificationEnabled() ? "on" : "off"));
     }
 
     public void testLaunchApp(View v) {
@@ -99,6 +108,11 @@ public class TestIntentActivity extends BaseActivity {
                 .setMessage(sb.toString())
                 .setPositiveButton("OK", null)
                 .create().show();
+    }
+
+    public void openNotification(View v) {
+        Intent intent = IntentUtils.getNotificationSettingIntent(true);
+        startActivity(intent);
     }
 
     @Override

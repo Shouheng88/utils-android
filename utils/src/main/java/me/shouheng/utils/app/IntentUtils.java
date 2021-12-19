@@ -1,10 +1,12 @@
 package me.shouheng.utils.app;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import androidx.annotation.RequiresPermission;
@@ -15,6 +17,7 @@ import java.util.List;
 import me.shouheng.utils.UtilsApp;
 
 import static android.Manifest.permission.CALL_PHONE;
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 /**
  * @author Shouheng Wang (shouheng2020@gmail.com)
@@ -237,6 +240,26 @@ public final class IntentUtils {
         return getIntent(intent, isNewTask);
     }
 
+    /** 获取设置通知的意图 */
+    public static Intent getNotificationSettingIntent(final boolean isNewTask) {
+        Context context = UtilsApp.getApp();
+        return getNotificationSettingIntent(context.getPackageName(), isNewTask);
+    }
+
+    /** 获取设置通知的意图 */
+    public static Intent getNotificationSettingIntent(final String pkgName, final boolean isNewTask) {
+        Intent intent;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            intent = new Intent();
+            intent.setAction(Settings.ACTION_APP_NOTIFICATION_SETTINGS);
+            intent.putExtra(Settings.EXTRA_APP_PACKAGE, pkgName);
+        } else {
+            intent = getLaunchSettingIntent(pkgName);
+        }
+        intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+        return getIntent(intent, isNewTask);
+    }
+
     public static class AppInfo {
 
         public final String pkgName;
@@ -269,7 +292,7 @@ public final class IntentUtils {
 
     private static Intent getIntent(final Intent intent, final boolean isNewTask) {
         if (intent == null) return null;
-        return isNewTask ? intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) : intent;
+        return isNewTask ? intent.addFlags(FLAG_ACTIVITY_NEW_TASK) : intent;
     }
 
     private IntentUtils() {

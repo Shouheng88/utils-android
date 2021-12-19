@@ -1,60 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
+    tools:context="me.shouheng.samples.intent.TestIntentActivity"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="me.shouheng.samples.intent.TestIntentActivity">
+    android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:text="启动当前应用"
-        android:onClick="testLaunchApp"
-        style="@style/MenuButton"/>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:text="启动当前应用设置页面"
-        android:onClick="testLaunchSetting"
-        style="@style/MenuButton"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:text="启动当前应用"
+            android:onClick="testLaunchApp"
+            style="@style/MenuButton"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:text="分享文本信息"
-        android:onClick="testShareText"
-        style="@style/MenuButton"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:text="启动当前应用设置页面"
+            android:onClick="testLaunchSetting"
+            style="@style/MenuButton"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:text="拨打 10086"
-        android:onClick="testDial"
-        style="@style/MenuButton"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:text="分享文本信息"
+            android:onClick="testShareText"
+            style="@style/MenuButton"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:text="发送消息给 10086"
-        android:onClick="testSendSms"
-        style="@style/MenuButton"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:text="拨打 10086"
+            android:onClick="testDial"
+            style="@style/MenuButton"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:text="发送邮件"
-        android:onClick="testSendEmail"
-        style="@style/MenuButton"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:text="发送消息给 10086"
+            android:onClick="testSendSms"
+            style="@style/MenuButton"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:text="打开百度网页"
-        android:onClick="testOpenWeb"
-        style="@style/MenuButton"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:text="发送邮件"
+            android:onClick="testSendEmail"
+            style="@style/MenuButton"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:text="打开应用市场"
-        android:onClick="testOpenMarket"
-        style="@style/MenuButton"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:text="打开百度网页"
+            android:onClick="testOpenWeb"
+            style="@style/MenuButton"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:text="拍照"
-        android:onClick="testCapture"
-        style="@style/MenuButton"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:text="打开应用市场"
+            android:onClick="testOpenMarket"
+            style="@style/MenuButton"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:text="获取可以执行分享文本意图的应用的信息"
-        android:onClick="testGetAppInfo"
-        style="@style/MenuButton"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:text="拍照"
+            android:onClick="testCapture"
+            style="@style/MenuButton"/>
 
-</LinearLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:text="获取可以执行分享文本意图的应用的信息"
+            android:onClick="testGetAppInfo"
+            style="@style/MenuButton"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:text="Open notification settings"
+            android:onClick="openNotification"
+            style="@style/MenuButton"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_notification_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

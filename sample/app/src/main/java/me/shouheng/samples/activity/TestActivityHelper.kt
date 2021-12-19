@@ -6,8 +6,8 @@ import android.net.Uri
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import me.shouheng.samples.R
 import me.shouheng.utils.constant.ActivityDirection
 import me.shouheng.utils.ktx.attrColorOf

@@ -1,5 +1,7 @@
 package me.shouheng.utils.ui;
 
+import static android.view.animation.Animation.RELATIVE_TO_SELF;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
@@ -16,6 +18,7 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
 import android.view.animation.AnticipateOvershootInterpolator;
 import android.view.animation.CycleInterpolator;
 import android.view.animation.DecelerateInterpolator;
@@ -52,19 +55,17 @@ public final class AnimUtils {
      * @param toDegrees might be 360
      * @return the animation object.
      */
-    public static RotateAnimation rotate(
-            View view,
-            long duration,
-            int repeatCount,
-            float fromDegrees,
-            float toDegrees
-    ) {
+    public static RotateAnimation rotate(View view,
+                                         long duration,
+                                         int repeatCount,
+                                         float fromDegrees,
+                                         float toDegrees) {
         if (view == null) {
             return null;
         }
         RotateAnimation animRotate = new RotateAnimation(fromDegrees, toDegrees,
-                RotateAnimation.RELATIVE_TO_SELF, 0.5f,
-                RotateAnimation.RELATIVE_TO_SELF, 0.5f);
+                RELATIVE_TO_SELF, 0.5f,
+                RELATIVE_TO_SELF, 0.5f);
         animRotate.setDuration(duration);
         animRotate.setInterpolator(new LinearInterpolator());
         animRotate.setRepeatCount(repeatCount);
@@ -81,12 +82,10 @@ public final class AnimUtils {
      * @param listener        动画回调
      * @param isNeedAnimation 是否需要动画
      */
-    public static AlphaAnimation fadeIn(
-            View view,
-            int duration,
-            Animation.AnimationListener listener,
-            boolean isNeedAnimation
-    ) {
+    public static AlphaAnimation fadeIn(View view,
+                                        int duration,
+                                        Animation.AnimationListener listener,
+                                        boolean isNeedAnimation) {
         if (view == null) {
             return null;
         }
@@ -117,12 +116,10 @@ public final class AnimUtils {
      * @param listener        动画回调
      * @param isNeedAnimation 是否需要动画
      */
-    public static AlphaAnimation fadeOut(
-            final View view,
-            int duration,
-            final Animation.AnimationListener listener,
-            boolean isNeedAnimation
-    ) {
+    public static AlphaAnimation fadeOut(final View view,
+                                         int duration,
+                                         final Animation.AnimationListener listener,
+                                         boolean isNeedAnimation) {
         if (view == null) {
             return null;
         }
@@ -187,13 +184,11 @@ public final class AnimUtils {
      * @return                动画对应的 Animator 对象, 注意无动画时返回 null
      */
     @Nullable
-    public static TranslateAnimation slideIn(
-            final View view,
-            int duration,
-            final Animation.AnimationListener listener,
-            boolean isNeedAnimation,
-            @UIDirection int direction
-    ) {
+    public static TranslateAnimation slideIn(final View view,
+                                             int duration,
+                                             final Animation.AnimationListener listener,
+                                             boolean isNeedAnimation,
+                                             @UIDirection int direction) {
         if (view == null) {
             return null;
         }
@@ -202,26 +197,26 @@ public final class AnimUtils {
             switch (direction) {
                 case LEFT_TO_RIGHT:
                     translate = new TranslateAnimation(
-                            Animation.RELATIVE_TO_SELF, -1f, Animation.RELATIVE_TO_SELF, 0f,
-                            Animation.RELATIVE_TO_SELF, 0f, Animation.RELATIVE_TO_SELF, 0f
+                            RELATIVE_TO_SELF, -1f, RELATIVE_TO_SELF, 0f,
+                            RELATIVE_TO_SELF, 0f, RELATIVE_TO_SELF, 0f
                     );
                     break;
                 case TOP_TO_BOTTOM:
                     translate = new TranslateAnimation(
-                            Animation.RELATIVE_TO_SELF, 0f, Animation.RELATIVE_TO_SELF, 0f,
-                            Animation.RELATIVE_TO_SELF, -1f, Animation.RELATIVE_TO_SELF, 0f
+                            RELATIVE_TO_SELF, 0f, RELATIVE_TO_SELF, 0f,
+                            RELATIVE_TO_SELF, -1f, RELATIVE_TO_SELF, 0f
                     );
                     break;
                 case RIGHT_TO_LEFT:
                     translate = new TranslateAnimation(
-                            Animation.RELATIVE_TO_SELF, 1f, Animation.RELATIVE_TO_SELF, 0f,
-                            Animation.RELATIVE_TO_SELF, 0f, Animation.RELATIVE_TO_SELF, 0f
+                            RELATIVE_TO_SELF, 1f, RELATIVE_TO_SELF, 0f,
+                            RELATIVE_TO_SELF, 0f, RELATIVE_TO_SELF, 0f
                     );
                     break;
                 case BOTTOM_TO_TOP:
                     translate = new TranslateAnimation(
-                            Animation.RELATIVE_TO_SELF, 0f, Animation.RELATIVE_TO_SELF, 0f,
-                            Animation.RELATIVE_TO_SELF, 1f, Animation.RELATIVE_TO_SELF, 0f
+                            RELATIVE_TO_SELF, 0f, RELATIVE_TO_SELF, 0f,
+                            RELATIVE_TO_SELF, 1f, RELATIVE_TO_SELF, 0f
                     );
                     break;
             }
@@ -254,13 +249,11 @@ public final class AnimUtils {
      * @return                动画对应的 Animator 对象, 注意无动画时返回 null
      */
     @Nullable
-    public static TranslateAnimation slideOut(
-            final View view,
-            int duration,
-            final Animation.AnimationListener listener,
-            boolean isNeedAnimation,
-            @UIDirection int direction
-    ) {
+    public static TranslateAnimation slideOut(final View view,
+                                              int duration,
+                                              final Animation.AnimationListener listener,
+                                              boolean isNeedAnimation,
+                                              @UIDirection int direction) {
         if (view == null) {
             return null;
         }
@@ -269,26 +262,26 @@ public final class AnimUtils {
             switch (direction) {
                 case LEFT_TO_RIGHT:
                     translate = new TranslateAnimation(
-                            Animation.RELATIVE_TO_SELF, 0f, Animation.RELATIVE_TO_SELF, 1f,
-                            Animation.RELATIVE_TO_SELF, 0f, Animation.RELATIVE_TO_SELF, 0f
+                            RELATIVE_TO_SELF, 0f, RELATIVE_TO_SELF, 1f,
+                            RELATIVE_TO_SELF, 0f, RELATIVE_TO_SELF, 0f
                     );
                     break;
                 case TOP_TO_BOTTOM:
                     translate = new TranslateAnimation(
-                            Animation.RELATIVE_TO_SELF, 0f, Animation.RELATIVE_TO_SELF, 0f,
-                            Animation.RELATIVE_TO_SELF, 0f, Animation.RELATIVE_TO_SELF, 1f
+                            RELATIVE_TO_SELF, 0f, RELATIVE_TO_SELF, 0f,
+                            RELATIVE_TO_SELF, 0f, RELATIVE_TO_SELF, 1f
                     );
                     break;
                 case RIGHT_TO_LEFT:
                     translate = new TranslateAnimation(
-                            Animation.RELATIVE_TO_SELF, 0f, Animation.RELATIVE_TO_SELF, -1f,
-                            Animation.RELATIVE_TO_SELF, 0f, Animation.RELATIVE_TO_SELF, 0f
+                            RELATIVE_TO_SELF, 0f, RELATIVE_TO_SELF, -1f,
+                            RELATIVE_TO_SELF, 0f, RELATIVE_TO_SELF, 0f
                     );
                     break;
                 case BOTTOM_TO_TOP:
                     translate = new TranslateAnimation(
-                            Animation.RELATIVE_TO_SELF, 0f, Animation.RELATIVE_TO_SELF, 0f,
-                            Animation.RELATIVE_TO_SELF, 0f, Animation.RELATIVE_TO_SELF, -1f
+                            RELATIVE_TO_SELF, 0f, RELATIVE_TO_SELF, 0f,
+                            RELATIVE_TO_SELF, 0f, RELATIVE_TO_SELF, -1f
                     );
                     break;
             }
@@ -344,18 +337,65 @@ public final class AnimUtils {
         return animator;
     }
 
-    /**
-     * Make given view shake
-     *
-     * @param view   view to shake
-     */
+    /** Make given view shake */
     public static TranslateAnimation shake(View view) {
-        TranslateAnimation animation = new TranslateAnimation(0f, 15f, 0f, 0f);
-        animation.setDuration(700);
-        Interpolator interpolator = new CycleInterpolator(4f);
+        return shake(view, UIDirection.LEFT_TO_RIGHT);
+    }
+
+    /** Make given view shake */
+    public static TranslateAnimation shake(View view, @UIDirection int direction) {
+        return shake(view, 15f, 4, 700, direction);
+    }
+
+    public static TranslateAnimation shake(View view,
+                                           float delta,
+                                           float cycles,
+                                           int duration,
+                                           @UIDirection int direction) {
+        TranslateAnimation animation;
+        if (direction == LEFT_TO_RIGHT || direction == RIGHT_TO_LEFT) {
+            animation = new TranslateAnimation(0f, delta, 0f, 0f);
+        } else {
+            animation = new TranslateAnimation(0f, 0f, delta, 0f);
+        }
+        animation.setDuration(duration);
+        Interpolator interpolator = new CycleInterpolator(cycles);
         animation.setInterpolator(interpolator);
         view.startAnimation(animation);
         return animation;
+    }
+
+    /**
+     * Scale from one to another continuously.
+     *
+     * @see #scales(View, long, float, int, float...)
+     */
+    public static AnimationSet scales(View view, long duration, float ...scales) {
+        return scales(view, duration, .5f, RELATIVE_TO_SELF, scales);
+    }
+
+    /**
+     * Scale from one to another continuously.
+     *
+     * @param scales For example, to scale from 1f->0.5f->1.5f->0.5f->1f,
+     *               you should pass scales as 1f, 0.5f, 1.5f, 0.5f, 1f.
+     *               The first 1f here is the start scale point.
+     */
+    public static AnimationSet scales(View view, long duration, float pivot, int pivotType, float ...scales) {
+        AnimationSet animationSet = new AnimationSet(true);
+        ScaleAnimation animation;
+        float current = 1f;
+        for (int i=1, len=scales.length; i<len; i++) {
+            float from = i == 1 ? scales[0] : 1f;
+            float to = scales[i]/current;
+            current = scales[i];
+            animation = new ScaleAnimation(from, to, from, to, pivotType, pivot, pivotType, pivot);
+            animation.setDuration(duration);
+            animation.setStartOffset(duration * (i-1));
+            animationSet.addAnimation(animation);
+        }
+        view.startAnimation(animationSet);
+        return animationSet;
     }
 
     /**
@@ -385,6 +425,19 @@ public final class AnimUtils {
         });
         valueAnimator.start();
         return valueAnimator;
+    }
+
+    /** Change background color from 'beforeColor' to 'afterColor'. */
+    public static ValueAnimator changeBackgroundColor(final View view,
+                                                      @ColorInt int beforeColor,
+                                                      @ColorInt int afterColor,
+                                                      long duration) {
+        return changeColor(beforeColor, afterColor, duration, new OnColorChangeListener() {
+            @Override
+            public void onColorChanged(int color) {
+                view.setBackgroundColor(color);
+            }
+        });
     }
 
     /**
@@ -500,11 +553,9 @@ public final class AnimUtils {
      * @param animatorListenerAdapter the animator adapter
      * @return                        the animator
      */
-    public static ObjectAnimator popupOut(
-            final View view,
-            long duration,
-            final AnimatorListenerAdapter animatorListenerAdapter
-    ) {
+    public static ObjectAnimator popupOut(final View view,
+                                          long duration,
+                                          final AnimatorListenerAdapter animatorListenerAdapter) {
         ObjectAnimator popupOut = ObjectAnimator.ofPropertyValuesHolder(view,
                 PropertyValuesHolder.ofFloat("alpha", 1f, 0f),
                 PropertyValuesHolder.ofFloat("scaleX", 1f, 0f),
@@ -524,8 +575,11 @@ public final class AnimUtils {
         return popupOut;
     }
 
+    /** Listener for color change event. */
     public interface OnColorChangeListener {
-        void onColorChanged(int color);
+
+        /** On color changed callback, */
+        void onColorChanged(@ColorInt  int color);
     }
 
     @IntDef(value = {LEFT_TO_RIGHT, TOP_TO_BOTTOM, RIGHT_TO_LEFT, BOTTOM_TO_TOP})

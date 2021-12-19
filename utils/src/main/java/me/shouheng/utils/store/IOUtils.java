@@ -182,6 +182,34 @@ public final class IOUtils {
         }
     }
 
+    /** Write text to output stream. For AndroidR etc, might need to write to given output stream. */
+    public static boolean write2Stream(final OutputStream os, final String text) {
+        return write2Stream(os, text, null);
+    }
+
+    public static boolean write2Stream(final OutputStream os, final String text, final String charsetName) {
+        try {
+            return write2Stream(os, isSpace(charsetName) ? text.getBytes() : text.getBytes(charsetName));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean write2Stream(final OutputStream os, final byte[] bytes) {
+        BufferedOutputStream bos = null;
+        try {
+            bos = new BufferedOutputStream(os);
+            bos.write(bytes);
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            safeCloseAll(bos);
+        }
+    }
+
     /*------------------------------------- 读取方法 ----------------------------------------*/
 
     public static List<String> readFile2List(final String filePath) {
@@ -323,6 +351,24 @@ public final class IOUtils {
             return null;
         } finally {
             safeCloseAll(fc);
+        }
+    }
+
+    public static String is2String(final InputStream is) {
+        return is2String(is, null);
+    }
+
+    public static String is2String(final InputStream is, final String charsetName) {
+        byte[] bytes = is2Bytes(is);
+        if (isSpace(charsetName)) {
+            return new String(bytes);
+        } else {
+            try {
+                return new String(bytes, charsetName);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+                return "";
+            }
         }
     }
 
