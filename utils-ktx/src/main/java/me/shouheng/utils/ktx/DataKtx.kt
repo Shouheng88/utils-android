@@ -5,6 +5,8 @@ import androidx.annotation.FloatRange
 import androidx.annotation.IntRange
 import me.shouheng.utils.ui.ColorUtils
 
+// The kotlin extensions for basic data types.
+
 /** Get color with alpha from given color. */
 @ColorInt fun Int.withAlpha(@FloatRange(from = .0, to = 1.0) alpha: Float, override: Boolean = true): Int {
     return ColorUtils.setColorAlpha(this, alpha, override)
