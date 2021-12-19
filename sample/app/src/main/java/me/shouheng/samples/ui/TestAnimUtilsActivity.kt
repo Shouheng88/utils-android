@@ -8,6 +8,7 @@ import me.shouheng.samples.R
 import me.shouheng.utils.ktx.*
 import me.shouheng.utils.ui.AnimUtils
 import me.shouheng.utils.ui.ViewUtils
+import android.view.animation.Animation.RELATIVE_TO_SELF
 
 /**
  * Anim utils test
@@ -21,19 +22,24 @@ class TestAnimUtilsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_anim_utils)
         obj = findViewById(R.id.v)
-        findViewById<View>(R.id.btn_fade_in).setOnClickListener { obj?.fadeIn(2000, null, true) }
-        findViewById<View>(R.id.btn_fade_out).setOnClickListener { obj?.fadeOut(2000, null, true) }
-        findViewById<View>(R.id.btn_slide_in).setOnClickListener { obj?.slideIn(2000, null, true, AnimUtils.UIDirection.RIGHT_TO_LEFT) }
-        findViewById<View>(R.id.btn_slide_out).setOnClickListener { obj?.slideOut(2000, null, true, AnimUtils.UIDirection.LEFT_TO_RIGHT) }
-        findViewById<View>(R.id.btn_shinning).setOnClickListener { obj?.shining(2888, 6, 0f, 0.66f, 1.0f, 0f) }
+        findViewById<View>(R.id.btn_fade_in).onDebouncedClick   { obj?.fadeIn(2000, null, true) }
+        findViewById<View>(R.id.btn_fade_out).onDebouncedClick  { obj?.fadeOut(2000, null, true) }
+        findViewById<View>(R.id.btn_slide_in).onDebouncedClick  { obj?.slideIn(2000, null, true, AnimUtils.UIDirection.RIGHT_TO_LEFT) }
+        findViewById<View>(R.id.btn_slide_out).onDebouncedClick { obj?.slideOut(2000, null, true, AnimUtils.UIDirection.LEFT_TO_RIGHT) }
+        findViewById<View>(R.id.btn_shinning).onDebouncedClick  { obj?.shining(2888, 6, 0f, 0.66f, 1.0f, 0f) }
     }
 
     fun shake(view: View?) {
         obj?.shake()
     }
 
+    fun shakeUpDown(view: View?) {
+        obj?.shake(AnimUtils.UIDirection.BOTTOM_TO_TOP)
+    }
+
     fun changeColor(view: View?) {
-        changeColor(Color.RED, Color.BLUE, 3000) { obj!!.setBackgroundColor(it) }
+        obj?.changeBackgroundColor(Color.RED, Color.BLUE, 3000)
+//        changeColor(Color.RED, Color.BLUE, 3000) { obj!!.setBackgroundColor(it) }
 //        AnimUtils.changeColor(Color.RED, Color.BLUE, 3000) {  }
     }
 
@@ -63,5 +69,13 @@ class TestAnimUtilsActivity : AppCompatActivity() {
 
     fun rotate(view: View) {
         obj?.rotate(2_000)
+    }
+
+    fun scale(view: View) {
+        obj?.scales(500L, 1f, .5f, 1f)
+    }
+
+    fun scales(view: View) {
+        obj?.scales(500L, .5f, RELATIVE_TO_SELF, 1f, .5f, 1.5f, 0.5f, 1f)
     }
 }

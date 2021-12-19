@@ -22,8 +22,6 @@ import me.shouheng.utils.store.IOUtils
 import me.shouheng.utils.store.PathUtils
 import me.shouheng.utils.store.SPUtils
 import java.io.File
-import java.io.IOException
-import java.io.OutputStream
 import java.util.*
 
 /** To make a sample for storage usage on Android 11. */
@@ -120,11 +118,11 @@ class StorageActivity : AppCompatActivity() {
             val root = DocumentFile.fromTreeUri(this, uri)
             var doc = createOrExistsFile(root, "test_a", "application/txt", "${System.currentTimeMillis()}.txt")
             var ous = this.contentResolver.openOutputStream(doc!!.uri)
-            var ret = writeToOutputStream(ous, "sample a")
+            var ret = IOUtils.write2Stream(ous, "sample a")
             toast("Result: $ret")
             doc = createOrExistsFile(root, "test_a/test_a_b", "application/txt", "${System.currentTimeMillis()}.txt")
             ous = this.contentResolver.openOutputStream(doc!!.uri)
-            ret = writeToOutputStream(ous, "sample a b")
+            ret = IOUtils.write2Stream(ous, "sample a b")
             toast("Result: $ret")
         } catch (e: Exception) {
             e.printStackTrace()
@@ -140,12 +138,12 @@ class StorageActivity : AppCompatActivity() {
             val name = "sample.txt"
             val doc = createOrExistsFile(root, "test_a", "application/txt", name)
             val ous = this.contentResolver.openOutputStream(doc!!.uri)
-            val ret = writeToOutputStream(ous, "sample a")
+            val ret = IOUtils.write2Stream(ous, "sample a")
             toast("Write succeed: $ret")
             val file = getFile(root, "test_a", name)
             val ins = contentResolver.openInputStream(file!!.uri)
-            val bytes = IOUtils.is2Bytes(ins)
-            toast("Read: ${String(bytes)}")
+            val text = IOUtils.is2String(ins)
+            toast("Read: $text")
         } catch (e: Exception) {
             e.printStackTrace()
             toast("failed!")
@@ -224,18 +222,6 @@ class StorageActivity : AppCompatActivity() {
         val root = PathUtils.getExternalStoragePath()
         val files = File("$root${File.separator}$path").list()
         toast(Arrays.toString(files))
-    }
-
-    private fun writeToOutputStream(ous: OutputStream?, text: String): Boolean {
-        return try {
-            ous?.write(text.toByteArray())
-            true
-        } catch (e: IOException) {
-            e.printStackTrace()
-            false
-        } finally {
-            IOUtils.safeCloseAll(ous)
-        }
     }
 
     private fun createOrExistsFile(

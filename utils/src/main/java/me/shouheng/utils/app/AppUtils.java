@@ -12,6 +12,7 @@ import android.content.pm.Signature;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import androidx.annotation.RequiresApi;
+import androidx.core.app.NotificationManagerCompat;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -154,6 +155,12 @@ public final class AppUtils {
             e.printStackTrace();
             return false;
         }
+    }
+
+    /** 通知是否可用 */
+    public static boolean areNotificationEnabled() {
+        NotificationManagerCompat manager = NotificationManagerCompat.from(UtilsApp.getApp());
+        return manager.areNotificationsEnabled();
     }
 
     /**

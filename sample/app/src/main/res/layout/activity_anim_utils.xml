@@ -23,6 +23,20 @@
         </FrameLayout>
 
         <Button
+            android:text="Scale"
+            android:onClick="scale"
+            android:textAllCaps="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:text="Scales"
+            android:onClick="scales"
+            android:textAllCaps="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
             android:id="@+id/btn_fade_in"
             android:text="Fade in"
             android:textAllCaps="false"
@@ -60,6 +74,13 @@
         <Button
             android:text="Shake"
             android:onClick="shake"
+            android:textAllCaps="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:text="Shake (up-down)"
+            android:onClick="shakeUpDown"
             android:textAllCaps="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
