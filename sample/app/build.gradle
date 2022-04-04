@@ -48,6 +48,7 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.0'
     implementation 'androidx.appcompat:appcompat:1.0.0'
     // utils
+    implementation 'com.tencent:mmkv:1.2.13'
     implementation project(path: ':utils')
     implementation project(path: ':utils-ktx')
 //    implementation 'com.github.Shouheng88:utils-core:2.4.0'

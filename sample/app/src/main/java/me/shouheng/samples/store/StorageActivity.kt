@@ -20,7 +20,7 @@ import me.shouheng.utils.ktx.onDebouncedClick
 import me.shouheng.utils.ktx.toast
 import me.shouheng.utils.store.IOUtils
 import me.shouheng.utils.store.PathUtils
-import me.shouheng.utils.store.SPUtils
+import me.shouheng.utils.store.KV
 import java.io.File
 import java.util.*
 
@@ -100,7 +100,7 @@ class StorageActivity : AppCompatActivity() {
                 if (resultCode != Activity.RESULT_OK) return
                 try {
                     val uri: Uri = intent?.data ?: return
-                    SPUtils.get().put("__external_storage_path", uri.toString())
+                    KV.get().put("__external_storage_path", uri.toString())
                     contentResolver.takePersistableUriPermission(uri,
                         Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
                     )
@@ -112,7 +112,7 @@ class StorageActivity : AppCompatActivity() {
     }
 
     private fun writeToPath() {
-        val uriString = SPUtils.get().getString("__external_storage_path")
+        val uriString = KV.get().getString("__external_storage_path")
         try {
             val uri = Uri.parse(uriString)
             val root = DocumentFile.fromTreeUri(this, uri)
@@ -131,7 +131,7 @@ class StorageActivity : AppCompatActivity() {
     }
 
     private fun readPath() {
-        val uriString = SPUtils.get().getString("__external_storage_path")
+        val uriString = KV.get().getString("__external_storage_path")
         try {
             val uri = Uri.parse(uriString)
             val root = DocumentFile.fromTreeUri(this, uri)
@@ -151,7 +151,7 @@ class StorageActivity : AppCompatActivity() {
     }
 
     private fun delete() {
-        val uriString = SPUtils.get().getString("__external_storage_path")
+        val uriString = KV.get().getString("__external_storage_path")
         try {
             val uri = Uri.parse(uriString)
             val root = DocumentFile.fromTreeUri(this, uri)
@@ -170,7 +170,7 @@ class StorageActivity : AppCompatActivity() {
     }
 
     private fun renameDir() {
-        val uriString = SPUtils.get().getString("__external_storage_path")
+        val uriString = KV.get().getString("__external_storage_path")
         try {
             val uri = Uri.parse(uriString)
             val root = DocumentFile.fromTreeUri(this, uri)
@@ -188,7 +188,7 @@ class StorageActivity : AppCompatActivity() {
     }
 
     private fun renameFile() {
-        val uriString = SPUtils.get().getString("__external_storage_path")
+        val uriString = KV.get().getString("__external_storage_path")
         try {
             val uri = Uri.parse(uriString)
             val root = DocumentFile.fromTreeUri(this, uri)
@@ -207,7 +207,7 @@ class StorageActivity : AppCompatActivity() {
     }
 
     private fun writeByFile() {
-        val uriString = SPUtils.get().getString("__external_storage_path")
+        val uriString = KV.get().getString("__external_storage_path")
         val left = uriString.removePrefix("content://com.android.externalstorage.documents/tree/primary%3A")
         val path = EncodeUtils.urlDecode(left)
         val root = PathUtils.getExternalStoragePath()
@@ -216,7 +216,7 @@ class StorageActivity : AppCompatActivity() {
     }
 
     private fun listAll() {
-        val uriString = SPUtils.get().getString("__external_storage_path")
+        val uriString = KV.get().getString("__external_storage_path")
         val left = uriString.removePrefix("content://com.android.externalstorage.documents/tree/primary%3A")
         val path = EncodeUtils.urlDecode(left)
         val root = PathUtils.getExternalStoragePath()
@@ -270,7 +270,7 @@ class StorageActivity : AppCompatActivity() {
 
     /** Is external storage write permission granted. */
     private fun isExternalStoragePermissionGranted(): Boolean {
-        val path = SPUtils.get().getString("__external_storage_path")
+        val path = KV.get().getString("__external_storage_path")
         if (TextUtils.isEmpty(path)) return false
         val uri1 = Uri.parse(path)
         val documentFile = DocumentFile.fromTreeUri(this, uri1) ?: return false

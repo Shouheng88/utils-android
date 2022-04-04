@@ -2,7 +2,11 @@ package me.shouheng.samples;
 
 import android.app.Application;
 
+import com.tencent.mmkv.MMKV;
+
 import me.shouheng.utils.UtilsApp;
+import me.shouheng.utils.stability.L;
+import me.shouheng.utils.store.KV;
 
 public class SampleApp extends Application {
 
@@ -12,5 +16,8 @@ public class SampleApp extends Application {
 
         // initialize the utils library
         UtilsApp.init(this);
+        String rootDir = MMKV.initialize(this);
+        L.d("mmkv root: " + rootDir);
+        KV.DEFAULT_STORAGE_TYPE = KV.Storage.MMKV;
     }
 }
