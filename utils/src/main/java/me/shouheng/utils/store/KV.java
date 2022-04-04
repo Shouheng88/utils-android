@@ -26,6 +26,8 @@ import me.shouheng.utils.data.StringUtils;
  * An Android Key-value typed data storage utils. This utils allow you to switch
  * inner storage between {@link SharedPreferences} and {@link MMKV}.
  *
+ * To learn how to use MMKV, see <a href="https://github.com/Tencent/MMKV">MMKV homepage</a>.
+ *
  * @author Shouheng Wang 2019-05-08 21:30
  */
 public final class KV {
