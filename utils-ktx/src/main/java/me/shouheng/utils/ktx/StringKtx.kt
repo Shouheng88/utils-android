@@ -1,6 +1,8 @@
 package me.shouheng.utils.ktx
 
+import android.graphics.Color
 import android.text.Spanned
+import androidx.annotation.ColorInt
 import me.shouheng.utils.data.*
 import me.shouheng.utils.data.function.StringFunction
 import java.lang.NumberFormatException
@@ -57,13 +59,16 @@ fun String.partial(start: Int, end: Int): String {
 /** Transform string to given type */
 fun String.toDate(): Date = TimeUtils.toDate(this)
 
-fun toInt(str: String, def: Int = 0): Int = try { str.toInt() } catch (e: NumberFormatException) { def }
+fun String.safeToInt(str: String, def: Int = 0): Int = try { str.toInt() } catch (e: NumberFormatException) { def }
 
-fun toLong(str: String, def: Long = 0): Long = try { str.toLong() } catch (e: NumberFormatException) { def }
+fun String.safeToLong(str: String, def: Long = 0): Long = try { str.toLong() } catch (e: NumberFormatException) { def }
 
-fun toFloat(str: String, def: Float = 0f): Float = try { str.toFloat() } catch (e: NumberFormatException) { def }
+fun String.safeToFloat(str: String, def: Float = 0f): Float = try { str.toFloat() } catch (e: NumberFormatException) { def }
 
-fun toDouble(str: String, def: Double = .0): Double = try { str.toDouble() } catch (e: NumberFormatException) { def }
+fun String.safeToDouble(str: String, def: Double = .0): Double = try { str.toDouble() } catch (e: NumberFormatException) { def }
+
+/** Transform string to color. */
+@ColorInt fun String.toColor(): Int = Color.parseColor(this)
 
 /** Join string by current string as python, for example, ','.join([1,2,3]) is '1,2,3'. */
 fun <E> String.join(c: Collection<E>): String = StringUtils.connect(c, this)
