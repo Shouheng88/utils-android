@@ -8,7 +8,6 @@ abstract class PreferenceNoDoubleClickListener : Preference.OnPreferenceClickLis
 
     private var lastClickTime: Long = 0
 
-
     override fun onPreferenceClick(preference: Preference): Boolean {
         val currentTime = System.currentTimeMillis()
         if (currentTime - lastClickTime > MIN_CLICK_DELAY_TIME) {
@@ -18,7 +17,7 @@ abstract class PreferenceNoDoubleClickListener : Preference.OnPreferenceClickLis
         return true
     }
 
-        protected abstract fun onNoDoubleClick(preference: Preference): Boolean
+    protected abstract fun onNoDoubleClick(preference: Preference): Boolean
 
     companion object {
         var MIN_CLICK_DELAY_TIME                       = 500L

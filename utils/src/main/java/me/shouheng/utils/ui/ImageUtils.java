@@ -162,8 +162,7 @@ public final class ImageUtils {
      * @param radius radius of every corner
      * @return       the drawable
      */
-    public static Drawable getDrawable(@ColorInt int color,
-                                       float radius) {
+    public static Drawable getDrawable(@ColorInt int color, float radius) {
         GradientDrawable drawable = new GradientDrawable();
         drawable.setColor(color);
         drawable.setCornerRadius(radius);
@@ -224,6 +223,20 @@ public final class ImageUtils {
                 bottomLeftRadius, bottomLeftRadius
         });
         return drawable;
+    }
+
+    /** Get a gradient drawable. */
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    public static Drawable getDrawable(int shape,
+                                       @ColorInt int[] colors,
+                                       int gradientType,
+                                       GradientDrawable.Orientation orientation) {
+        GradientDrawable gradientDrawable = new GradientDrawable();
+        gradientDrawable.setShape(shape);
+        gradientDrawable.setColors(colors);
+        gradientDrawable.setGradientType(gradientType);
+        gradientDrawable.setOrientation(orientation);
+        return gradientDrawable;
     }
 
     /*------------------------------------- 获取 ----------------------------------------*/

@@ -3,14 +3,15 @@ package me.shouheng.samples.ui
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.Gravity
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import me.shouheng.samples.R
 import me.shouheng.utils.app.ResUtils
 import me.shouheng.utils.ktx.*
@@ -51,7 +52,24 @@ class TestImageUtilsActivity : AppCompatActivity() {
         addImage(ll, src.compressBySampleSize(2), "Compress By Sample Size")
         addImage(ll, ResUtils.getDrawable(R.drawable.ic_widgets_black_24dp).tint(Color.BLUE), "Tint Drawable")
         addImage(ll, ImageUtils.getDrawable(Color.BLUE, ViewUtils.dp2px(120f).toFloat()), "Generated Drawable By Code")
-        addImage(ll, ImageUtils.getDrawable(Color.BLUE, ViewUtils.dp2px(120f).toFloat(), ViewUtils.dp2px(10f), Color.YELLOW), "Generated Drawable By Code With Stroke")
+        addImage(ll, ImageUtils.getDrawable(Color.BLUE
+            , ViewUtils.dp2px(120f).toFloat()
+            , ViewUtils.dp2px(10f)
+            , Color.YELLOW)
+            , "Generated Drawable By Code With Stroke")
+        addImage(ll, ImageUtils.getDrawable(GradientDrawable.RECTANGLE
+            , intArrayOf(Color.RED, Color.GREEN, Color.BLUE)
+            , GradientDrawable.LINEAR_GRADIENT
+            , GradientDrawable.Orientation.BOTTOM_TOP)
+            , "Gradient drawable")
+        addImage(ll, GradientDrawableBuilder()
+            .withShape(GradientDrawable.RECTANGLE)
+            .withColors(intArrayOf(Color.RED, Color.GREEN, Color.BLUE))
+            .withStroke(10f.dp(), Color.BLACK)
+            .withRadius(16f.dp().toFloat(), 0f, 16f.dp().toFloat(), 0f)
+            .withGradientType(GradientDrawable.LINEAR_GRADIENT)
+            .withOrientation(GradientDrawable.Orientation.TL_BR)
+            .build(), "Builder")
     }
 
     private fun addImage(container: LinearLayout, bitmap: Bitmap, title: String) {

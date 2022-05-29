@@ -1,11 +1,10 @@
 package me.shouheng.samples.ui
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import kotlinx.android.synthetic.main.activity_test_view_utils.*
+import androidx.appcompat.app.AppCompatActivity
 import me.shouheng.samples.R
 import me.shouheng.utils.ktx.colorOf
 import me.shouheng.utils.ktx.pressScale
@@ -13,8 +12,10 @@ import me.shouheng.utils.ui.ColorUtils
 import me.shouheng.utils.ui.ViewUtils
 
 class TestViewUtilsActivity : AppCompatActivity() {
+
     private var isAlpha = false
     private var ivCapture: ImageView? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test_view_utils)
@@ -23,7 +24,7 @@ class TestViewUtilsActivity : AppCompatActivity() {
         ViewUtils.forceGetViewSize(tvMeasure) { view -> tvMeasure.text = "W:" + view.width + ", H:" + view.height }
         val tv = findViewById<TextView>(R.id.tv)
         tv.text = "颜色转换：#458CF7 -> " + ColorUtils.colorToString(colorOf(R.color.colorPrimary))
-        btn_show_soft.pressScale(alphaFactor = .55f)
+        findViewById<View>(R.id.btn_show_soft).pressScale(alphaFactor = .55f)
     }
 
     fun showSortInput(view: View?) {

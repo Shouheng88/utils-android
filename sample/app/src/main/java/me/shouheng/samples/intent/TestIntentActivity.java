@@ -5,12 +5,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.core.content.FileProvider;
-import androidx.appcompat.app.AlertDialog;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.FileProvider;
 
 import java.io.File;
 import java.util.List;
@@ -22,6 +23,7 @@ import me.shouheng.utils.app.IntentUtils;
 import me.shouheng.utils.permission.Permission;
 import me.shouheng.utils.permission.PermissionUtils;
 import me.shouheng.utils.permission.callback.OnGetPermissionCallback;
+import me.shouheng.utils.stability.L;
 import me.shouheng.utils.store.PathUtils;
 
 public class TestIntentActivity extends BaseActivity {
@@ -32,6 +34,7 @@ public class TestIntentActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_intent);
+        L.d("TestIntentActivity#onCreate");
     }
 
     @Override
@@ -39,6 +42,18 @@ public class TestIntentActivity extends BaseActivity {
         super.onResume();
         TextView textView = findViewById(R.id.tv_notification_status);
         textView.setText("Notification status : " + (AppUtils.areNotificationEnabled() ? "on" : "off"));
+        L.d("TestIntentActivity#onResume");
+        new AlertDialog.Builder(this)
+                .setTitle("TEST DIALOG")
+                .setMessage("TEST MESSSGAGE")
+                .create().show();
+//        new Handler().postDelayed(() -> launchIntentWithMode(null), 2000);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        L.d("TestIntentActivity#onNewIntent");
     }
 
     public void testLaunchApp(View v) {
@@ -112,6 +127,15 @@ public class TestIntentActivity extends BaseActivity {
 
     public void openNotification(View v) {
         Intent intent = IntentUtils.getNotificationSettingIntent(true);
+        startActivity(intent);
+    }
+
+    /**
+     * 这种方式启动 activity 的时候会重建当前 activity，走 onCreate - onResume 等流程而不走 onNewIntent 方法
+     * */
+    public void launchIntentWithMode(View v) {
+        Intent intent = new Intent(this, TestIntentActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 

@@ -1,6 +1,5 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 //apply plugin: 'com.novoda.bintray-release'
 apply plugin: 'maven-publish'
@@ -37,6 +36,7 @@ dependencies {
     implementation project(":utils")
     compileOnly "androidx.preference:preference-ktx:1.2.0"
 //    implementation "com.github.Shouheng88:utils-core:${releaseVersion}"
+    compileOnly "androidx.localbroadcastmanager:localbroadcastmanager:1.0.0"
 }
 
 //publish {

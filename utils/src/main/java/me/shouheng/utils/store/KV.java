@@ -39,9 +39,14 @@ public final class KV {
         int MMKV                    = 2;
     }
 
-    public static int DEFAULT_STORAGE_TYPE = Storage.SHARED_PREFERENCES;
-    private static final Map<String, KV> SP_UTILS_MAP = new ConcurrentHashMap<>();
+    private static int DEFAULT_STORAGE_TYPE = Storage.SHARED_PREFERENCES;
+    private static final Map<String, KV> KV_MAP = new ConcurrentHashMap<>();
     private SharedPreferences sp;
+
+    /** Set default storage type. */
+    public static void setDefaultStorageType(@Storage int storage) {
+        DEFAULT_STORAGE_TYPE = storage;
+    }
 
     /*-------------------------------------get instance----------------------------------------*/
 
@@ -69,16 +74,18 @@ public final class KV {
         return get(spName, Context.MODE_PRIVATE, storage);
     }
 
+    /** Get an {@link KV} instance from {@link #KV_MAP} by spName and storage type. */
     public static KV get(String spName, final int mode, final @Storage int storage) {
         if (StringUtils.isSpace(spName)) {
             spName = getDefaultSharedPreferencesName();
         }
-        KV spUtils = SP_UTILS_MAP.get(spName);
-        if (spUtils == null) {
-            spUtils = new KV(spName, mode, storage);
-            SP_UTILS_MAP.put(spName, spUtils);
+        String key = getMapKeyName(spName, storage);
+        KV kv = KV_MAP.get(key);
+        if (kv == null) {
+            kv = new KV(spName, mode, storage);
+            KV_MAP.put(key, kv);
         }
-        return spUtils;
+        return kv;
     }
 
     /*-------------------------------------instance methods----------------------------------------*/
@@ -261,4 +268,8 @@ public final class KV {
         }
     }
 
+    /** Get key for {@link #KV_MAP}. */
+    private static String getMapKeyName(String spName, final @Storage int storage) {
+        return spName + "_" + storage;
+    }
 }
