@@ -6,48 +6,86 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.preference.PreferenceManager;
+import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 
+import com.tencent.mmkv.MMKV;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import me.shouheng.utils.Platform;
 import me.shouheng.utils.UtilsApp;
 import me.shouheng.utils.data.StringUtils;
 
 /**
- * 封装基于 {@link android.content.SharedPreferences} 的持久化工具
+ * An Android Key-value typed data storage utils. This utils allow you to switch
+ * inner storage between {@link SharedPreferences} and {@link MMKV}.
+ *
+ * To learn how to use MMKV, see <a href="https://github.com/Tencent/MMKV">MMKV homepage</a>.
  *
  * @author Shouheng Wang 2019-05-08 21:30
  */
-public final class SPUtils {
+public final class KV {
 
-    private static final Map<String, SPUtils> SP_UTILS_MAP = new ConcurrentHashMap<>();
+    @IntDef({Storage.SHARED_PREFERENCES, Storage.MMKV})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface Storage {
+        int SHARED_PREFERENCES      = 1;
+        int MMKV                    = 2;
+    }
+
+    private static int DEFAULT_STORAGE_TYPE = Storage.SHARED_PREFERENCES;
+    private static final Map<String, KV> KV_MAP = new ConcurrentHashMap<>();
     private SharedPreferences sp;
+
+    /** Set default storage type. */
+    public static void setDefaultStorageType(@Storage int storage) {
+        DEFAULT_STORAGE_TYPE = storage;
+    }
 
     /*-------------------------------------get instance----------------------------------------*/
 
-    public static SPUtils get() {
-        return get("", Context.MODE_PRIVATE);
+    public static KV get() {
+        return get("", Context.MODE_PRIVATE, DEFAULT_STORAGE_TYPE);
     }
 
-    public static SPUtils get(final int mode) {
-        return get("", mode);
+    public static KV get(final int mode) {
+        return get("", mode, DEFAULT_STORAGE_TYPE);
     }
 
-    public static SPUtils get(String spName) {
-        return get(spName, Context.MODE_PRIVATE);
+    public static KV get(String spName) {
+        return get(spName, Context.MODE_PRIVATE, DEFAULT_STORAGE_TYPE);
     }
 
-    public static SPUtils get(String spName, final int mode) {
-        if (StringUtils.isSpace(spName)) spName = getDefaultSharedPreferencesName();
-        SPUtils spUtils = SP_UTILS_MAP.get(spName);
-        if (spUtils == null) {
-            spUtils = new SPUtils(spName, mode);
-            SP_UTILS_MAP.put(spName, spUtils);
+    public static KV of(final @Storage int storage) {
+        return get("", Context.MODE_PRIVATE, storage);
+    }
+
+    public static KV of(final int mode, final @Storage int storage) {
+        return get("", mode, storage);
+    }
+
+    public static KV of(String spName, final @Storage int storage) {
+        return get(spName, Context.MODE_PRIVATE, storage);
+    }
+
+    /** Get an {@link KV} instance from {@link #KV_MAP} by spName and storage type. */
+    public static KV get(String spName, final int mode, final @Storage int storage) {
+        if (StringUtils.isSpace(spName)) {
+            spName = getDefaultSharedPreferencesName();
         }
-        return spUtils;
+        String key = getMapKeyName(spName, storage);
+        KV kv = KV_MAP.get(key);
+        if (kv == null) {
+            kv = new KV(spName, mode, storage);
+            KV_MAP.put(key, kv);
+        }
+        return kv;
     }
 
     /*-------------------------------------instance methods----------------------------------------*/
@@ -214,12 +252,12 @@ public final class SPUtils {
 
     /*-------------------------------------inner methods----------------------------------------*/
 
-    private SPUtils(final String spName) {
-        sp = UtilsApp.getApp().getSharedPreferences(spName, Context.MODE_PRIVATE);
-    }
-
-    private SPUtils(final String spName, final int mode) {
-        sp = UtilsApp.getApp().getSharedPreferences(spName, mode);
+    private KV(final String spName, final int mode, final @Storage int storage) {
+        if (Platform.DEPENDENCY_MMKV_ANALYTICS && storage == Storage.MMKV) {
+            sp = MMKV.mmkvWithID(spName, mode);
+        } else {
+            sp = UtilsApp.getApp().getSharedPreferences(spName, mode);
+        }
     }
 
     private static String getDefaultSharedPreferencesName() {
@@ -230,4 +268,8 @@ public final class SPUtils {
         }
     }
 
+    /** Get key for {@link #KV_MAP}. */
+    private static String getMapKeyName(String spName, final @Storage int storage) {
+        return spName + "_" + storage;
+    }
 }
