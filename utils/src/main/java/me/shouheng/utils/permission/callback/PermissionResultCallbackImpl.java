@@ -17,9 +17,9 @@ import me.shouheng.utils.ui.ToastUtils;
  */
 public class PermissionResultCallbackImpl implements PermissionResultCallback {
 
-    private Context context;
+    private final Context context;
 
-    private OnGetPermissionCallback onGetPermissionCallback;
+    private final OnGetPermissionCallback onGetPermissionCallback;
 
     public PermissionResultCallbackImpl(Context context, OnGetPermissionCallback onGetPermissionCallback) {
         this.context = context;
@@ -34,7 +34,7 @@ public class PermissionResultCallbackImpl implements PermissionResultCallback {
     }
 
     @Override
-    public void showPermissionsRationale(String... permissions) {
+    public void showPermissionsRationale(String ...permissions) {
         String names = PermissionHelper.names(permissions);
         String message = context.getResources().getQuantityString(
                 R.plurals.permission_set_in_settings_message, permissions.length, names);
