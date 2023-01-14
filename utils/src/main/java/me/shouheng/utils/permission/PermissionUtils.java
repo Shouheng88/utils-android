@@ -93,7 +93,9 @@ public final class PermissionUtils {
      * @param <T> 需要同时实现 {@link PermissionResultResolver}
      */
     public static <T extends Activity & PermissionResultResolver> void checkStoragePermission(
-            @NonNull T activity, OnGetPermissionCallback callback) {
+            @NonNull T activity,
+            OnGetPermissionCallback callback
+    ) {
         checkPermissions(activity, callback, Permission.STORAGE);
     }
 
@@ -105,7 +107,9 @@ public final class PermissionUtils {
      * @param <T> 需要同时实现 {@link PermissionResultResolver}
      */
     public static <T extends Activity & PermissionResultResolver> void checkPhonePermission(
-            @NonNull T activity, OnGetPermissionCallback callback) {
+            @NonNull T activity,
+            OnGetPermissionCallback callback
+    ) {
         checkPermissions(activity, callback, Permission.PHONE_STATE);
     }
 
@@ -117,7 +121,9 @@ public final class PermissionUtils {
      * @param <T> 需要同时实现 {@link PermissionResultResolver}
      */
     public static <T extends Activity & PermissionResultResolver> void checkLocationPermission(
-            @NonNull T activity, OnGetPermissionCallback callback) {
+            @NonNull T activity,
+            OnGetPermissionCallback callback
+    ) {
         checkPermissions(activity, callback, Permission.LOCATION);
     }
 
@@ -129,7 +135,9 @@ public final class PermissionUtils {
      * @param <T> 需要同时实现 {@link PermissionResultResolver}
      */
     public static <T extends Activity & PermissionResultResolver> void checkRecordPermission(
-            @NonNull T activity, OnGetPermissionCallback callback) {
+            @NonNull T activity,
+            OnGetPermissionCallback callback
+    ) {
         checkPermissions(activity, callback, Permission.MICROPHONE);
     }
 
@@ -141,7 +149,9 @@ public final class PermissionUtils {
      * @param <T> 需要同时实现 {@link PermissionResultResolver}
      */
     public static <T extends Activity & PermissionResultResolver> void checkSmsPermission(
-            @NonNull T activity, OnGetPermissionCallback callback) {
+            @NonNull T activity,
+            OnGetPermissionCallback callback
+    ) {
         checkPermissions(activity, callback, Permission.SMS);
     }
 
@@ -154,7 +164,9 @@ public final class PermissionUtils {
      */
     @TargetApi(Build.VERSION_CODES.KITKAT_WATCH)
     public static <T extends Activity & PermissionResultResolver> void checkSensorsPermission(
-            @NonNull T activity, OnGetPermissionCallback callback) {
+            @NonNull T activity,
+            OnGetPermissionCallback callback
+    ) {
         checkPermissions(activity, callback, Permission.SENSORS);
     }
 
@@ -166,7 +178,9 @@ public final class PermissionUtils {
      * @param <T> 需要同时实现 {@link PermissionResultResolver}
      */
     public static <T extends Activity & PermissionResultResolver> void checkContactsPermission(
-            @NonNull T activity, OnGetPermissionCallback callback) {
+            @NonNull T activity,
+            OnGetPermissionCallback callback
+    ) {
         checkPermissions(activity, callback, Permission.CONTACTS);
     }
 
@@ -178,7 +192,9 @@ public final class PermissionUtils {
      * @param <T> 需要同时实现 {@link PermissionResultResolver}
      */
     public static <T extends Activity & PermissionResultResolver> void checkCameraPermission(
-            @NonNull T activity, OnGetPermissionCallback callback) {
+            @NonNull T activity,
+            OnGetPermissionCallback callback
+    ) {
         checkPermissions(activity, callback, Permission.CAMERA);
     }
 
@@ -190,7 +206,9 @@ public final class PermissionUtils {
      * @param <T> 需要同时实现 {@link PermissionResultResolver}
      */
     public static <T extends Activity & PermissionResultResolver> void checkCalendarPermission(
-            @NonNull T activity, OnGetPermissionCallback callback) {
+            @NonNull T activity,
+            OnGetPermissionCallback callback
+    ) {
         checkPermissions(activity, callback, Permission.CALENDAR);
     }
 
@@ -203,7 +221,10 @@ public final class PermissionUtils {
      * @param <T> 需要同时实现 {@link PermissionResultResolver}
      */
     public static <T extends Activity & PermissionResultResolver> void checkPermissions(
-            @NonNull T activity, OnGetPermissionCallback callback, @Permission int...permissions) {
+            @NonNull T activity,
+            OnGetPermissionCallback callback,
+            @Permission int ...permissions
+    ) {
         activity.setOnGetPermissionCallback(callback);
         // map permission code
         int length = permissions.length;
@@ -238,7 +259,7 @@ public final class PermissionUtils {
      * @param permissions 权限列表
      * @return            全部具备
      */
-    public static boolean hasPermissions(@Permission int...permissions) {
+    public static boolean hasPermissions(@Permission int ...permissions) {
         return hasPermissions(UtilsApp.getApp(), permissions);
     }
 
@@ -249,7 +270,7 @@ public final class PermissionUtils {
      * @param permissions 权限列表
      * @return            全部具备
      */
-    public static boolean hasPermissions(Context context, @Permission int...permissions) {
+    public static boolean hasPermissions(Context context, @Permission int ...permissions) {
         // map permission code
         int length = permissions.length;
         String[] standardPermissions = new String[length];

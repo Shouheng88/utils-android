@@ -28,13 +28,15 @@ public class PermissionResultHandler {
      * @param requestCode request code
      * @param permissions permissions required
      * @param grantResults permission results
-     * @param permissionResultCallback callback
+     * @param callback callback
      */
-    public static void handlePermissionsResult(Activity activity,
-                                               int requestCode,
-                                               @NonNull String[] permissions,
-                                               @NonNull int[] grantResults,
-                                               @NonNull PermissionResultCallback permissionResultCallback) {
+    public static void handlePermissionsResult(
+            Activity activity,
+            int requestCode,
+            @NonNull String[] permissions,
+            @NonNull int[] grantResults,
+            @NonNull PermissionResultCallback callback
+    ) {
         // get permissions not granted
         int notGrantedCount = 0;
         List<String> notGranted = new LinkedList<>();
@@ -47,7 +49,7 @@ public class PermissionResultHandler {
 
         // check the permissions result and call the callback
         if (notGrantedCount == 0) {
-            permissionResultCallback.onGetAllPermissions();
+            callback.onGetAllPermissions();
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 List<String> rationaleList = new LinkedList<>();
@@ -57,12 +59,12 @@ public class PermissionResultHandler {
                     }
                 }
                 if (rationaleList.isEmpty()) {
-                    permissionResultCallback.onPermissionNotGranted(notGranted.toArray(new String[0]));
+                    callback.onPermissionNotGranted(notGranted.toArray(new String[0]));
                 } else {
-                    permissionResultCallback.showPermissionsRationale(rationaleList.toArray(new String[0]));
+                    callback.showPermissionsRationale(rationaleList.toArray(new String[0]));
                 }
             } else {
-                permissionResultCallback.onPermissionNotGranted(notGranted.toArray(new String[0]));
+                callback.onPermissionNotGranted(notGranted.toArray(new String[0]));
             }
         }
     }

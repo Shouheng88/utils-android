@@ -1,3 +1,3 @@
-include ':app', ':utils', ':utils-ktx'
-project(':utils').projectDir = new File('../utils')
+include ':app', ':utils-core', ':utils-ktx'
+project(':utils-core').projectDir = new File('../utils')
 project(':utils-ktx').projectDir = new File('../utils-ktx')
