@@ -240,7 +240,15 @@ public final class IntentUtils {
         return getIntent(intent, isNewTask);
     }
 
-    /** 获取设置通知的意图 */
+    /**
+     * Get App notification setting intent.
+     *
+     * To check are notifications enabled, call
+     * {@link AppUtils#areNotificationsEnabled()} method.
+     *
+     * @param isNewTask is new task
+     * @return the intent
+     */
     public static Intent getNotificationSettingIntent(final boolean isNewTask) {
         Context context = UtilsApp.getApp();
         return getNotificationSettingIntent(context.getPackageName(), isNewTask);
@@ -256,7 +264,44 @@ public final class IntentUtils {
         } else {
             intent = getLaunchSettingIntent(pkgName);
         }
-        intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+        return getIntent(intent, isNewTask);
+    }
+
+    /**
+     * Get notification channel setting intent.
+     *
+     * To check is notification channel enabled, call
+     * {@link AppUtils#isNotificationChannelEnabled(String)}} method.
+     *
+     * @param channelId notification channel id
+     * @param isNewTask is new task
+     */
+    public static Intent getNotificationChannelSettingIntent(String channelId, final boolean isNewTask) {
+        Context context = UtilsApp.getApp();
+        return getNotificationChannelSettingIntent(context.getPackageName(), channelId, isNewTask);
+    }
+
+    /**
+     * Get notification channel setting intent.
+     *
+     * @param pkgName package name
+     * @param channelId notification channel id
+     * @param isNewTask is new task
+     */
+    public static Intent getNotificationChannelSettingIntent(
+            final String pkgName,
+            final String channelId,
+            final boolean isNewTask
+    ) {
+        Intent intent;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            intent = new Intent();
+            intent.setAction(Settings.ACTION_APP_NOTIFICATION_SETTINGS);
+            intent.putExtra(Settings.EXTRA_APP_PACKAGE, pkgName);
+            intent.putExtra(Settings.EXTRA_CHANNEL_ID, channelId);
+        } else {
+            intent = getLaunchSettingIntent(pkgName);
+        }
         return getIntent(intent, isNewTask);
     }
 
