@@ -1,5 +1,7 @@
 package me.shouheng.utils.app;
 
+import static androidx.core.app.NotificationManagerCompat.IMPORTANCE_NONE;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ComponentName;
@@ -12,6 +14,7 @@ import android.content.pm.Signature;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import androidx.annotation.RequiresApi;
+import androidx.core.app.NotificationChannelCompat;
 import androidx.core.app.NotificationManagerCompat;
 import android.text.TextUtils;
 import android.util.Log;
@@ -157,10 +160,32 @@ public final class AppUtils {
         }
     }
 
-    /** 通知是否可用 */
-    public static boolean areNotificationEnabled() {
+    /**
+     * Are notifications for App enabled.
+     *
+     * To enable notification in settings, use methods below,
+     * {@link IntentUtils#getNotificationSettingIntent(boolean)}
+     * {@link IntentUtils#getNotificationSettingIntent(String, boolean)}
+     */
+    public static boolean areNotificationsEnabled() {
         NotificationManagerCompat manager = NotificationManagerCompat.from(UtilsApp.getApp());
         return manager.areNotificationsEnabled();
+    }
+
+    /**
+     * Is given nofitication channel enabled.
+     *
+     * To enable notification channel in settings, use methods below,
+     * {@link IntentUtils#getNotificationChannelSettingIntent(String, boolean)}
+     * {@link IntentUtils#getNotificationChannelSettingIntent(String, String, boolean)}
+     *
+     * @param channelId the notification channel
+     * @return is enabled
+     */
+    public static boolean isNotificationChannelEnabled(final String channelId) {
+        NotificationManagerCompat manager = NotificationManagerCompat.from(UtilsApp.getApp());
+        NotificationChannelCompat channel = manager.getNotificationChannelCompat(channelId);
+        return channel == null || channel.getImportance() > IMPORTANCE_NONE;
     }
 
     /**
