@@ -210,7 +210,7 @@ public final class L {
     }
 
     public static void log(final int type, final String tag, final Object... contents) {
-        if (!CONFIG.mLogSwitch || (!CONFIG.mLog2ConsoleSwitch && !CONFIG.mLog2FileSwitch)) return;
+        if (isLogSwitchOff()) return;
         int type_low = type & 0x0f, type_high = type & 0xf0;
         if (type_low < CONFIG.mConsoleFilter && type_low < CONFIG.mFileFilter) return;
         final TagHead tagHead = processTagAndHead(tag);
@@ -221,6 +221,10 @@ public final class L {
         if ((CONFIG.mLog2FileSwitch || type_high == FILE) && type_low >= CONFIG.mFileFilter) {
             print2File(type_low, tagHead.tag, tagHead.fileHead + body);
         }
+    }
+
+    public static boolean isLogSwitchOff() {
+        return !CONFIG.mLogSwitch || (!CONFIG.mLog2ConsoleSwitch && !CONFIG.mLog2FileSwitch);
     }
 
     /*-------------------------------------inner methods-----------------------------------------*/

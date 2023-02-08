@@ -17,6 +17,7 @@
             android:layout_width="wrap_content" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_show_soft"
             android:text="显示软键盘"
             android:onClick="showSortInput"
             style="@style/MenuButton"/>
@@ -32,6 +33,7 @@
             style="@style/MenuButton"/>
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_alpha"
             android:text="切换透明度"
             android:onClick="toggleAlpha"
             style="@style/MenuButton"/>

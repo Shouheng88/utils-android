@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
-import kotlinx.android.synthetic.main.activity_test_encrypt_utils.*
+import androidx.appcompat.widget.AppCompatEditText
 import me.shouheng.samples.R
 import me.shouheng.utils.data.EncryptUtils
 import me.shouheng.utils.ktx.*
@@ -45,7 +45,7 @@ class TestEncryptUtilsActivity : AppCompatActivity() {
     }
 
     fun doDecrept(view: View?) {
-        val s = et_de!!.text.toString()
+        val s = findViewById<AppCompatEditText>(R.id.et_de)!!.text.toString()
         val result = "\n\n".join(
             listOf(
                 "DES: ${String(EncryptUtils.decryptHexStringDES(s, "1234577ddccDEFC1".toByteArray(), "DES", null))}"
