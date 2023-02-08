@@ -1,6 +1,7 @@
 package me.shouheng.utils.ktx
 
 import android.app.Activity
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import androidx.annotation.AnimRes
@@ -20,6 +21,15 @@ fun Context.startHomeActivity() {
     val i = Intent(Intent.ACTION_MAIN)
     i.addCategory(Intent.CATEGORY_HOME)
     this.startActivity(i)
+}
+
+/** One save way to unregister receiver. */
+fun Context.saveUnregisterReceiver(receiver: BroadcastReceiver) {
+    try {
+        this.unregisterReceiver(receiver)
+    } catch (t: IllegalArgumentException) {
+        t.printStackTrace()
+    }
 }
 
 fun Activity.start(activityClass: Class<out Activity?>, requestCode: Int) {

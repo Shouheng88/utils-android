@@ -52,14 +52,14 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.multidex:multidex:2.0.0'
     implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation "androidx.localbroadcastmanager:localbroadcastmanager:1.0.0"
     // utils
     implementation 'com.tencent:mmkv:1.2.13'
-    implementation project(path: ':utils')
+    implementation project(path: ':utils-core')
     implementation project(path: ':utils-ktx')
     // leakcanarye
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.2'
