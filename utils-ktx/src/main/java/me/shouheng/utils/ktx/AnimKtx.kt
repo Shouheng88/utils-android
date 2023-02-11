@@ -4,10 +4,10 @@ import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
-import androidx.annotation.ColorInt
 import android.view.View
 import android.view.animation.*
 import android.view.animation.Animation.AnimationListener
+import androidx.annotation.ColorInt
 import me.shouheng.utils.ui.AnimUtils
 import me.shouheng.utils.ui.AnimUtils.UIDirection
 

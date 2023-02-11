@@ -61,7 +61,6 @@ public class SampleApp extends Application {
     }
 }
 ```
-
 ### 2.2 Fetures and functions
 
 The utils classes was divided into multiple groups:
@@ -86,11 +85,10 @@ The utils classes was divided into multiple groups:
 |16|[FileUtils](./utils/src/main/java/me/shouheng/utils/store/FileUtils.java)|Storage|File, visit, move, delete etc
 |17|[PathUtils](./utils/src/main/java/me/shouheng/utils/store/PathUtils.java)|Storage|Get directory paths
 |18|[IOUtils](./utils/src/main/java/me/shouheng/utils/store/IOUtils.java)|Storage|IO|
-|19|[SPUtils](./utils/src/main/java/me/shouheng/utils/store/SPUtils.java)|Storage|Sharedpreference|
+|19|[KV](./utils/src/main/java/me/shouheng/utils/store/KV.java)|Storage|Sharedpreference|
 |20|[ImageUtils](./utils/src/main/java/me/shouheng/utils/ui/ImageUtils.java)|ui|Image process, scale, roate etc|
 |21|[ToastUtils](./utils/src/main/java/me/shouheng/utils/ui/ToastUtils.java)|ui|Toast|
 |22|[ViewUtils](./utils/src/main/java/me/shouheng/utils/ui/ViewUtils.java)|ui|View info etc|
-
 ### 2.3 Use Utils-ktx
 
 `utils-ktx` is a kotlin extension based on Android-Utils, which is used to simplify usages of utils classes. For example, if you want to get a drawable, tint it and then display it in ImageView. One line is enough:
@@ -113,8 +111,14 @@ btnRateIntro.onDebouncedClick { /* do something */ }
 
 All in all, by utils-ktx you can significantly lower the difficulty of development.
 
-## 3、About
+### 2.3 Proguard rules
 
+```
+# Add MMKV classname
+-keepnames class com.tencent.mmkv.MMKV
+```
+
+## 3、About
 ### 3.1 Change log
 
 [Log](CHANGELOG.md)

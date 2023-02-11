@@ -71,6 +71,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:text="Launch intent with mode"
+            android:onClick="launchIntentWithMode"
+            style="@style/MenuButton"/>
+
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>

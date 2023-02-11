@@ -98,6 +98,16 @@
             android:text="AnimUtils"
             style="@style/MenuButton" />
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:onClick="testBroadcast"
+            android:text="Global boradcast"
+            style="@style/MenuButton" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:onClick="testLiveData"
+            android:text="Live data"
+            style="@style/MenuButton" />
+
     </LinearLayout>
 
 </ScrollView>

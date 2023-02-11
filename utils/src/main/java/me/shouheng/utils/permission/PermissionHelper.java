@@ -23,20 +23,21 @@ public class PermissionHelper {
      */
     public static String map(@Permission int permission) {
         switch (permission) {
-            case Permission.STORAGE: return Manifest.permission.WRITE_EXTERNAL_STORAGE;
+            case Permission.STORAGE:     return Manifest.permission.WRITE_EXTERNAL_STORAGE;
             case Permission.PHONE_STATE: return Manifest.permission.READ_PHONE_STATE;
-            case Permission.LOCATION: return Manifest.permission.ACCESS_FINE_LOCATION;
-            case Permission.MICROPHONE: return Manifest.permission.RECORD_AUDIO;
-            case Permission.SMS: return Manifest.permission.SEND_SMS;
+            case Permission.LOCATION:    return Manifest.permission.ACCESS_FINE_LOCATION;
+            case Permission.MICROPHONE:  return Manifest.permission.RECORD_AUDIO;
+            case Permission.SMS:         return Manifest.permission.SEND_SMS;
             case Permission.SENSORS:
                 if (VERSION.SDK_INT >= VERSION_CODES.KITKAT_WATCH) {
                     return Manifest.permission.BODY_SENSORS;
                 }
                 return "android.permission.BODY_SENSORS";
-            case Permission.CONTACTS: return Manifest.permission.READ_CONTACTS;
-            case Permission.CAMERA: return Manifest.permission.CAMERA;
-            case Permission.CALENDAR: return Manifest.permission.READ_CALENDAR;
-            default:throw new IllegalArgumentException("Unrecognized permission code " + permission);
+            case Permission.CONTACTS:    return Manifest.permission.READ_CONTACTS;
+            case Permission.CAMERA:      return Manifest.permission.CAMERA;
+            case Permission.CALENDAR:    return Manifest.permission.READ_CALENDAR;
+            default:
+                throw new IllegalArgumentException("Unrecognized permission code " + permission);
         }
     }
 
@@ -49,8 +50,9 @@ public class PermissionHelper {
      */
     public static String name(String permission) {
         // Get permission name from getter first
-        if (PermissionUtils.getPermissionNameGetter() != null) {
-            String name = PermissionUtils.getPermissionNameGetter().getName(permission);
+        PermissionNameGetter getter = PermissionUtils.getPermissionNameGetter();
+        if (getter != null) {
+            String name = getter.getName(permission);
             if (name != null) {
                 return name;
             }
@@ -85,7 +87,8 @@ public class PermissionHelper {
             case Manifest.permission.READ_CALENDAR:
                 resName = R.string.permission_calendar_permission;
                 break;
-            default: throw new IllegalArgumentException("Unrecognized permission " + permission);
+            default:
+                throw new IllegalArgumentException("Unrecognized permission " + permission);
         }
         return UtilsApp.getApp().getString(resName);
     }
