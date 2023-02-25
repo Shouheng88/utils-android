@@ -245,6 +245,13 @@ fun View.setMarginEnd(margin: Int) {
     }
 }
 
+/** Set view height. */
+fun View.setHeight(height: Int) {
+    val layoutParams = this.layoutParams
+    layoutParams?.height = height
+    this.layoutParams = layoutParams
+}
+
 /** Scale when pressed. */
 @SuppressLint("ClickableViewAccessibility")
 fun View.pressScale(scaleFactor: Float = 0.96f, alphaFactor: Float? = null, duration: Long = 50) {
