@@ -508,9 +508,10 @@ public final class AnimUtils {
      * @param view  the view to animate
      * @param start the start height
      * @param end   the end height
+     * @param duration the duration
      * @return      the value animator
      */
-    public static ValueAnimator animateHeight(final View view, int start, int end) {
+    public static ValueAnimator animateHeight(final View view, int start, int end, long duration) {
         ValueAnimator valueAnimator = ValueAnimator.ofInt(start, end);
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -521,6 +522,7 @@ public final class AnimUtils {
                 view.setLayoutParams(layoutParams);
             }
         });
+        valueAnimator.setDuration(duration);
         valueAnimator.start();
         return valueAnimator;
     }
