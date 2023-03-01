@@ -100,6 +100,12 @@ fun View.animateHeight(
     duration: Long,
 ): ValueAnimator = AnimUtils.animateHeight(this, start, end, duration)
 
+fun View.animateWidth(
+    start: Int,
+    end: Int,
+    duration: Long,
+): ValueAnimator = AnimUtils.animateWidth(this, start, end, duration)
+
 fun View.popupIn(duration: Long): ObjectAnimator = AnimUtils.popupIn(this, duration)
 
 fun View.popupOut(

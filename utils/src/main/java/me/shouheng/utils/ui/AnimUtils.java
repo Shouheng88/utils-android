@@ -528,6 +528,31 @@ public final class AnimUtils {
     }
 
     /**
+     * Animate the width of given view.
+     *
+     * @param view the view to animate
+     * @param start the start width
+     * @param end the end width
+     * @param duration the duration
+     * @return the value animator
+     */
+    public static ValueAnimator animateWidth(final View view, int start, int end, long duration) {
+        ValueAnimator valueAnimator = ValueAnimator.ofInt(start, end);
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                int value = (int) animation.getAnimatedValue();
+                ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+                layoutParams.width = value;
+                view.setLayoutParams(layoutParams);
+            }
+        });
+        valueAnimator.setDuration(duration);
+        valueAnimator.start();
+        return valueAnimator;
+    }
+
+    /**
      * Popup in
      *
      * @param view     the view
