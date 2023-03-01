@@ -441,7 +441,7 @@ public final class AnimUtils {
     }
 
     /**
-     * Make given view zoom in
+     * Make given view zoom out.
      *
      * @param view     the view
      * @param scale    scale
@@ -449,7 +449,7 @@ public final class AnimUtils {
      * @param duration the duration
      * @return         the animator set
      */
-    public static AnimatorSet zoomIn(View view, float scale, float dist, long duration) {
+    public static AnimatorSet zoomOut(View view, float scale, float dist, long duration) {
         view.setPivotX(view.getWidth()*.5f);
         view.setPivotY(view.getHeight());
         AnimatorSet animationSet = new AnimatorSet();
@@ -471,7 +471,7 @@ public final class AnimUtils {
      * @param duration the duration
      * @return         the animator set
      */
-    public static AnimatorSet zoomOut(View view, float scale, long duration) {
+    public static AnimatorSet zoomIn(View view, float scale, long duration) {
         view.setPivotX(view.getWidth()*.5f);
         view.setPivotY(view.getHeight());
         AnimatorSet animationSet = new AnimatorSet();

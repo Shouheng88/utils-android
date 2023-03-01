@@ -81,16 +81,16 @@ fun View.shake(
     @UIDirection direction: Int
 ): TranslateAnimation = AnimUtils.shake(this, delta, cycles, duration, direction)
 
-fun View.zoomIn(
+fun View.zoomOut(
     scale: Float,
     dist: Float,
     duration: Long
-): AnimatorSet = AnimUtils.zoomIn(this, scale, dist, duration)
+): AnimatorSet = AnimUtils.zoomOut(this, scale, dist, duration)
 
-fun View.zoomOut(
+fun View.zoomIn(
     scale: Float,
     duration: Long
-): AnimatorSet = AnimUtils.zoomOut(this, scale, duration)
+): AnimatorSet = AnimUtils.zoomIn(this, scale, duration)
 
 fun View.scaleUpDown(duration: Long): ScaleAnimation = AnimUtils.scaleUpDown(this, duration)
 
