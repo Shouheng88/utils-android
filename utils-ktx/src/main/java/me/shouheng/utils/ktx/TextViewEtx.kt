@@ -1,5 +1,6 @@
 package me.shouheng.utils.ktx
 
+import android.graphics.Paint
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.widget.TextView
@@ -91,3 +92,7 @@ fun TextView.setDrawableRight(drawable: Drawable, width: Int, height: Int) {
     this.setCompoundDrawablesRelative(null, null, drawable, null)
 }
 
+/** Set under line. */
+fun TextView.setUnderline() {
+    this.paint.flags = Paint.UNDERLINE_TEXT_FLAG
+}
