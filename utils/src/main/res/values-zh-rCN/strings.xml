@@ -9,6 +9,9 @@
     <string name="permission_contacts_permission">通讯录</string>
     <string name="permission_camera_permission">相机</string>
     <string name="permission_calendar_permission">日历</string>
+    <string name="permission_media_audio_permission">音频</string>
+    <string name="permission_media_video_permission">视频</string>
+    <string name="permission_media_images_permission">图片</string>
     <string name="permission_set_permission">设置权限</string>
     <plurals name="permission_denied_message">
         <item quantity="other">没有权限，请授予<![CDATA[<b>%s</b>]]>权限之后再次尝试。</item>

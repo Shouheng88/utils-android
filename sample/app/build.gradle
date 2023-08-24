@@ -34,6 +34,9 @@ android {
             abortOnError false
         }
     }
+    viewBinding {
+        enabled = true
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -44,6 +47,7 @@ android {
     packagingOptions {
         exclude 'META-INF/library_release.kotlin_module'
     }
+    ndkVersion "22.1.7171670"
 }
 
 dependencies {
@@ -62,8 +66,8 @@ dependencies {
     implementation project(path: ':utils-core')
     implementation project(path: ':utils-ktx')
     // leakcanarye
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.2'
-    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.1'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.8.1'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:2.8.1'
 //    implementation 'com.github.Shouheng88:utils-core:2.4.0'
 //    implementation 'com.github.Shouheng88:utils-ktx:2.4.0'
     // other utils class references

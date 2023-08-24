@@ -32,6 +32,7 @@ fun <T> T.checkSmsPermission(callback: () -> Unit) where T : Activity, T : Permi
 fun <T> T.checkSensorsPermission(callback: () -> Unit) where T : Activity, T : PermissionResultResolver {
     PermissionUtils.checkPermissions(this, OnGetPermissionCallback { callback() }, Permission.SENSORS)
 }
+
 fun <T> T.checkContactsPermission(callback: () -> Unit) where T : Activity, T : PermissionResultResolver {
     PermissionUtils.checkPermissions(this, OnGetPermissionCallback { callback() }, Permission.CONTACTS)
 }
@@ -47,6 +48,18 @@ fun <T> T.checkCalendarPermission(callback: () -> Unit) where T : Activity, T : 
 fun <T> T.checkPermissions(callback: () -> Unit, @Permission vararg permissions: Int) where T : Activity, T : PermissionResultResolver {
     PermissionUtils.checkPermissions(this, OnGetPermissionCallback { callback() }, *permissions)
 }
+
+/**
+ * 请求权限
+ */
+fun <T> T.checkPermissions(callback: () -> Unit, vararg permissions: String) where T : Activity, T : PermissionResultResolver {
+    PermissionUtils.checkPermissions(this, { callback() }, *permissions)
+}
+
+/**
+ * 判断是否拥有指定权限
+ */
+fun hasPermissions(vararg permissions: String) = PermissionUtils.hasPermissions(*permissions)
 
 fun hasPermissions(@Permission vararg permissions: Int) = PermissionUtils.hasPermissions(*permissions)
 

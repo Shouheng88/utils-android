@@ -92,10 +92,7 @@ public final class PermissionUtils {
      * @param callback 获取到权限时的回调
      * @param <T> 需要同时实现 {@link PermissionResultResolver}
      */
-    public static <T extends Activity & PermissionResultResolver> void checkStoragePermission(
-            @NonNull T activity,
-            OnGetPermissionCallback callback
-    ) {
+    public static <T extends Activity & PermissionResultResolver> void checkStoragePermission(@NonNull T activity, OnGetPermissionCallback callback) {
         checkPermissions(activity, callback, Permission.STORAGE);
     }
 
@@ -106,10 +103,7 @@ public final class PermissionUtils {
      * @param callback 获取到权限时的回调
      * @param <T> 需要同时实现 {@link PermissionResultResolver}
      */
-    public static <T extends Activity & PermissionResultResolver> void checkPhonePermission(
-            @NonNull T activity,
-            OnGetPermissionCallback callback
-    ) {
+    public static <T extends Activity & PermissionResultResolver> void checkPhonePermission(@NonNull T activity, OnGetPermissionCallback callback) {
         checkPermissions(activity, callback, Permission.PHONE_STATE);
     }
 
@@ -120,10 +114,7 @@ public final class PermissionUtils {
      * @param callback 获取到权限时的回调
      * @param <T> 需要同时实现 {@link PermissionResultResolver}
      */
-    public static <T extends Activity & PermissionResultResolver> void checkLocationPermission(
-            @NonNull T activity,
-            OnGetPermissionCallback callback
-    ) {
+    public static <T extends Activity & PermissionResultResolver> void checkLocationPermission(@NonNull T activity, OnGetPermissionCallback callback) {
         checkPermissions(activity, callback, Permission.LOCATION);
     }
 
@@ -134,10 +125,7 @@ public final class PermissionUtils {
      * @param callback 获取到权限时的回调
      * @param <T> 需要同时实现 {@link PermissionResultResolver}
      */
-    public static <T extends Activity & PermissionResultResolver> void checkRecordPermission(
-            @NonNull T activity,
-            OnGetPermissionCallback callback
-    ) {
+    public static <T extends Activity & PermissionResultResolver> void checkRecordPermission(@NonNull T activity, OnGetPermissionCallback callback) {
         checkPermissions(activity, callback, Permission.MICROPHONE);
     }
 
@@ -148,10 +136,7 @@ public final class PermissionUtils {
      * @param callback 获取到权限时的回调
      * @param <T> 需要同时实现 {@link PermissionResultResolver}
      */
-    public static <T extends Activity & PermissionResultResolver> void checkSmsPermission(
-            @NonNull T activity,
-            OnGetPermissionCallback callback
-    ) {
+    public static <T extends Activity & PermissionResultResolver> void checkSmsPermission(@NonNull T activity, OnGetPermissionCallback callback) {
         checkPermissions(activity, callback, Permission.SMS);
     }
 
@@ -163,10 +148,7 @@ public final class PermissionUtils {
      * @param <T> 需要同时实现 {@link PermissionResultResolver}
      */
     @TargetApi(Build.VERSION_CODES.KITKAT_WATCH)
-    public static <T extends Activity & PermissionResultResolver> void checkSensorsPermission(
-            @NonNull T activity,
-            OnGetPermissionCallback callback
-    ) {
+    public static <T extends Activity & PermissionResultResolver> void checkSensorsPermission(@NonNull T activity, OnGetPermissionCallback callback) {
         checkPermissions(activity, callback, Permission.SENSORS);
     }
 
@@ -177,10 +159,7 @@ public final class PermissionUtils {
      * @param callback 获取到权限时的回调
      * @param <T> 需要同时实现 {@link PermissionResultResolver}
      */
-    public static <T extends Activity & PermissionResultResolver> void checkContactsPermission(
-            @NonNull T activity,
-            OnGetPermissionCallback callback
-    ) {
+    public static <T extends Activity & PermissionResultResolver> void checkContactsPermission(@NonNull T activity, OnGetPermissionCallback callback) {
         checkPermissions(activity, callback, Permission.CONTACTS);
     }
 
@@ -191,10 +170,7 @@ public final class PermissionUtils {
      * @param callback 获取到权限时的回调
      * @param <T> 需要同时实现 {@link PermissionResultResolver}
      */
-    public static <T extends Activity & PermissionResultResolver> void checkCameraPermission(
-            @NonNull T activity,
-            OnGetPermissionCallback callback
-    ) {
+    public static <T extends Activity & PermissionResultResolver> void checkCameraPermission(@NonNull T activity, OnGetPermissionCallback callback) {
         checkPermissions(activity, callback, Permission.CAMERA);
     }
 
@@ -205,10 +181,7 @@ public final class PermissionUtils {
      * @param callback 获取到权限时的回调
      * @param <T> 需要同时实现 {@link PermissionResultResolver}
      */
-    public static <T extends Activity & PermissionResultResolver> void checkCalendarPermission(
-            @NonNull T activity,
-            OnGetPermissionCallback callback
-    ) {
+    public static <T extends Activity & PermissionResultResolver> void checkCalendarPermission(@NonNull T activity, OnGetPermissionCallback callback) {
         checkPermissions(activity, callback, Permission.CALENDAR);
     }
 
@@ -220,11 +193,7 @@ public final class PermissionUtils {
      * @param permissions 要获取的权限
      * @param <T> 需要同时实现 {@link PermissionResultResolver}
      */
-    public static <T extends Activity & PermissionResultResolver> void checkPermissions(
-            @NonNull T activity,
-            OnGetPermissionCallback callback,
-            @Permission int ...permissions
-    ) {
+    public static <T extends Activity & PermissionResultResolver> void checkPermissions(@NonNull T activity, OnGetPermissionCallback callback, @Permission int ...permissions) {
         activity.setOnGetPermissionCallback(callback);
         // map permission code
         int length = permissions.length;
@@ -236,8 +205,7 @@ public final class PermissionUtils {
         int notGrantedCount = 0;
         List<String> notGranted = new LinkedList<>();
         for (int i=0; i<length; i++) {
-            if (ContextCompat.checkSelfPermission(activity, standardPermissions[i])
-                    != PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(activity, standardPermissions[i]) != PackageManager.PERMISSION_GRANTED) {
                 notGrantedCount++;
                 notGranted.add(standardPermissions[i]);
             }
@@ -248,8 +216,45 @@ public final class PermissionUtils {
                 callback.onGetPermission();
             }
         } else {
-            ActivityCompat.requestPermissions(activity,
-                    notGranted.toArray(new String[0]), PermissionHelper.REQUEST_PERMISSIONS);
+            ActivityCompat.requestPermissions(activity, notGranted.toArray(new String[0]), PermissionHelper.REQUEST_PERMISSIONS);
+        }
+    }
+
+    /**
+     * 请求权限信息
+     *
+     * @param activity 上下文
+     * @param callback 回调
+     * @param permissions 请求的权限列表
+     * @param <T> 上下文
+     */
+    public static <T extends Activity & PermissionResultResolver> void checkPermissions(@NonNull T activity, OnGetPermissionCallback callback, String ...permissions) {
+        // 请求的权限为空
+        if (permissions == null || permissions.length == 0) {
+            callback.onGetPermission();
+            return;
+        }
+
+        // 设置回调
+        activity.setOnGetPermissionCallback(callback);
+
+        // 判断未得到的权限
+        int notGrantedCount = 0;
+        List<String> notGranted = new LinkedList<>();
+        for (String permission : permissions) {
+            if (ContextCompat.checkSelfPermission(activity, permission) != PackageManager.PERMISSION_GRANTED) {
+                notGrantedCount++;
+                notGranted.add(permission);
+            }
+        }
+
+        // 根据未获取的权限继续请求或者返回
+        if (notGrantedCount == 0) {
+            if (callback != null) {
+                callback.onGetPermission();
+            }
+        } else {
+            ActivityCompat.requestPermissions(activity, notGranted.toArray(new String[0]), PermissionHelper.REQUEST_PERMISSIONS);
         }
     }
 
@@ -280,13 +285,40 @@ public final class PermissionUtils {
         // check permissions
         int notGrantedCount = 0;
         for (int i=0; i<length; i++) {
-            if (ContextCompat.checkSelfPermission(context, standardPermissions[i])
-                    != PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(context, standardPermissions[i]) != PackageManager.PERMISSION_GRANTED) {
                 notGrantedCount++;
             }
         }
         return notGrantedCount == 0;
     }
+
+    /**
+     * 判断当前是否已经拥有了这些权限
+     *
+     * @param permissions 权限列表
+     * @return true 表示全部拥有
+     */
+    public static boolean hasPermissions(String ...permissions) {
+        return hasPermissions(UtilsApp.getApp(), permissions);
+    }
+
+    /**
+     * 判断当前是否已经拥有了这些权限
+     *
+     * @param context 上下文
+     * @param permissions 权限列表
+     * @return true 表示全部拥有
+     */
+    public static boolean hasPermissions(Context context, String ...permissions) {
+        int notGrantedCount = 0;
+        for (String permission : permissions) {
+            if (ContextCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                notGrantedCount++;
+            }
+        }
+        return notGrantedCount == 0;
+    }
+
 
     /**
      * 去设置权限

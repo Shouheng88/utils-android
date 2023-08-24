@@ -27,4 +27,39 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_images"
+        android:text="Request Images Permission (API >= 33)"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_media"
+        android:text="Request Media Permission (API >= 33)"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_images_compact"
+        android:text="Request Images Permission (Compact)"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_media_compact"
+        android:text="Request Media Permission (Compact)"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_open_album"
+        android:text="Open Album (API >= 33)"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
 </LinearLayout>
