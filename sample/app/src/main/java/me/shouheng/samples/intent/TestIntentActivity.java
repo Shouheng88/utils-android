@@ -41,7 +41,7 @@ public class TestIntentActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         TextView textView = findViewById(R.id.tv_notification_status);
-        textView.setText("Notification status : " + (AppUtils.areNotificationEnabled() ? "on" : "off"));
+        textView.setText("Notification status : " + (AppUtils.areNotificationsEnabled() ? "on" : "off"));
         L.d("TestIntentActivity#onResume");
         new AlertDialog.Builder(this)
                 .setTitle("TEST DIALOG")

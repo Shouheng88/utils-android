@@ -9,6 +9,9 @@
     <string name="permission_contacts_permission">通訊錄</string>
     <string name="permission_camera_permission">相機</string>
     <string name="permission_calendar_permission">行事曆</string>
+    <string name="permission_media_audio_permission">音頻</string>
+    <string name="permission_media_video_permission">視頻</string>
+    <string name="permission_media_images_permission">圖片</string>
     <string name="permission_set_permission">設定許可權</string>
     <plurals name="permission_denied_message">
         <item quantity="other">沒有許可權，請授予<![CDATA[<b>%s</b>]]>許可權之後再次嘗試。</item>

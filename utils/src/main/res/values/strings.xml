@@ -9,6 +9,9 @@
     <string name="permission_contacts_permission">Contacts</string>
     <string name="permission_camera_permission">Camera</string>
     <string name="permission_calendar_permission">Calendar</string>
+    <string name="permission_media_audio_permission">Audio</string>
+    <string name="permission_media_video_permission">Video</string>
+    <string name="permission_media_images_permission">Images</string>
     <string name="permission_set_permission">Permission settings</string>
     <plurals name="permission_denied_message">
         <item quantity="one">Permission denied. Please try again after grant the <![CDATA[<b>%s</b>]]> permission.</item>
