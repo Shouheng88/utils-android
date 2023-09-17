@@ -51,6 +51,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/tv_zip_decrypt"
+            android:padding="16dp"
+            android:textSize="12sp"
+            android:text="Unzip"
+            android:onClick="doZipDecrypt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/tv_zip_encrypt"
+            android:padding="16dp"
+            android:textSize="12sp"
+            android:layout_marginTop="8dp"
+            android:text="ReZip"
+            android:onClick="doZipEncrypt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>
