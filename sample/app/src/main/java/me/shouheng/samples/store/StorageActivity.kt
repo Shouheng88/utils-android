@@ -1,6 +1,7 @@
 package me.shouheng.samples.store
 
 import android.app.Activity
+import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -8,72 +9,84 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.DocumentsContract
 import android.text.TextUtils
-import android.view.View
+import android.view.LayoutInflater
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.documentfile.provider.DocumentFile
-import me.shouheng.samples.R
+import me.shouheng.samples.databinding.ActivityStorageBinding
+import me.shouheng.utils.UtilsApp
 import me.shouheng.utils.data.EncodeUtils
+import me.shouheng.utils.ktx.join
 import me.shouheng.utils.ktx.onDebouncedClick
 import me.shouheng.utils.ktx.toast
 import me.shouheng.utils.store.IOUtils
-import me.shouheng.utils.store.PathUtils
 import me.shouheng.utils.store.KV
+import me.shouheng.utils.store.PathUtils
 import java.io.File
 import java.util.*
 
 /** To make a sample for storage usage on Android 11. */
 class StorageActivity : AppCompatActivity() {
 
+    private var binding: ActivityStorageBinding? = null
+
     private var request: ActivityResultLauncher<Unit>? = null
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_storage)
+        binding = ActivityStorageBinding.inflate(LayoutInflater.from(this))
+        setContentView(binding!!.root)
         buildPermissionRequest()
-        findViewById<View>(R.id.btn_request).onDebouncedClick {
+
+        binding?.btnRequest?.onDebouncedClick {
             request?.launch(Unit)
         }
-        findViewById<View>(R.id.btn_permission).onDebouncedClick {
+        binding?.btnPermission?.onDebouncedClick {
             toast("Permitted: [${isExternalStoragePermissionGranted()}]")
         }
-        findViewById<View>(R.id.btn_write).onDebouncedClick {
+        binding?.btnWrite?.onDebouncedClick {
             if (isExternalStoragePermissionGranted()) {
                 writeToPath()
             }
         }
-        findViewById<View>(R.id.btn_read).onDebouncedClick {
+        binding?.btnRead?.onDebouncedClick {
             if (isExternalStoragePermissionGranted()) {
                 readPath()
             }
         }
-        findViewById<View>(R.id.btn_delete).onDebouncedClick {
+        binding?.btnDelete?.onDebouncedClick {
             if (isExternalStoragePermissionGranted()) {
                 delete()
             }
         }
-        findViewById<View>(R.id.btn_rename_dir).onDebouncedClick {
+        binding?.btnRenameDir?.onDebouncedClick {
             if (isExternalStoragePermissionGranted()) {
                 renameDir()
             }
         }
-        findViewById<View>(R.id.btn_rename_file).onDebouncedClick {
+        binding?.btnRenameFile?.onDebouncedClick {
             if (isExternalStoragePermissionGranted()) {
                 renameFile()
             }
         }
-        findViewById<View>(R.id.btn_write_old).onDebouncedClick {
+        binding?.btnWriteOld?.onDebouncedClick {
             if (isExternalStoragePermissionGranted()) {
                 writeByFile()
             }
         }
-        findViewById<View>(R.id.btn_list_all).onDebouncedClick {
+        binding?.btnListAll?.onDebouncedClick {
             if (isExternalStoragePermissionGranted()) {
                 listAll()
             }
+        }
+        binding?.btnGetGranted?.onDebouncedClick {
+            binding?.tv?.text = "persistedUriPermissions:\n" +
+                    "\n".join(UtilsApp.getApp().contentResolver.persistedUriPermissions.map { it.toString() }) +
+                    "outgoingPersistedUriPermissions:\n" +
+                    "\n".join(UtilsApp.getApp().contentResolver.outgoingPersistedUriPermissions.map { it.toString() })
         }
     }
 
@@ -81,16 +94,20 @@ class StorageActivity : AppCompatActivity() {
     private fun buildPermissionRequest() {
         request = registerForActivityResult(object : ActivityResultContract<Unit, Unit>() {
             override fun createIntent(context: Context, input: Unit?): Intent {
-//                var uri = Uri.parse("content://com.android.externalstorage.documents/tree/primary%3AAndroid%2Fdata")
-//                var uri = Uri.parse("content://com.android.externalstorage.documents/tree/primary%3AAndroid")
-                var uri = Uri.parse("content://com.android.externalstorage.documents/tree/primary")
-                uri = DocumentFile.fromTreeUri(this@StorageActivity, uri)?.uri
+                // 授予对目录内容的访问权限，如果是读写文件可以用 ACTION_CREATE_DOCUMENT 或者 ACTION_OPEN_DOCUMENT
+                // https://developer.android.com/reference/android/content/Intent#ACTION_OPEN_DOCUMENT_TREE
+                // https://developer.android.com/training/data-storage/shared/documents-files?hl=zh-cn#grant-access-directory
                 val i = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE)
                 i.flags = (Intent.FLAG_GRANT_READ_URI_PERMISSION
                         or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
                         or Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION
                         or Intent.FLAG_GRANT_PREFIX_URI_PERMISSION)
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    // 您可以根据需要使用 EXTRA_INITIAL_URI intent extra 指定文件选择器在首次加载时应显示的目录的 URI。
+//                var uri = Uri.parse("content://com.android.externalstorage.documents/tree/primary%3AAndroid%2Fdata")
+//                var uri = Uri.parse("content://com.android.externalstorage.documents/tree/primary%3AAndroid")
+                    var uri = Uri.parse("content://com.android.externalstorage.documents/tree/primary")
+                    uri = DocumentFile.fromTreeUri(this@StorageActivity, uri)?.uri
                     i.putExtra(DocumentsContract.EXTRA_INITIAL_URI, uri)
                 }
                 return i
@@ -108,7 +125,9 @@ class StorageActivity : AppCompatActivity() {
                     e.printStackTrace()
                 }
             }
-        }) {}
+        }) {
+
+        }
     }
 
     private fun writeToPath() {

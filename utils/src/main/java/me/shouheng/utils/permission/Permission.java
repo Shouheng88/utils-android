@@ -20,7 +20,10 @@ import java.lang.annotation.RetentionPolicy;
         Permission.SENSORS,
         Permission.CONTACTS,
         Permission.CAMERA,
-        Permission.CALENDAR
+        Permission.CALENDAR,
+        Permission.MEDIA_AUDIO,
+        Permission.MEDIA_VIDEO,
+        Permission.MEDIA_IMAGES,
 })
 @Retention(RetentionPolicy.SOURCE)
 public @interface Permission {
@@ -33,4 +36,7 @@ public @interface Permission {
     int CONTACTS            = 0xFF07;
     int CAMERA              = 0xFF08;
     int CALENDAR            = 0xFF09;
+    int MEDIA_AUDIO         = 0xFF10;
+    int MEDIA_VIDEO         = 0xFF11;
+    int MEDIA_IMAGES        = 0xFF12;
 }
