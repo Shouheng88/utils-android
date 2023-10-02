@@ -84,6 +84,13 @@ class TestPermissionActivity : AppCompatActivity(), PermissionResultResolver {
                 startActivityForResult(i, 0x01111)
             }
         }
+        binding?.btnPostNotification?.onDebouncedClick {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                checkPermissions({
+                    toast("Got post notification")
+                }, Manifest.permission.POST_NOTIFICATIONS)
+            }
+        }
 
         // Update permission info.
         updatePermissions()
@@ -98,6 +105,9 @@ class TestPermissionActivity : AppCompatActivity(), PermissionResultResolver {
             texts.add("READ_MEDIA_IMAGES:${hasPermissions(Manifest.permission.READ_MEDIA_IMAGES)}")
             texts.add("READ_MEDIA_AUDIO:${hasPermissions(Manifest.permission.READ_MEDIA_AUDIO)}")
             texts.add("READ_MEDIA_VIDEO:${hasPermissions(Manifest.permission.READ_MEDIA_VIDEO)}")
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            texts.add("POST_NOTIFICATIONS:${hasPermissions(Manifest.permission.POST_NOTIFICATIONS)}")
         }
         binding?.tv?.text = "\n".join(texts)
     }
