@@ -1,7 +1,10 @@
 package me.shouheng.utils.ktx
 
 import android.graphics.Color
+import android.text.Spannable
+import android.text.SpannableString
 import android.text.Spanned
+import android.text.style.ForegroundColorSpan
 import androidx.annotation.ColorInt
 import me.shouheng.utils.data.*
 import me.shouheng.utils.data.function.StringFunction
@@ -75,18 +78,10 @@ fun <E> String.join(c: Collection<E>): String = StringUtils.connect(c, this)
 
 fun <E> String.join(c: Collection<E>, function: StringFunction<E>): String = StringUtils.connect(c, this, function)
 
-fun CharSequence.equalsIgnoreCase(s: CharSequence): Boolean = StringUtils.equals(this, s)
+fun String.colored(@ColorInt color: Int): CharSequence {
+    val length = length
+    return SpannableString(this).apply {
+        this.setSpan(ForegroundColorSpan(color), 0, length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+    }
+}
 
-fun CharSequence.isMatch(regex: String): Boolean = RegexUtils.isMatch(regex, this)
-
-fun CharSequence.isMobileSimple(): Boolean = RegexUtils.isMobileSimple(this)
-
-fun CharSequence.isMobileExact(): Boolean = RegexUtils.isMobileExact(this)
-
-fun CharSequence.isEmail(): Boolean = RegexUtils.isEmail(this)
-
-fun CharSequence.isValidChineseIdCard(): Boolean = RegexUtils.isValidChineseIdCard(this)
-
-fun CharSequence.isBankCard(): Boolean = RegexUtils.isBankCard(this)
-
-fun CharSequence.isNumber(): Boolean = RegexUtils.isNumber(this)
