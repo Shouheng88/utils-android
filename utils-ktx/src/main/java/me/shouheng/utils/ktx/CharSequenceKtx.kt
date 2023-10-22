@@ -3,6 +3,7 @@ package me.shouheng.utils.ktx
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
+import android.text.style.UnderlineSpan
 import androidx.annotation.ColorInt
 import me.shouheng.utils.data.RegexUtils
 import me.shouheng.utils.data.StringUtils
@@ -26,6 +27,13 @@ fun CharSequence.isNumber(): Boolean = RegexUtils.isNumber(this)
 /** Get colored text from text. */
 fun CharSequence.colored(@ColorInt color: Int): CharSequence {
     val sb = SpannableStringBuilder(this)
-    sb.setSpan(ForegroundColorSpan(color), 0, this.length, Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
+    sb.setSpan(ForegroundColorSpan(color), 0, this.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+    return sb
+}
+
+/** Set text underlined. */
+fun CharSequence.underlined(): CharSequence {
+    val sb = SpannableStringBuilder(this)
+    sb.setSpan(UnderlineSpan(), 0, this.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
     return sb
 }
