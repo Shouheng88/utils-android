@@ -52,7 +52,7 @@ public final class ToastUtils {
         show(text == null ? NULL : text, Toast.LENGTH_SHORT, ToastStyle.NORMAL, null);
     }
 
-    public static void showShort(final CharSequence text, @ToastStyle int style) {
+    public static void showShortWithStyle(final CharSequence text, @ToastStyle int style) {
         show(text == null ? NULL : text, Toast.LENGTH_SHORT, style, null);
     }
 
@@ -64,7 +64,7 @@ public final class ToastUtils {
         show(resId, Toast.LENGTH_SHORT, ToastStyle.NORMAL, null);
     }
 
-    public static void showShort(@StringRes final int resId, @ToastStyle int style) {
+    public static void showShortWithStyle(@StringRes final int resId, @ToastStyle int style) {
         show(resId, Toast.LENGTH_SHORT, style, null);
     }
 
@@ -84,7 +84,7 @@ public final class ToastUtils {
         show(text == null ? NULL : text, Toast.LENGTH_LONG, ToastStyle.NORMAL, null);
     }
 
-    public static void showLong(final CharSequence text, @ToastStyle int style) {
+    public static void showLongWithStyle(final CharSequence text, @ToastStyle int style) {
         show(text == null ? NULL : text, Toast.LENGTH_LONG, style, null);
     }
 
@@ -96,7 +96,7 @@ public final class ToastUtils {
         show(resId, Toast.LENGTH_LONG, ToastStyle.NORMAL, null);
     }
 
-    public static void showLong(@StringRes final int resId, @ToastStyle int style) {
+    public static void showLongWithStyle(@StringRes final int resId, @ToastStyle int style) {
         show(resId, Toast.LENGTH_LONG, style, null);
     }
 
@@ -317,13 +317,14 @@ public final class ToastUtils {
         View getView(CharSequence text);
     }
 
-    @IntDef({ToastStyle.NORMAL, ToastStyle.INFO, ToastStyle.WARN, ToastStyle.ERROR})
+    @IntDef({ToastStyle.NORMAL, ToastStyle.INFO, ToastStyle.WARN, ToastStyle.ERROR, ToastStyle.SUCCESS})
     @Retention(RetentionPolicy.SOURCE)
     public @interface ToastStyle {
         int NORMAL      = 0;
         int INFO        = 1;
         int WARN        = 2;
         int ERROR       = 3;
+        int SUCCESS     = 4;
     }
 
     private ToastUtils() {
