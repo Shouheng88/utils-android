@@ -242,7 +242,7 @@ public final class KV {
         }
     }
 
-    public void setOnSharedPreferenceChangeListener(OnSharedPreferenceChangeListener listener) {
+    public void registerOnSharedPreferenceChangeListener(OnSharedPreferenceChangeListener listener) {
         sp.registerOnSharedPreferenceChangeListener(listener);
     }
 

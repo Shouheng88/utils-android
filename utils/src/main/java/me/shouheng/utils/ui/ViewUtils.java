@@ -10,8 +10,6 @@ import android.graphics.LightingColorFilter;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
@@ -24,6 +22,9 @@ import android.view.animation.AlphaAnimation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
 
 import java.lang.reflect.Method;
 
@@ -64,7 +65,7 @@ public final class ViewUtils {
     public static void setIconsVisible(Menu menu, boolean visible) {
         if (menu != null) {
             try {
-                Method method = Menu.class.getDeclaredMethod("setOptionalIconsVisible", Boolean.TYPE);
+                Method method = menu.getClass().getDeclaredMethod("setOptionalIconsVisible", Boolean.TYPE);
                 method.setAccessible(true);
                 method.invoke(menu, visible);
             } catch (Exception e) {

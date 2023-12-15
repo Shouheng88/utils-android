@@ -30,6 +30,20 @@ fun View.toggle() {
     }
 }
 
+/** Set view height. */
+fun View.setHeight(height: Int) {
+    val layoutParams = this.layoutParams
+    layoutParams?.height = height
+    this.layoutParams = layoutParams
+}
+
+/** Set view width. */
+fun View.setWidth(width: Int) {
+    val layoutParams = this.layoutParams
+    layoutParams?.width = width
+    this.layoutParams = layoutParams
+}
+
 fun View.setBackgroundCompact(drawable: Drawable) { ViewUtils.setBackground(this, drawable) }
 
 fun View.toBitmap() { ImageUtils.view2Bitmap(this) }
