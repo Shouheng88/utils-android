@@ -62,13 +62,15 @@ fun String.partial(start: Int, end: Int): String {
 /** Transform string to given type */
 fun String.toDate(): Date = TimeUtils.toDate(this)
 
-fun String.safeToInt(str: String, def: Int = 0): Int = try { str.toInt() } catch (e: NumberFormatException) { def }
+fun String.safeToBoolean(def: Boolean = false): Boolean = try { this.toBoolean() } catch (e: NumberFormatException) { def }
 
-fun String.safeToLong(str: String, def: Long = 0): Long = try { str.toLong() } catch (e: NumberFormatException) { def }
+fun String.safeToInt(def: Int = 0): Int = try { this.toInt() } catch (e: NumberFormatException) { def }
 
-fun String.safeToFloat(str: String, def: Float = 0f): Float = try { str.toFloat() } catch (e: NumberFormatException) { def }
+fun String.safeToLong(def: Long = 0): Long = try { this.toLong() } catch (e: NumberFormatException) { def }
 
-fun String.safeToDouble(str: String, def: Double = .0): Double = try { str.toDouble() } catch (e: NumberFormatException) { def }
+fun String.safeToFloat(def: Float = 0f): Float = try { this.toFloat() } catch (e: NumberFormatException) { def }
+
+fun String.safeToDouble(def: Double = .0): Double = try { this.toDouble() } catch (e: NumberFormatException) { def }
 
 /** Transform string to color. */
 @ColorInt fun String.toColor(): Int = Color.parseColor(this)
