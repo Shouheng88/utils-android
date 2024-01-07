@@ -76,22 +76,24 @@ class TestActivityHelper : AppCompatActivity() {
     companion object {
         private const val REQUEST_RESULT = 1
         private val DIRECTION_ANIMATION_ARRAY = intArrayOf(
-                ActivityDirection.ANIMATE_NONE,
-                ActivityDirection.ANIMATE_FORWARD,
-                ActivityDirection.ANIMATE_EASE_IN_OUT,
-                ActivityDirection.ANIMATE_SLIDE_TOP_FROM_BOTTOM,
-                ActivityDirection.ANIMATE_SLIDE_BOTTOM_FROM_TOP,
-                ActivityDirection.ANIMATE_SCALE_IN,
-                ActivityDirection.ANIMATE_SCALE_OUT
+            ActivityDirection.ANIMATE_NONE,
+            ActivityDirection.ANIMATE_FORWARD,
+            ActivityDirection.ANIMATE_EASE_IN_OUT,
+            ActivityDirection.ANIMATE_SLIDE_TOP_FROM_BOTTOM,
+            ActivityDirection.ANIMATE_SLIDE_BOTTOM_FROM_TOP,
+            ActivityDirection.ANIMATE_SCALE_IN,
+            ActivityDirection.ANIMATE_SCALE_OUT,
+            ActivityDirection.ANIMATE_NO_ANIMATION,
         )
         private val DIRECTION_ANIMATION_NAME_ARRAY = arrayOf(
-                "ANIMATE_NONE",
-                "ANIMATE_FORWARD",
-                "ANIMATE_EASE_IN_OUT",
-                "ANIMATE_SLIDE_TOP_FROM_BOTTOM",
-                "ANIMATE_SLIDE_BOTTOM_FROM_TOP",
-                "ANIMATE_SCALE_IN",
-                "ANIMATE_SCALE_OUT"
+            "ANIMATE_NONE",
+            "ANIMATE_FORWARD",
+            "ANIMATE_EASE_IN_OUT",
+            "ANIMATE_SLIDE_TOP_FROM_BOTTOM",
+            "ANIMATE_SLIDE_BOTTOM_FROM_TOP",
+            "ANIMATE_SCALE_IN",
+            "ANIMATE_SCALE_OUT",
+            "ANIMATE_NO_ANIMATION",
         )
     }
 }

@@ -61,8 +61,10 @@ fun Activity.overridePendingTransition(@ActivityDirection direction: Int) {
         ActivityDirection.ANIMATE_SLIDE_BOTTOM_FROM_TOP -> { this.overridePendingTransition(R.anim.slide_none_medium_time, R.anim.slide_top_to_bottom) }
         ActivityDirection.ANIMATE_SCALE_IN -> { this.overridePendingTransition(R.anim.popup_scale_in, R.anim.slide_none) }
         ActivityDirection.ANIMATE_SCALE_OUT -> { this.overridePendingTransition(R.anim.slide_none, R.anim.popup_scale_out) }
-        ActivityDirection.ANIMATE_NONE -> {/*do nothing*/ }
-        else -> { this.overridePendingTransition(R.anim.magnify_fade_in, R.anim.fade_out) }
+        ActivityDirection.ANIMATE_NONE -> { /*do nothing*/ }
+        ActivityDirection.ANIMATE_NO_ANIMATION -> {
+            this.overridePendingTransition(0, 0)
+        }else -> { this.overridePendingTransition(R.anim.magnify_fade_in, R.anim.fade_out) }
     }
 }
 
