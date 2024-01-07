@@ -154,6 +154,8 @@ public final class ActivityUtils {
             activity.overridePendingTransition(R.anim.popup_scale_in, R.anim.slide_none);
         } else if (direction == ActivityDirection.ANIMATE_SCALE_OUT) {
             activity.overridePendingTransition(R.anim.slide_none, R.anim.popup_scale_out);
+        } else if (direction == ActivityDirection.ANIMATE_NO_ANIMATION) {
+            activity.overridePendingTransition(0, 0);
         } else if (direction == ActivityDirection.ANIMATE_NONE) {
             // do nothing
         } else {

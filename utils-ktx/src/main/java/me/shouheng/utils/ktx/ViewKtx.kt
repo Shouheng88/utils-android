@@ -1,6 +1,7 @@
 package me.shouheng.utils.ktx
 
 import android.annotation.SuppressLint
+import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.view.MotionEvent
@@ -46,7 +47,7 @@ fun View.setWidth(width: Int) {
 
 fun View.setBackgroundCompact(drawable: Drawable) { ViewUtils.setBackground(this, drawable) }
 
-fun View.toBitmap() { ImageUtils.view2Bitmap(this) }
+fun View.toBitmap(): Bitmap? { return ImageUtils.view2Bitmap(this) }
 
 /** Set view padding. */
 fun View.setPaddingLeft(padding: Int) {

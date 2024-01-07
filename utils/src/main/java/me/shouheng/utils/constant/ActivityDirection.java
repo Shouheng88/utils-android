@@ -24,7 +24,9 @@ import java.lang.annotation.RetentionPolicy;
         ActivityDirection.ANIMATE_SLIDE_TOP_FROM_BOTTOM,
         ActivityDirection.ANIMATE_SLIDE_BOTTOM_FROM_TOP,
         ActivityDirection.ANIMATE_SCALE_IN,
-        ActivityDirection.ANIMATE_SCALE_OUT})
+        ActivityDirection.ANIMATE_SCALE_OUT,
+        ActivityDirection.ANIMATE_NO_ANIMATION,
+})
 @Retention(RetentionPolicy.SOURCE)
 public @interface ActivityDirection {
     int ANIMATE_NONE                        = 0x00;
@@ -35,4 +37,5 @@ public @interface ActivityDirection {
     int ANIMATE_SLIDE_BOTTOM_FROM_TOP       = 0x05;
     int ANIMATE_SCALE_IN                    = 0x06;
     int ANIMATE_SCALE_OUT                   = 0x07;
+    int ANIMATE_NO_ANIMATION                = 0x08;
 }
