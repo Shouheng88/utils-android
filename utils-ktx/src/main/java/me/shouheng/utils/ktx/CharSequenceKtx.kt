@@ -6,9 +6,6 @@ import android.text.style.ForegroundColorSpan
 import android.text.style.UnderlineSpan
 import androidx.annotation.ColorInt
 import me.shouheng.utils.data.RegexUtils
-import me.shouheng.utils.data.StringUtils
-
-fun CharSequence.equalsIgnoreCase(s: CharSequence): Boolean = StringUtils.equals(this, s)
 
 fun CharSequence.isMatch(regex: String): Boolean = RegexUtils.isMatch(regex, this)
 

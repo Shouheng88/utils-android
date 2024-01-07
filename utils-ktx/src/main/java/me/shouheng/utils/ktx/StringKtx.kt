@@ -11,6 +11,8 @@ import me.shouheng.utils.data.function.StringFunction
 import java.lang.NumberFormatException
 import java.util.*
 
+fun String.equalsIgnoreCase(s: String): Boolean = StringUtils.equalsIgnoreCase(this, s)
+
 fun String.isSpace(): Boolean = StringUtils.isSpace(this)
 
 fun String.isEmpty(): Boolean = StringUtils.isEmpty(this)
