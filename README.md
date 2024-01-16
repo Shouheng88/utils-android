@@ -1,4 +1,4 @@
-<h1 align="center">Android-Utils: a collection of Android utils</h1>
+<h1 align="center">Android-Utils: A Collection of Android Utils</h1>
 
 <p align="center">
   <a href="http://www.apache.org/licenses/LICENSE-2.0">
